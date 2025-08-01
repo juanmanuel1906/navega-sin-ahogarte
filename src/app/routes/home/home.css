@@ -1,0 +1,62 @@
+/* Componentes Estilo Cómic */
+.comic-button {
+  transition: all 0.2s ease-in-out;
+  border: 3px solid var(--dark-text);
+  box-shadow: 5px 5px 0px var(--dark-text);
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 9px 9px 0px var(--dark-text);
+  }
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 3px 3px 0px var(--dark-text);
+  }
+}
+
+.comic-card {
+  background-color: white;
+  border: 3px solid var(--dark-text);
+  border-radius: 1rem;
+  box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.25);
+}
+
+/* Textura de Puntos (Halftone) */
+.halftone-bg {
+  background-color: var(--main-purple);
+  background-image: radial-gradient(#8B5CF6 15%, transparent 16%);
+  background-size: 25px 25px;
+}
+
+/* Estilos para el carrusel dinámico */
+.banner-slide, .ecosystem-image {
+  display: none;
+  animation: fadeIn 0.7s ease-in-out;
+}
+
+.banner-slide.active, .ecosystem-image.active {
+  display: block;
+}
+
+#illustration-container {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  margin: 2.5rem auto;
+  aspect-ratio: 1 / 1;
+}
+
+.ecosystem-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1.5rem;
+  border: 4px solid black;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

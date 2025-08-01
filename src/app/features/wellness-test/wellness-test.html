@@ -1,0 +1,61 @@
+<div class="test-wrapper">
+  <!-- Pantalla de Inicio del Test -->
+  @if (currentScreen === 'start') {
+  <div class="screen active text-center max-w-lg">
+    <i class="ph-fill ph-rocket-launch text-7xl main-purple"></i>
+    <h1 class="font-comic text-5xl mt-4">¿Cómo estás navegando?</h1>
+    <p class="text-lg text-gray-600 mt-2">
+      Este breve test te ayudará a entender tu estado de bienestar digital.
+      Responde con honestidad, no hay respuestas correctas o incorrectas.
+    </p>
+    <button
+      (click)="startTest()"
+      class="comic-button mt-8 bg-main-purple text-white font-comic text-3xl py-4 px-10 rounded-lg cursor-pointer"
+    >
+      Comenzar Test
+    </button>
+  </div>
+  }
+
+  <!-- Pantalla de Preguntas -->
+  @if (currentScreen === 'questions') {
+  <div class="screen active w-full max-w-3xl">
+    <div class="progress-bar-container">
+      <div class="progress-bar" [style.width.%]="progressPercentage"></div>
+    </div>
+    @if (questions[currentQuestionIndex]) {
+    <div class="mt-8 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold">
+        {{ questions[currentQuestionIndex].text }}
+      </h2>
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+        @for (answer of questions[currentQuestionIndex].answers; track
+        answer.text) {
+        <button (click)="selectAnswer(answer.score)" class="answer-card">
+          {{ answer.text }}
+        </button>
+        }
+      </div>
+    </div>
+    }
+  </div>
+  }
+
+  <!-- Pantalla de Resultados -->
+  @if (currentScreen === 'result' && finalResult) {
+      <div class="screen active text-center max-w-lg">
+          <h1 class="font-comic text-5xl">¡Test Completado!</h1>
+          <div class="my-8">
+              <div class="result-visual" [ngClass]="finalResult.visualClass">
+                  <i [ngClass]="finalResult.icon"></i>
+              </div>
+          </div>
+          <h2 class="text-3xl font-bold">{{ finalResult.title }}</h2>
+          <p class="text-lg text-gray-600 mt-2">{{ finalResult.description }}</p>
+          <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+              <a class="comic-button cursor-pointer inline-block bg-[var(--main-purple)] text-white font-comic text-2xl py-3 px-8 rounded-lg">Ver mis recursos</a>
+              <a (click)="retakeTest()" class="comic-button cursor-pointer inline-block font-comic text-2xl py-3 px-8 rounded-lg">Volver a realizar</a>
+          </div>
+      </div>
+  }
+</div>

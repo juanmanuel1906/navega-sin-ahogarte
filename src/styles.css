@@ -1,1 +1,41 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+:root {
+  --main-purple: #6d28d9;
+  --light-purple: #e9d5ff;
+  --main-blue: #3b82f6;
+  --dark-text: #1f2937;
+}
+
+.main-purple {
+  color: var(--main-purple);
+}
+
+.light-purple {
+  color: var(--light-purple);
+}
+
+.main-blue {
+  color: var(--main-blue);
+}
+
+.bg-main-purple {
+  background-color: var(--main-purple);
+}
+
+.bg-light-purple {
+  background-color: var(--light-purple);
+}
+
+.main-blue {
+  color: var(--main-blue);
+}
+
+.bg-main-blue {
+  background-color: var(--main-blue);
+}
+
+.font-comic {
+  font-family: "Bangers", cursive;
+  letter-spacing: 2px;
+}

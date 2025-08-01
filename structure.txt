@@ -1,0 +1,53 @@
+/src
+|
++-- /app
+|   |
+|   +-- /core
+|   |   +-- /guards           // Guardianes de rutas (ej. auth.guard.ts)
+|   |   +-- /interceptors     // Interceptores HTTP (ej. token.interceptor.ts)
+|   |   +-- /services         // Servicios globales (singletons, ej. user.service.ts)
+|   |
+|   +-- /features             // Corazón de la app, cada carpeta es una funcionalidad
+|   |   +-- /auth             // Registro, Login, Perfil de usuario.
+|   |   [cite_start]+-- /community        // Comunidad "Ansiosos Anónimos" [cite: 99]
+|   |   |   +-- /components   // Componentes específicos de esta sección
+|   |   |   |   +-- post-card.component.ts
+|   |   |   |   +-- post-form.component.ts
+|   |   |   +-- community.component.ts  // Componente principal de la ruta
+|   |   |   +-- community.service.ts    // Lógica para obtener y enviar posts
+|   |   |
+|   |   [cite_start]+-- /dashboard        // El panel de control principal del usuario [cite: 180]
+|   |   [cite_start]+-- /educational-content // Módulos de e-learning y contenido [cite: 97, 196]
+|   |   [cite_start]+-- /emergency-kit    // El "Kit de Emergencia" y "Botón de Pánico" [cite: 109, 212]
+|   |   [cite_start]+-- /institutional-offer // El "Banco de Soluciones" [cite: 95, 182]
+|   |   [cite_start]+-- /wellness-test    // El test interactivo de bienestar [cite: 87, 190]
+|   |
+|   +-- /routes               // Componentes de las páginas públicas principales
+|   |   +-- home.component.ts // La landing page
+|   |   +-- about.component.ts
+|   |   +-- not-found.component.ts
+|   |
+|   +-- /shared
+|   |   +-- /components       // Componentes de UI reutilizables (botones, cards, modales)
+|   |   +-- /models           // Interfaces de TypeScript (ej. user.model.ts)
+|   |   +-- /pipes            // Pipes reutilizables
+|   |   +-- /directives       // Directivas reutilizables (ej. animaciones de scroll)
+|   |
+|   +-- app.component.ts      // Componente principal/raíz de la aplicación
+|   +-- app.config.ts         // Configuración central de la app (providers, etc.)
+|   +-- app.config.server.ts  // Configuración para el renderizado en servidor (SSR)
+|   +-- app.routes.ts         // Definición principal de las rutas
+|
++-- /assets
+|   +-- /images
+|   +-- /icons
+|   +-- /fonts
+|
++-- /environments
+|   +-- environment.ts        // Variables de entorno para desarrollo
+|   +-- environment.prod.ts   // Variables de entorno para producción
+|
++-- main.ts
++-- main.server.ts            // Punto de entrada para el servidor (SSR)
++-- server.ts                 // Lógica del servidor Express para SSR
++-- styles.scss               // Estilos globales

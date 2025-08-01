@@ -1,0 +1,40 @@
+section {
+  font-family: "Inter", sans-serif;
+  background-color: #f0f0ff;
+}
+.main-purple {
+  color: #6d28d9;
+}
+.bg-main-purple {
+  background-color: #6d28d9;
+}
+.bg-light-purple {
+  background-color: #e9d5ff;
+}
+.main-blue {
+  color: #3b82f6;
+}
+.bg-main-blue {
+  background-color: #3b82f6;
+}
+
+/* Componentes Estilo Cómic */
+.comic-button {
+  transition: all 0.2s ease-in-out;
+  border: 3px solid #1f2937;
+  box-shadow: 5px 5px 0px #1f2937;
+}
+.comic-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 9px 9px 0px #1f2937;
+}
+.comic-button:active {
+  transform: translateY(2px);
+  box-shadow: 3px 3px 0px #1f2937;
+}
+.comic-card {
+  background-color: white;
+  border: 3px solid #1f2937;
+  border-radius: 1rem;
+  box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.25);
+}

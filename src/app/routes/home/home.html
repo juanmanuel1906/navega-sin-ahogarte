@@ -1,0 +1,128 @@
+<!-- Barra de Navegación (simulada, usualmente estaría en app.component.html) -->
+<nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b-4 border-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+            <a href="#" class="font-comic text-4xl main-purple">NAVEGA</a>
+            <a href="#" class="comic-button bg-main-blue text-white font-comic text-2xl py-2 px-6 rounded-lg">
+                ÚNETE
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<header class="bg-light-purple px-4 py-20 lg:py-0 lg:h-screen lg:flex lg:items-center">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="text-center lg:text-left pt-26">
+            <h1 class="font-comic text-6xl md:text-8xl text-gray-900 leading-none">NAVEGA</h1>
+            <h1 class="font-comic text-6xl md:text-8xl main-purple leading-none">SIN AHOGARTE</h1>
+            <p class="mt-6 text-xl text-gray-700 max-w-lg mx-auto lg:mx-0">Tu espacio seguro para encontrar el equilibrio en el mundo digital. Herramientas, comunidad y apoyo real.</p>
+            <div class="mt-10">
+                <a href="#wellness-test" class="comic-button bg-yellow-400 text-black font-comic text-3xl py-4 px-12 rounded-lg">
+                    ¡Comienza ahora!
+                </a>
+            </div>
+        </div>
+        <!-- Carrusel Dinámico -->
+        <div class="w-full">
+            <!-- Ilustraciones -->
+            <div id="illustration-container">
+                @for (slide of slides; track slide.feature; let i = $index) {
+                    <img [src]="slide.image" [alt]="slide.alt" class="ecosystem-image" [class.active]="currentSlide === i">
+                }
+            </div>
+            <!-- Banner de Texto -->
+            <div id="banner-container" class="comic-card p-6 max-w-md mx-auto -mt-32 relative z-10">
+                @for (slide of slides; track slide.feature; let i = $index) {
+                    <div class="banner-slide" [class.active]="currentSlide === i">
+                        <h3 class="font-bold text-xl text-center"><i class="ph-fill" [ngClass]="slide.icon"></i> {{ slide.feature }}</h3>
+                        <p class="text-gray-600 mt-1 text-center">{{ slide.description }}</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Sección de Estadísticas -->
+<section class="py-24 md:py-32 px-4 bg-white h-screen">
+    <div class="max-w-5xl mx-auto text-center">
+        <h2 class="font-comic text-5xl md:text-6xl text-gray-900">UNA NUEVA <span class="main-purple">PANDEMIA</span></h2>
+        <p class="mt-2 text-lg text-gray-600">La salud mental es un tema serio. Estos son los datos, no opiniones.</p>
+    </div>
+    <div class="mt-16 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div class="comic-card p-8 text-center">
+            <div class="relative w-40 h-40 mx-auto">
+                <div class="absolute inset-0 rounded-full bg-light-purple"></div>
+                <div class="absolute inset-0 rounded-full bg-main-purple" style="clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%, 50% 50%); transform: rotate(85deg);"></div>
+                <div class="absolute inset-2 rounded-full bg-white flex items-center justify-center">
+                    <span class="font-comic text-4xl text-gray-900">66,3%</span>
+                </div>
+            </div>
+            <p class="mt-6 font-bold text-lg">De la población colombiana ha sufrido algún trastorno mental.</p>
+        </div>
+         <div class="comic-card p-8 text-center">
+            <div class="relative w-40 h-40 mx-auto">
+                <div class="absolute inset-0 rounded-full bg-light-purple"></div>
+                <div class="absolute inset-0 rounded-full bg-main-purple" style="clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%, 50% 50%); transform: rotate(144deg);"></div>
+                 <div class="absolute inset-2 rounded-full bg-white flex items-center justify-center">
+                    <span class="font-comic text-4xl text-gray-900">70%</span>
+                </div>
+            </div>
+            <p class="mt-6 font-bold text-lg">Eran niños, niñas y jóvenes que se han sentido poco felices o deprimidos.</p>
+        </div>
+         <div class="comic-card p-8 text-center" data-aos="fade-up" data-aos-delay="300">
+            <div class="relative w-40 h-40 mx-auto">
+                <div class="absolute inset-0 rounded-full bg-light-purple"></div>
+                <div class="absolute inset-0 rounded-full bg-main-purple" style="clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%, 50% 50%); transform: rotate(250deg);"></div>
+                <div class="absolute inset-2 rounded-full bg-white flex items-center justify-center">
+                    <span class="font-comic text-4xl text-gray-900">44%</span>
+                </div>
+            </div>
+            <p class="mt-6 font-bold text-lg">de ellos aseguran que el espacio propicio para desarrollar estos transtornos es en la <b>CASA</b>.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Sección de Etapas -->
+<section class="py-24 md:py-32 px-4 halftone-bg h-screen">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center" data-aos="fade-up">
+            <h2 class="font-comic text-5xl md:text-6xl text-white">NUESTRO OBJETIVO</h2>
+            <p class="mt-2 text-lg text-purple-200 max-w-3xl mx-auto">Crear una ruta efectiva que democratice el acceso a la información y al apoyo en salud mental.</p>
+        </div>
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="comic-card p-8 text-center transform hover:scale-105 transition-transform duration-300" data-aos="fade-up" data-aos-delay="100">
+                <i class="ph-fill ph-shield-check text-6xl main-purple"></i>
+                <h3 class="font-comic text-4xl mt-4">Prevenir</h3>
+                <p class="mt-2 text-gray-600">Capacitarte para mejorar tus hábitos digitales y fortalecer tu mente.</p>
+            </div>
+             <div class="comic-card p-8 text-center transform hover:scale-105 transition-transform duration-300" data-aos="fade-up" data-aos-delay="200">
+                <i class="ph-fill ph-user-list text-6xl main-purple"></i>
+                <h3 class="font-comic text-4xl mt-4">Caracterizar</h3>
+                <p class="mt-2 text-gray-600">Ayudarte a entender tu estado emocional con herramientas de autodiagnóstico.</p>
+            </div>
+             <div class="comic-card p-8 text-center transform hover:scale-105 transition-transform duration-300" data-aos="fade-up" data-aos-delay="300">
+                <i class="ph-fill ph-handshake text-6xl main-purple"></i>
+                <h3 class="font-comic text-4xl mt-4">Conectar</h3>
+                <p class="mt-2 text-gray-600">Ser el puente entre tú y una red de aliados que ofrecen soluciones reales.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Test de bienestar digital -->
+<section class="py-24 px-4 h-screen">
+    <app-wellness-test id="wellness-test"></app-wellness-test>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 py-12 px-4 text-center">
+    <a href="#" class="font-comic text-4xl text-white">NAVEGA SIN AHOGARTE</a>
+    <p class="text-purple-300 mt-2">Un proyecto para el bienestar de nuestra generación.</p>
+    <div class="mt-6 flex justify-center gap-6">
+        <a href="#" class="text-white hover:text-yellow-400"><i class="ph-fill ph-instagram-logo text-3xl"></i></a>
+        <a href="#" class="text-white hover:text-yellow-400"><i class="ph-fill ph-tiktok-logo text-3xl"></i></a>
+        <a href="#" class="text-white hover:text-yellow-400"><i class="ph-fill ph-youtube-logo text-3xl"></i></a>
+    </div>
+</footer>

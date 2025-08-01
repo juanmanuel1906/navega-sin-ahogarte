@@ -1,0 +1,81 @@
+.comic-button {
+  transition: all 0.2s ease-in-out;
+  border: 3px solid var(--dark-text);
+  box-shadow: 5px 5px 0px var(--dark-text);
+}
+.comic-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 9px 9px 0px var(--dark-text);
+}
+.comic-button:active {
+  transform: translateY(2px);
+  box-shadow: 3px 3px 0px var(--dark-text);
+}
+
+.test-wrapper {
+  min-height: calc(100vh - 5rem); /* Ajusta la altura para que no quede debajo del nav */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.screen {
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Estilos de la barra de progreso */
+.progress-bar-container {
+  width: 100%;
+  height: 1.25rem;
+  background-color: #e5e7eb;
+  border-radius: 9999px;
+  border: 3px solid var(--dark-text);
+  padding: 0.25rem;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: var(--main-purple);
+  border-radius: 9999px;
+  transition: width 0.4s ease-in-out;
+}
+
+/* Estilos de las tarjetas de respuesta */
+.answer-card {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  font-size: 1.125rem;
+  font-weight: bold;
+  border: 3px solid var(--dark-text);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+.answer-card:hover {
+  transform: scale(1.05);
+  background-color: #E9D5FF;
+  box-shadow: 6px 6px 0px var(--dark-text);
+}
+
+/* Estilos del resultado final */
+.result-visual {
+  width: 8rem;
+  height: 8rem;
+  margin: 0 auto;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid var(--dark-text);
+}
+.result-visual i {
+  font-size: 4rem;
+  color: var(--dark-text);
+}
