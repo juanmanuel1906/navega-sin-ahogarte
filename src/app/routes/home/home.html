@@ -1,4 +1,4 @@
-<!-- Barra de Navegación (simulada, usualmente estaría en app.component.html) -->
+<!-- Barra de Navegación -->
 <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b-4 border-black">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
@@ -11,9 +11,9 @@
 </nav>
 
 <!-- Hero Section -->
-<header class="bg-light-purple px-4 py-20 lg:py-0 lg:h-screen lg:flex lg:items-center">
+<header class="bg-light-purple px-4 py-20 lg:py-0 lg:min-h-screen lg:flex lg:items-center">
     <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div class="text-center lg:text-left lg:pt-26">
+        <div class="text-center lg:text-left" data-aos="fade-right" data-aos-duration="1000">
             <h1 class="font-comic text-6xl md:text-8xl text-gray-900 leading-none">NAVEGA</h1>
             <h1 class="font-comic text-6xl md:text-8xl main-purple leading-none">SIN AHOGARTE</h1>
             <p class="mt-6 text-xl text-gray-700 max-w-lg mx-auto lg:mx-0">Tu espacio seguro para encontrar el equilibrio en el mundo digital. Herramientas, comunidad y apoyo real.</p>
@@ -24,7 +24,7 @@
             </div>
         </div>
         <!-- Carrusel Dinámico -->
-        <div class="w-full">
+        <div class="w-full" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
             <!-- Ilustraciones -->
             <div id="illustration-container">
                 @for (slide of slides; track slide.feature; let i = $index) {
@@ -45,13 +45,13 @@
 </header>
 
 <!-- Sección de Estadísticas -->
-<section class="py-24 md:py-32 px-4 bg-white lg:h-screen">
-    <div class="max-w-5xl mx-auto text-center">
+<section class="py-24 md:py-32 px-4 bg-white">
+    <div class="max-w-5xl mx-auto text-center" data-aos="fade-up">
         <h2 class="font-comic text-5xl md:text-6xl text-gray-900">UNA NUEVA <span class="main-purple">PANDEMIA</span></h2>
         <p class="mt-2 text-lg text-gray-600">La salud mental es un tema serio. Estos son los datos, no opiniones.</p>
     </div>
     <div class="mt-16 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
-        <div class="comic-card p-8 text-center">
+        <div class="comic-card p-8 text-center" data-aos="zoom-in" data-aos-duration="600">
             <div class="relative w-40 h-40 mx-auto">
                 <div class="absolute inset-0 rounded-full bg-light-purple"></div>
                 <div class="absolute inset-0 rounded-full bg-main-purple" style="clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%, 50% 50%); transform: rotate(85deg);"></div>
@@ -61,7 +61,7 @@
             </div>
             <p class="mt-6 font-bold text-lg">De la población colombiana ha sufrido algún trastorno mental.</p>
         </div>
-         <div class="comic-card p-8 text-center">
+         <div class="comic-card p-8 text-center" data-aos="zoom-in" data-aos-duration="600" data-aos-delay="200">
             <div class="relative w-40 h-40 mx-auto">
                 <div class="absolute inset-0 rounded-full bg-light-purple"></div>
                 <div class="absolute inset-0 rounded-full bg-main-purple" style="clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%, 50% 50%); transform: rotate(144deg);"></div>
@@ -69,9 +69,9 @@
                     <span class="font-comic text-4xl text-gray-900">70%</span>
                 </div>
             </div>
-            <p class="mt-6 font-bold text-lg">Eran niños, niñas y jóvenes que se han sentido poco felices o deprimidos.</p>
+            <p class="mt-6 font-bold text-lg">Son niños, niñas y jóvenes que se han sentido poco felices o deprimidos.</p>
         </div>
-         <div class="comic-card p-8 text-center" data-aos="fade-up" data-aos-delay="300">
+         <div class="comic-card p-8 text-center" data-aos="zoom-in" data-aos-duration="600" data-aos-delay="400">
             <div class="relative w-40 h-40 mx-auto">
                 <div class="absolute inset-0 rounded-full bg-light-purple"></div>
                 <div class="absolute inset-0 rounded-full bg-main-purple" style="clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%, 50% 50%); transform: rotate(250deg);"></div>
@@ -79,30 +79,30 @@
                     <span class="font-comic text-4xl text-gray-900">44%</span>
                 </div>
             </div>
-            <p class="mt-6 font-bold text-lg">de ellos aseguran que el espacio propicio para desarrollar estos transtornos es en la <b>CASA</b>.</p>
+            <p class="mt-6 font-bold text-lg">Aseguran que el espacio propicio para desarrollar estos transtornos es en la <b>CASA</b>.</p>
         </div>
     </div>
 </section>
 
 <!-- Sección de Etapas -->
-<section class="sm:mt-40 py-24 md:py-32 px-4 halftone-bg lg:h-screen">
+<section class="py-24 md:py-32 px-4 halftone-bg">
     <div class="max-w-7xl mx-auto">
         <div class="text-center" data-aos="fade-up">
             <h2 class="font-comic text-5xl md:text-6xl text-white">NUESTRO OBJETIVO</h2>
             <p class="mt-2 text-lg text-purple-200 max-w-3xl mx-auto">Crear una ruta efectiva que democratice el acceso a la información y al apoyo en salud mental.</p>
         </div>
         <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div class="comic-card p-8 text-center transform hover:scale-105 transition-transform duration-300" data-aos="fade-up" data-aos-delay="100">
+            <div class="comic-card p-8 text-center transform hover:scale-105 transition-transform duration-300" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="1000">
                 <i class="ph-fill ph-shield-check text-6xl main-purple"></i>
                 <h3 class="font-comic text-4xl mt-4">Prevenir</h3>
                 <p class="mt-2 text-gray-600">Capacitarte para mejorar tus hábitos digitales y fortalecer tu mente.</p>
             </div>
-             <div class="comic-card p-8 text-center transform hover:scale-105 transition-transform duration-300" data-aos="fade-up" data-aos-delay="200">
+             <div class="comic-card p-8 text-center transform hover:scale-105 transition-transform duration-300" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="1000" data-aos-delay="200">
                 <i class="ph-fill ph-user-list text-6xl main-purple"></i>
                 <h3 class="font-comic text-4xl mt-4">Caracterizar</h3>
                 <p class="mt-2 text-gray-600">Ayudarte a entender tu estado emocional con herramientas de autodiagnóstico.</p>
             </div>
-             <div class="comic-card p-8 text-center transform hover:scale-105 transition-transform duration-300" data-aos="fade-up" data-aos-delay="300">
+             <div class="comic-card p-8 text-center transform hover:scale-105 transition-transform duration-300" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="1000" data-aos-delay="400">
                 <i class="ph-fill ph-handshake text-6xl main-purple"></i>
                 <h3 class="font-comic text-4xl mt-4">Conectar</h3>
                 <p class="mt-2 text-gray-600">Ser el puente entre tú y una red de aliados que ofrecen soluciones reales.</p>
@@ -112,7 +112,7 @@
 </section>
 
 <!-- Test de bienestar digital -->
-<section class="py-24 px-4 lg:h-screen">
+<section class="py-24 px-4">
     <app-wellness-test id="wellness-test"></app-wellness-test>
 </section>
 
