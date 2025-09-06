@@ -1,24 +1,34 @@
-.comic-button {
+.comic-button,
+.comic-button-secondary {
   transition: all 0.2s ease-in-out;
   border: 3px solid var(--dark-text);
   box-shadow: 5px 5px 0px var(--dark-text);
 }
-.comic-button:hover {
+.comic-button:hover,
+.comic-button-secondary:hover {
   transform: translateY(-4px);
   box-shadow: 9px 9px 0px var(--dark-text);
 }
-.comic-button:active {
+.comic-button:active,
+.comic-button-secondary:active {
   transform: translateY(2px);
   box-shadow: 3px 3px 0px var(--dark-text);
 }
+.comic-button-secondary {
+  background-color: white;
+  color: var(--dark-text);
+}
+.comic-button-secondary:hover {
+  background-color: #f3f4f6;
+}
 
 .test-wrapper {
-  min-height: calc(100vh - 5rem); /* Ajusta la altura para que no quede debajo del nav */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 1rem;
+  min-height: 120vh;
 }
 
 .screen {
@@ -26,11 +36,16 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Estilos de la barra de progreso */
 .progress-bar-container {
   width: 100%;
   height: 1.25rem;
@@ -47,24 +62,21 @@
   transition: width 0.4s ease-in-out;
 }
 
-/* Estilos de las tarjetas de respuesta */
-.answer-card {
+/* NUEVO: Estilo para las respuestas con escala */
+.answer-card-scaled {
   background-color: white;
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 0.75rem;
-  font-size: 1.125rem;
   font-weight: bold;
   border: 3px solid var(--dark-text);
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
-.answer-card:hover {
+.answer-card-scaled:hover {
   transform: scale(1.05);
-  background-color: #E9D5FF;
-  box-shadow: 6px 6px 0px var(--dark-text);
+  background-color: #e9d5ff;
 }
 
-/* Estilos del resultado final */
 .result-visual {
   width: 8rem;
   height: 8rem;
@@ -78,4 +90,91 @@
 .result-visual i {
   font-size: 4rem;
   color: var(--dark-text);
+}
+
+/* Estilos para el formulario de perfil */
+.boat-wrapper {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+}
+.boat-wrapper:hover {
+    transform: translateY(-8px) scale(1.05);
+}
+.boat-figure {
+    position: relative;
+    width: 150px;
+    height: 130px;
+    margin: 0 auto;
+}
+.boat-hull {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 150px;
+    height: 60px;
+    border-radius: 0 0 80px 80px / 0 0 40px 40px;
+    border: 3px solid var(--dark-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.boat-content {
+    color: var(--dark-text);
+}
+.boat-mast {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 70px;
+    background-color: #a1887f; /* brown */
+    border: 3px solid var(--dark-text);
+    border-bottom: none;
+}
+/* Vela principal */
+.boat-sail-main {
+    position: absolute;
+    bottom: 65px;
+    left: calc(50% + 4px);
+    width: 0;
+    height: 0;
+    border-bottom: 60px solid white;
+    border-left: 45px solid transparent;
+    filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.2));
+}
+/* Vela frontal (jib) */
+.boat-sail-jib {
+    position: absolute;
+    bottom: 65px;
+    right: calc(50% + 4px);
+    width: 0;
+    height: 0;
+    border-bottom: 45px solid #f3f4f6; /* Lighter grey */
+    border-right: 30px solid transparent;
+    filter: drop-shadow(-2px 2px 0px rgba(0,0,0,0.2));
+}
+
+.boat-detail-card {
+    background-color: white;
+    border: 4px solid var(--dark-text);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 12px 12px 0px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.5s;
+}
+
+.video-container {
+    position: relative;
+    border: 3px solid var(--dark-text);
+    border-radius: 1rem;
+    overflow: hidden;
+    background-color: #e5e7eb;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
 }

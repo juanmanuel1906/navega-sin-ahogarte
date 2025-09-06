@@ -1,38 +1,72 @@
 <div class="test-wrapper">
   <!-- Pantalla de Inicio del Test -->
   @if (currentScreen === 'start') {
-  <div class="screen active text-center max-w-lg">
-    <i class="ph-fill ph-rocket-launch text-7xl main-purple"></i>
-    <h1 class="font-comic text-5xl mt-4">¿Cómo estás navegando?</h1>
-    <p class="text-lg text-gray-600 mt-2">
-      Este breve test te ayudará a entender tu estado de bienestar digital.
-      Responde con honestidad, no hay respuestas correctas o incorrectas.
-    </p>
-    <button
-      (click)="startTest()"
-      class="comic-button mt-8 bg-main-purple text-white font-comic text-3xl py-4 px-10 rounded-lg cursor-pointer"
+  <div class="flex flex-col items-center justify-center min-h-screen p-4">
+
+    <div
+      class="bg-white rounded-2xl shadow-lg p-8 sm:p-12 w-full max-w-2xl text-center comic-card"
+      data-aos="fade-up"
     >
-      Comenzar Test
-    </button>
+      <div
+        class="mx-auto w-16 h-16 flex items-center justify-center rounded-full bg-purple-100 mb-6"
+      >
+      <div data-aos="fade-right"><i class="ph-fill ph-sailboat text-6xl text-purple-600"></i></div>
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl text-slate-800 font-comic" data-aos="zoom-in" data-aos-delay="100">
+        ¿Cómo estás navegando?
+      </h1>
+
+      <p class="text-lg text-slate-600 mt-4 max-w-xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+        Este breve test es tu brújula digital. Descubre si tus hábitos en línea
+        te llevan a aguas seguras o si es momento de ajustar el rumbo.
+      </p>
+
+      <div class="mt-8 p-4 rounded-lg" data-aos="fade-up" data-aos-delay="300">
+        <p class="text-sm text-slate-700 font-medium">
+          <i class="ph-fill ph-check-circle text-green-500 mr-1"></i>
+          No hay respuestas incorrectas, solo señales para conocerte mejor.
+        </p>
+      </div>
+
+      <button
+        (click)="startTest()"
+        class="group comic-button mt-10 w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-main-purple text-white font-comic text-3xl py-4 px-10 rounded-lg cursor-pointer transition-all duration-300 ease-in-out hover:bg-purple-700 hover:shadow-lg hover:-translate-y-1 active:scale-95"
+      >
+        Comenzar
+      </button>
+    </div>
+
   </div>
   }
 
-  <!-- Pantalla de Preguntas -->
-  @if (currentScreen === 'questions') {
+  <!-- Pantalla de Datos Iniciales (Perfil Interactivo) -->
+  @if (currentScreen === 'initial-data') {
   <div class="screen active w-full max-w-3xl">
     <div class="progress-bar-container">
-      <div class="progress-bar" [style.width.%]="progressPercentage"></div>
+      <div
+        class="progress-bar"
+        [style.width.%]="profileProgressPercentage"
+      ></div>
     </div>
-    @if (questions[currentQuestionIndex]) {
+    @if (profileQuestions[profileQuestionIndex]) {
     <div class="mt-8 text-center">
       <h2 class="text-2xl md:text-3xl font-bold">
-        {{ questions[currentQuestionIndex].text }}
+        {{ profileQuestions[profileQuestionIndex].text }}
       </h2>
-      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-        @for (answer of questions[currentQuestionIndex].answers; track
-        answer.text) {
-        <button (click)="selectAnswer(answer.score)" class="answer-card">
-          {{ answer.text }}
+      <div class="mt-8 grid grid-cols-2 lg:grid-cols-3 gap-4">
+        @for (option of profileQuestions[profileQuestionIndex].options; track
+        option) {
+        <button
+          (click)="
+            selectProfileAnswer(
+              profileQuestions[profileQuestionIndex].key,
+              option
+            )
+          "
+          class="answer-card-scaled"
+        >
+          {{ option }}
         </button>
         }
       </div>
@@ -41,21 +75,196 @@
   </div>
   }
 
+  <!-- Pantalla de Preguntas (Test Unificado) -->
+  @if (currentScreen === 'test-questions') {
+  <div class="screen active w-full max-w-3xl">
+    <div class="progress-bar-container">
+      <div class="progress-bar" [style.width.%]="testProgressPercentage"></div>
+    </div>
+    @if (testQuestions[currentQuestionIndex]) {
+    <div class="mt-8 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold">
+        {{ testQuestions[currentQuestionIndex].text }}
+      </h2>
+      <p class="text-gray-500 mt-2">
+        En las últimas 2 semanas, ¿con qué frecuencia?
+      </p>
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        @for (answer of answerScale; track answer.score; let isLast = $last) {
+        @if (isLast && answerScale.length % 2 !== 0) {
+        <div class="sm:col-span-2 flex justify-center">
+          <button
+            (click)="selectAnswer(answer.score)"
+            class="answer-card-scaled w-full sm:w-1/2"
+          >
+            {{ answer.text }}
+          </button>
+        </div>
+        } @else {
+        <button (click)="selectAnswer(answer.score)" class="answer-card-scaled">
+          {{ answer.text }}
+        </button>
+        } }
+      </div>
+    </div>
+    }
+  </div>
+  }
+
   <!-- Pantalla de Resultados -->
   @if (currentScreen === 'result' && finalResult) {
-      <div class="screen active text-center max-w-lg">
-          <h1 class="font-comic text-5xl">¡Test Completado!</h1>
-          <div class="my-8">
-              <div class="result-visual" [ngClass]="finalResult.visualClass">
-                  <i [ngClass]="finalResult.icon"></i>
-              </div>
-          </div>
-          <h2 class="text-3xl font-bold">{{ finalResult.title }}</h2>
-          <p class="text-lg text-gray-600 mt-2">{{ finalResult.description }}</p>
-          <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-              <a class="comic-button cursor-pointer inline-block bg-[var(--main-purple)] text-white font-comic text-2xl py-3 px-8 rounded-lg">Ver mis recursos</a>
-              <a (click)="retakeTest()" class="comic-button cursor-pointer inline-block font-comic text-2xl py-3 px-8 rounded-lg">Volver a realizar</a>
-          </div>
+  <div class="screen active text-center max-w-4xl" data-aos="zoom-in">
+    @if (resultStep === 'initial') {
+    <div data-aos="fade-up">
+      <h1 class="font-comic text-5xl">¡Test Completado!</h1>
+      <div class="my-8">
+        <div class="result-visual" [ngClass]="finalResult.visualClass">
+          <i [ngClass]="finalResult.icon"></i>
+        </div>
       </div>
+      <h2 class="text-3xl font-bold">{{ finalResult.title }}</h2>
+      <p class="text-lg text-gray-600 mt-2 max-w-2xl mx-auto">
+        {{ finalResult.description }}
+      </p>
+      <div
+        class="comic-card text-left p-4 mt-6 bg-yellow-100 border-2 rounded-2xl"
+      >
+        <h3 class="font-bold text-lg text-center">Recomendación rápida:</h3>
+        <p class="text-gray-700 text-center">{{ selectedRecommendation }}</p>
+      </div>
+      <div class="mt-8">
+        <button
+          (click)="showBoats()"
+          class="comic-button bg-main-purple text-white font-comic text-3xl py-3 px-10 rounded-lg cursor-pointer"
+        >
+          Continuar
+        </button>
+      </div>
+    </div>
+    } @if (resultStep === 'boats') {
+    <div>
+      @if (selectedBoat) {
+      <div class="boat-detail-modern" data-aos="fade-up">
+        <button (click)="closeBoatDetail()" class="close-button">
+          &times;
+        </button>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <!-- Columna Izquierda: Video y Título -->
+          <div class="text-center">
+            <h2
+              class="font-comic text-5xl"
+              [class.text-blue-600]="selectedBoat.id === 'clinical'"
+              [class.text-green-600]="selectedBoat.id === 'sports'"
+              [class.text-yellow-500]="selectedBoat.id === 'spiritual'"
+              [class.text-red-600]="selectedBoat.id === 'nutrition'"
+            >
+              Barco {{ selectedBoat.title }}
+            </h2>
+            <!-- Iframe para mostrar el video de YouTube -->
+            <div class="video-container">
+              <youtube-player [width]="430" [height]="400" [videoId]="selectedBoat.videoId" loadApi="true" disablePlaceholder></youtube-player>
+            </div>
+          </div>
+          <!-- Columna Derecha: Información -->
+          <div class="text-left space-y-6">
+            <div>
+              <h3 class="font-comic text-2xl border-b-4 border-black pb-1">
+                ¿Quiénes lo tripulan?
+              </h3>
+              <!-- Se muestra el ícono de cada aliado -->
+              @for(ally of selectedBoat.allies; track ally.name) {
+              <div class="mt-4 flex items-start gap-3">
+                <i class="text-2xl mt-1 main-purple" [ngClass]="ally.icon"></i>
+                <div>
+                  <p class="font-bold">{{ ally.name }}</p>
+                  <p class="text-sm text-gray-600">{{ ally.description }}</p>
+                </div>
+              </div>
+              }
+            </div>
+            <div>
+              <h3 class="font-comic text-2xl border-b-4 border-black pb-1">
+                ¿Qué Ofrece este Barco?
+              </h3>
+              <ul class="list-disc list-inside mt-2 space-y-1">
+                @for(offering of selectedBoat.offerings; track offering) {
+                <li>{{ offering }}</li>
+                }
+              </ul>
+            </div>
+            <div class="flex justify-center">
+              <button
+                (click)="closeBoatDetail()"
+                class="mx-2 comic-button-secondary cursor-pointer inline-block font-comic md:text-2xl md:py-3 md:px-8 rounded-lg"
+              >
+                RETROCEDER
+              </button>
+              <a
+                [href]="selectedBoat.link"
+                target="_blank"
+                class="comic-button bg-yellow-400 text-black font-comic md:text-2xl py-2 md:py-3 px-4 md:px-8 rounded-lg w-full text-center block"
+              >
+                Visitar Puerto
+              </a>
+            </div>
+          </div>
+        </div>
+        <p class="mt-6 text-xs text-gray-500 italic text-center">
+          {{ selectedBoat.disclaimer }}
+        </p>
+      </div>
+      } @else {
+      <div data-aos="fade-up">
+        <h2 class="font-comic text-4xl">
+          Elige un barco para afrontar el reto
+        </h2>
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          @for (boat of boatsOfSupport; track boat.id) {
+          <!--<div
+            (click)="selectBoat(boat)"
+            class="boat-wrapper"
+            data-aos="fade-up"
+            data-aos-delay="$index * 100"
+          >
+            <div class="boat-figure">
+              <div class="boat-hull" [ngClass]="boat.color">
+                <div class="boat-content">
+                  <i class="text-4xl" [ngClass]="boat.icon"></i>
+                </div>
+              </div>
+              <div class="boat-mast"></div>
+              <div class="boat-sail-main"></div>
+              <div class="boat-sail-jib"></div>
+            </div>
+            <h3 class="font-bold text-xl mt-4">{{ boat.title }}</h3>
+          </div>-->
+          <div (click)="selectBoat(boat)" class="flex flex-col items-center hover:scale-110 transition-transform cursor-pointer">
+            <div class="absolute w-8 h-8 mt-8 mr-4 rounded-full bg-[var(--main-purple)] text-white flex items-center justify-center" data-aos="fade-up" data-aos-delay="$index * 100">
+                  <i class="text-2xl" [ngClass]="boat.icon"></i>
+            </div>
+            <i class="ph-fill ph-sailboat text-9xl " [ngClass]="boat.color"></i>
+            <h3 class="font-bold text-xl">{{ boat.title }}</h3>
+          </div>
+          }
+        </div>  
+        <div class="mt-12">
+          <button
+            (click)="hideBoats()"
+            class="mx-2 comic-button-secondary cursor-pointer inline-block font-comic text-2xl py-3 px-8 rounded-lg"
+          >
+            RETROCEDER
+          </button>
+          <button
+            (click)="retakeTest()"
+            class="mx-2 comic-button bg-main-purple text-white font-comic text-2xl py-3 px-10 rounded-lg cursor-pointer"
+          >
+            REINICIAR
+          </button>
+        </div>
+      </div>
+      }
+    </div>
+    }
+  </div>
   }
 </div>
