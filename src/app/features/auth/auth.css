@@ -1,0 +1,6 @@
+section {
+  font-family: "Inter", sans-serif;
+  background-color: #e9d5ff; /* Morado claro de fondo */
+  background-image: radial-gradient(#ddd6fe 1px, transparent 1px);
+  background-size: 16px 16px;
+}

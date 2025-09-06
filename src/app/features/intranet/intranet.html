@@ -1,0 +1,111 @@
+<!-- Estructura del Dashboard Rediseñada con Estilo Cómic (Versión Compacta) -->
+<div class="bg-purple-100 min-h-screen">
+  <!-- NAVBAR SECTION -->
+  <nav class="sticky top-0 z-40">
+    <div class="px-4 sm:px-6 lg:px-8 bg-white border-b-2 border-black">
+      <!-- Altura de la barra de navegación reducida de h-20 a h-16 -->
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo y Botón de Sidebar -->
+        <div class="flex items-center">
+          <!--<button (click)="toggleSidebar()" class="p-2 mr-2 rounded-md hover:bg-purple-200">
+            <!-- Tamaño de ícono reducido 
+            <i class="ph-fill ph-list text-2xl text-black"></i>
+          </button>-->
+          <!-- Tamaño de fuente del logo reducido -->
+          <a href="#" class="font-comic text-3xl text-purple-600">NAVEGA</a>
+        </div>
+
+        <!-- Íconos y Menú de Usuario -->
+        <div class="flex items-center gap-4">
+          <button class="p-2 rounded-full hover:bg-purple-200">
+            <!-- Tamaño de ícono reducido -->
+            <i class="ph-fill ph-bell text-2xl text-black"></i>
+          </button>
+
+          <!-- Menú de Usuario -->
+          <div class="relative">
+            <button (click)="toggleUserMenu()" class="flex items-center gap-2 comic-button bg-white text-black p-1 rounded-full">
+              <!-- Tamaño de imagen de perfil reducido -->
+              <img class="w-8 h-8 rounded-full border-2 border-black" [src]="currentUser.picture" alt="user photo"/>
+              <i class="ph-fill ph-caret-down text-lg pr-1"></i>
+            </button>
+
+            <!-- Dropdown del menú -->
+            @if (isUserMenuOpen) {
+              <div class="absolute right-0 mt-3 w-56 comic-card bg-white z-50">
+                <div class="px-3 py-2 border-b-2 border-black">
+                  <!-- Tamaños de fuente reducidos -->
+                  <p class="text-xs font-bold text-gray-900" role="none">
+                    {{ currentUser.name }}
+                  </p>
+                  <p class="text-xs font-medium text-gray-600 truncate" role="none">
+                    {{ currentUser.email }}
+                  </p>
+                </div>
+                <ul class="py-1" role="none">
+                  <li>
+                    <a href="#" class="block px-3 py-1.5 text-sm font-bold text-gray-700 hover:bg-purple-100">Configuraciones</a>
+                  </li>
+                  <li>
+                    <a href="#" class="block px-3 py-1.5 text-sm font-bold text-gray-700 hover:bg-purple-100">Cerrar Sesión</a>
+                  </li>
+                </ul>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ASIDE SECTION (Sidebar) -->
+  <aside 
+    class="fixed top-0 left-0 z-30 h-screen bg-white border-r-2 border-black transition-all duration-300 ease-in-out"
+    [class.w-56]="isSidebarOpen"
+    [class.w-18]="!isSidebarOpen"
+  >
+    <!-- Padding superior reducido -->
+    <div class="h-full px-3 py-4 overflow-y-auto pt-20">
+      <ul class="space-y-3">
+        <li>
+          <!-- Padding interno reducido -->
+          <a routerLink="/dashboard" class="flex items-center p-2.5 comic-button text-black rounded-lg">
+            <i class="ph-fill ph-house text-2xl"></i>
+            <span class="ms-3 font-bold text-base" [class.hidden]="!isSidebarOpen">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/analytics" class="flex items-center p-2.5 comic-button bg-white text-black rounded-lg">
+            <i class="ph-fill ph-chart-bar text-2xl"></i>
+            <span class="ms-3 font-bold text-base" [class.hidden]="!isSidebarOpen">Analíticas</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/users" class="flex items-center p-2.5 comic-button bg-white text-black rounded-lg">
+            <i class="ph-fill ph-users-three text-2xl"></i>
+            <span class="ms-3 font-bold text-base" [class.hidden]="!isSidebarOpen">Usuarios</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/anonymous-chat-admin" class="flex items-center p-2.5 comic-button bg-white text-black rounded-lg">
+            <i class="ph-fill ph-chats-circle text-2xl"></i>
+            <span class="ms-3 font-bold text-base" [class.hidden]="!isSidebarOpen">Ansiosos anónimos</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- CONTENT SECTION -->
+  <div 
+    class="p-4 transition-all duration-300 ease-in-out"
+    [class.lg:ml-56]="isSidebarOpen"
+    [class.lg:ml-20]="!isSidebarOpen"
+  >
+    <!-- Margen superior ajustado a la nueva altura de la navbar -->
+    <div>
+        <router-outlet />
+    </div>
+  </div>
+</div>
+

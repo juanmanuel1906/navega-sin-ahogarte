@@ -1,0 +1,173 @@
+<!-- Encabezado y Acciones -->
+<div class="mb-8">
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+    <div>
+      <h1 class="font-comic text-5xl text-purple-600">
+        Administrar Tripulación
+      </h1>
+      <p class="text-lg text-gray-700 mt-1">
+        Gestiona los roles y perfiles de los usuarios de la plataforma.
+      </p>
+    </div>
+    <div class="mt-4 md:mt-0">
+      <a
+        href="#"
+        class="comic-button bg-yellow-400 text-black font-comic text-xl py-3 px-6 rounded-lg flex items-center gap-2"
+      >
+        <i class="ph-fill ph-user-plus text-2xl"></i>
+        Añadir
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Barra de Búsqueda y Filtros -->
+<div class="mb-6">
+  <div class="relative">
+    <!--<div
+      class="absolute inset-y-0 left-0 flex items-center pl-[170vh] pointer-events-none"
+    >
+      <i class="ph-fill ph-magnifying-glass text-xl text-gray-500"></i>
+    </div>-->
+    <input
+      type="text"
+      class="comic-input w-full pl-12 p-3"
+      placeholder="Buscar por nombre o correo electrónico..."
+    />
+  </div>
+</div>
+
+<!-- Tabla de Usuarios -->
+<div class="comic-card bg-white p-2 overflow-x-auto">
+  <table class="w-full text-left">
+    <thead class="border-b-4 border-black">
+      <tr>
+        <th class="p-4 font-comic text-2xl">Usuario</th>
+        <th class="p-4 font-comic text-2xl">Rol</th>
+        <th class="p-4 font-comic text-2xl">Fecha de Registro</th>
+        <th class="p-4 font-comic text-2xl text-center">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Fila de Usuario 1 -->
+      <tr class="border-b-2 border-gray-200">
+        <td class="p-4">
+          <div class="flex items-center gap-4">
+            <img
+              class="w-12 h-12 rounded-full border-2 border-black"
+              src="https://placehold.co/100x100/C4B5FD/3730A3?text=CN"
+              alt="Avatar"
+            />
+            <div>
+              <p class="font-bold text-lg">Capitán Nemo</p>
+              <p class="text-sm text-gray-600">capitan@navegasinahogarte.com</p>
+            </div>
+          </div>
+        </td>
+        <td class="p-4">
+          <span
+            class="px-3 py-1 text-sm font-bold text-white bg-blue-600 rounded-full border-2 border-black"
+            >Administrador</span
+          >
+        </td>
+        <td class="p-4 font-medium">01 Sep, 2025</td>
+        <td class="p-4">
+          <div class="flex justify-center gap-3">
+            <button
+              class="comic-button bg-white p-2 rounded-lg"
+              title="Editar Rol"
+            >
+              <i class="ph-fill ph-pencil-simple text-xl"></i>
+            </button>
+            <button
+              class="comic-button bg-red-500 text-white p-2 rounded-lg"
+              title="Eliminar Usuario"
+            >
+              <i class="ph-fill ph-trash text-xl"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+
+      <!-- Fila de Usuario 2 -->
+      <tr class="border-b-2 border-gray-200">
+        <td class="p-4">
+          <div class="flex items-center gap-4">
+            <img
+              class="w-12 h-12 rounded-full border-2 border-black"
+              src="https://placehold.co/100x100/A7F3D0/047857?text=JV"
+              alt="Avatar"
+            />
+            <div>
+              <p class="font-bold text-lg">Jules Verne</p>
+              <p class="text-sm text-gray-600">jverne@classics.com</p>
+            </div>
+          </div>
+        </td>
+        <td class="p-4">
+          <span
+            class="px-3 py-1 text-sm font-bold text-black bg-gray-300 rounded-full border-2 border-black"
+            >Usuario</span
+          >
+        </td>
+        <td class="p-4 font-medium">28 Ago, 2025</td>
+        <td class="p-4">
+          <div class="flex justify-center gap-3">
+            <button
+              class="comic-button bg-white p-2 rounded-lg"
+              title="Editar Rol"
+            >
+              <i class="ph-fill ph-pencil-simple text-xl"></i>
+            </button>
+            <button
+              class="comic-button bg-red-500 text-white p-2 rounded-lg"
+              title="Eliminar Usuario"
+            >
+              <i class="ph-fill ph-trash text-xl"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+
+      <!-- Fila de Usuario 3 -->
+      <tr class="border-b-2 border-gray-200">
+        <td class="p-4">
+          <div class="flex items-center gap-4">
+            <img
+              class="w-12 h-12 rounded-full border-2 border-black"
+              src="https://placehold.co/100x100/FDE68A/B45309?text=IS"
+              alt="Avatar"
+            />
+            <div>
+              <p class="font-bold text-lg">Ishmael</p>
+              <p class="text-sm text-gray-600">callmeishmael@sea.com</p>
+            </div>
+          </div>
+        </td>
+        <td class="p-4">
+          <span
+            class="px-3 py-1 text-sm font-bold text-black bg-gray-300 rounded-full border-2 border-black"
+            >Usuario</span
+          >
+        </td>
+        <td class="p-4 font-medium">25 Ago, 2025</td>
+        <td class="p-4">
+          <div class="flex justify-center gap-3">
+            <button
+              class="comic-button bg-white p-2 rounded-lg"
+              title="Editar Rol"
+            >
+              <i class="ph-fill ph-pencil-simple text-xl"></i>
+            </button>
+            <button
+              class="comic-button bg-red-500 text-white p-2 rounded-lg"
+              title="Eliminar Usuario"
+            >
+              <i class="ph-fill ph-trash text-xl"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

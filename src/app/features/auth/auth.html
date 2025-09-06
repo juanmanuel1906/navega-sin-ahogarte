@@ -1,0 +1,92 @@
+<!-- auth.html (Versión actualizada con formularios reactivos) -->
+<section class="antialiased">
+  <div class="min-h-screen flex items-center justify-center p-4 bg-[var(--main-blue)]">
+    <div class="w-full max-w-5xl comic-card">
+      <div class="grid grid-cols-1 lg:grid-cols-2">
+        <!-- Columna de Ilustración -->
+        <div class="hidden lg:flex flex-col items-center justify-center p-12 bg-purple-200 border-r-4 border-black">
+          <img src="https://placehold.co/400x400/C4B5FD/3730A3?text=NSA" alt="Personajes de Navega Sin Ahogarte" class="w-full max-w-xs rounded-full border-4 border-black"/>
+          <h2 class="font-comic text-5xl main-purple mt-8 text-center">
+            ¡Bienvenido a bordo!
+          </h2>
+          <p class="text-black text-center mt-2 font-medium">
+            Tu viaje hacia un bienestar digital más saludable comienza aquí.
+          </p>
+        </div>
+
+        <!-- Columna de Formulario -->
+        <div class="relative overflow-hidden">
+          <div id="form-slider" class="flex w-[200%] transition-transform duration-700 ease-in-out" [style.transform]="isLoginVisible ? 'translateX(0)' : 'translateX(-50%)'">
+            
+            <!-- Panel de Login -->
+            <div class="w-1/2 shrink-0">
+              <div class="p-8 md:p-12">
+                <h2 class="font-comic text-5xl main-purple text-center">Iniciar Sesión</h2>
+                <p class="text-gray-600 mt-2 text-center">¡Qué bueno verte de nuevo!</p>
+
+                <!-- FORMULARIO DE LOGIN ACTUALIZADO -->
+                <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" class="mt-8 space-y-6">
+                  <div>
+                    <label for="login-email" class="text-lg font-bold">Correo electrónico</label>
+                    <input type="email" id="login-email" class="comic-input mt-2" placeholder="tu@correo.com" formControlName="email" />
+                  </div>
+                  <div>
+                    <label for="login-password" class="text-lg font-bold">Contraseña</label>
+                    <input type="password" id="login-password" class="comic-input mt-2" placeholder="••••••••" formControlName="password" />
+                  </div>
+                  <button type="submit" [disabled]="loginForm.invalid" class="w-full comic-button bg-[var(--main-yellow)] text-black font-comic text-3xl py-3 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                    Entrar
+                  </button>
+                </form>
+
+                <p class="mt-8 text-center font-medium">
+                  ¿Aún no tienes cuenta?<br>
+                  <a (click)="showRegister(); $event.preventDefault()" class="text-purple-600 hover:underline font-bold cursor-pointer">
+                    ¡Únete a la tripulación!
+                  </a>
+                </p>
+              </div>
+            </div>
+
+            <!-- Panel de Registro -->
+            <div class="w-1/2 shrink-0">
+              <div class="p-8 md:p-12">
+                <h2 class="font-comic text-5xl main-purple text-center">Crear Cuenta</h2>
+                <p class="text-gray-600 text-center mt-2">
+                  ¡Sube a bordo y empecemos a navegar!
+                </p>
+
+                <!-- FORMULARIO DE REGISTRO ACTUALIZADO -->
+                <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()" class="mt-8 space-y-6">
+                  <div>
+                    <label for="register-name" class="text-lg font-bold">Tu nombre o apodo</label>
+                    <input type="text" id="register-name" class="comic-input mt-2" placeholder="Capitán Nemo" formControlName="name"/>
+                  </div>
+                  <div>
+                    <label for="register-email" class="text-lg font-bold">Correo electrónico</label>
+                    <input type="email" id="register-email" class="comic-input mt-2" placeholder="tu@correo.com" formControlName="email" />
+                  </div>
+                  <div>
+                    <label for="register-password" class="text-lg font-bold">Contraseña</label>
+                    <input type="password" id="register-password" class="comic-input mt-2" placeholder="Crea una contraseña segura" formControlName="password" />
+                  </div>
+                  <button type="submit" [disabled]="registerForm.invalid" class="w-full comic-button bg-[var(--main-yellow)] text-black font-comic text-3xl py-3 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                    Crear mi cuenta
+                  </button>
+                </form>
+
+                <p class="mt-8 text-center font-medium">
+                  ¿Ya tienes una cuenta?
+                  <br>
+                  <a (click)="showLogin(); $event.preventDefault()" class="text-purple-600 hover:underline font-bold cursor-pointer">
+                    Inicia sesión aquí.
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

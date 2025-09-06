@@ -1,0 +1,61 @@
+<!-- TITLE SECTION-->
+<div class="h-1000 max-w-7xl mx-auto">
+  <div class="text-center">
+    <div class="flex flex-col md:flex-row justify-center items-center pt-20">
+      <h1
+        class="font-comic text-6xl md:text-8xl text-gray-900 mx-2"
+        id="title-navega"
+      >
+        Navega
+      </h1>
+      <h1
+        class="font-comic text-6xl md:text-8xl main-purple mx-2"
+        id="title-sin-ahogarte"
+      >
+        sin ahogarte
+      </h1>
+    </div>
+    <p
+      class="mt-3 text-xl text-gray-700 max-w-lg mx-auto"
+      id="description-text"
+    >
+      Llegaste a un lugar seguro... podrás encontrar el equilibrio entre el
+      mundo real y el digital.
+    </p>
+    <div class="mt-10 test-button-transition">
+      <a
+        href="#wellness-test"
+        class="comic-button bg-yellow-400 text-black font-comic text-3xl py-4 lg:px-12 rounded-lg"
+      >
+        ¡Comienza ahora!
+      </a>
+    </div>
+  </div>
+  <!--
+  <div class="fixed top-0 left-0 w-screen h-screen -z-10">
+    <video id="background-video" src="/images/test2.mp4" loop muted playsinline preload="auto" class="w-full h-full object-cover">
+        Tu navegador no soporta el elemento de video.
+    </video>
+    <div class="absolute top-0 left-0 w-full h-full bg-black opacity-20"></div>
+</div>-->
+</div>
+
+<div class="main__container">
+    <ng-lottie 
+        [options]="options" 
+        width="500px" 
+        height="500px" 
+        (animationCreated)="animationCreated($event)" />
+  
+    <button 
+        class="animation__button" 
+        (click)="play()">Play</button>
+    <button 
+        class="animation__button" 
+        (click)="pause()">Pause</button>
+    <button 
+        class="animation__button"
+         (click)="stop()">Stop</button>
+</div>
+
+<!-- END TITLE SECTION -->

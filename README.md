@@ -58,4 +58,4 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
 
-git remote set-url origin https://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@github.com/juanmanuel1906/navega-sin-ahogarte.git
+git remote set-url origin https://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@github.com/juanmanuel1906/navega-sin-ahogarte.git

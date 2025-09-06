@@ -1,18 +1,38 @@
 import { Routes } from '@angular/router';
 import { NotFound } from './routes/not-found/not-found';
 import { Home } from './routes/home/home';
+import { Landing } from './routes/landing/landing';
+import { Auth } from './features/auth/auth';
 
 export const routes: Routes = [
   {
     path: '',
     component: Home,
-    title: 'Navega Sin Ahogarte - Tu Bienestar Digital', 
+    title: 'Navega Sin Ahogarte - Tu Bienestar Digital',
+  },
+  {
+    path: 'auth',
+    component: Auth,
+    title: 'Navega Sin Ahogarte - Autenticación',
+  },
+  {
+    path: 'landing',
+    component: Landing,
+    title: 'Navega Sin Ahogarte - Tu Bienestar Digital',
   },
   {
     path: 'wellness-test',
-    loadComponent: () => import('././features/wellness-test/wellness-test').then(m => m.WellnessTest),
-    //canActivate: [authGuard], 
-    title: 'Test de Bienestar Digital'
+    loadComponent: () =>
+      import('././features/wellness-test/wellness-test').then(
+        (m) => m.WellnessTest
+      ),
+    //canActivate: [authGuard],
+    title: 'Test de Bienestar Digital',
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/intranet/intranet.routes').then((i) => i.IntranetRoutes),
   },
   {
     path: '**',

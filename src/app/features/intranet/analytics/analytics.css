@@ -1,0 +1,7 @@
+.comic-card {
+  background-color: white;
+  border: 2px solid #1f2937;
+  border-radius: 1.5rem;
+  box-shadow: 3px 3px 0px #1f2937;
+  overflow: hidden;
+}
