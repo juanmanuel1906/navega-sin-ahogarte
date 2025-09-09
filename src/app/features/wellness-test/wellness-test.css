@@ -72,10 +72,6 @@
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
-.answer-card-scaled:hover {
-  transform: scale(1.05);
-  background-color: #e9d5ff;
-}
 
 .result-visual {
   width: 8rem;
@@ -92,79 +88,6 @@
   color: var(--dark-text);
 }
 
-/* Estilos para el formulario de perfil */
-.boat-wrapper {
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    text-align: center;
-}
-.boat-wrapper:hover {
-    transform: translateY(-8px) scale(1.05);
-}
-.boat-figure {
-    position: relative;
-    width: 150px;
-    height: 130px;
-    margin: 0 auto;
-}
-.boat-hull {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 150px;
-    height: 60px;
-    border-radius: 0 0 80px 80px / 0 0 40px 40px;
-    border: 3px solid var(--dark-text);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.boat-content {
-    color: var(--dark-text);
-}
-.boat-mast {
-    position: absolute;
-    bottom: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 8px;
-    height: 70px;
-    background-color: #a1887f; /* brown */
-    border: 3px solid var(--dark-text);
-    border-bottom: none;
-}
-/* Vela principal */
-.boat-sail-main {
-    position: absolute;
-    bottom: 65px;
-    left: calc(50% + 4px);
-    width: 0;
-    height: 0;
-    border-bottom: 60px solid white;
-    border-left: 45px solid transparent;
-    filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.2));
-}
-/* Vela frontal (jib) */
-.boat-sail-jib {
-    position: absolute;
-    bottom: 65px;
-    right: calc(50% + 4px);
-    width: 0;
-    height: 0;
-    border-bottom: 45px solid #f3f4f6; /* Lighter grey */
-    border-right: 30px solid transparent;
-    filter: drop-shadow(-2px 2px 0px rgba(0,0,0,0.2));
-}
-
-.boat-detail-card {
-    background-color: white;
-    border: 4px solid var(--dark-text);
-    border-radius: 1rem;
-    padding: 2rem;
-    box-shadow: 12px 12px 0px rgba(0, 0, 0, 0.25);
-    animation: fadeIn 0.5s;
-}
-
 .video-container {
     position: relative;
     border: 3px solid var(--dark-text);
@@ -177,4 +100,33 @@
     position: absolute;
     top: 0;
     left: 0;
+}
+
+@keyframes drift-right {
+  0% {
+    transform: translateX(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateX(8px) rotate(1deg);
+  }
+  100% {
+    transform: translateX(0) rotate(-1deg);
+  }
+}
+
+/*
+  Clase que aplica la animación.
+  - La ejecuta de forma infinita.
+  - Con una duración de 4 segundos para que sea un movimiento lento.
+  - "ease-in-out" hace que el movimiento sea suave al empezar y terminar.
+*/
+.boat-animation {
+  animation: drift-right 4s ease-in-out infinite;
+}
+
+@media (min-width: 1024px) {
+  .answer-card-scaled:hover {
+    transform: scale(1.05);
+    background-color: #e9d5ff;
+  }
 }

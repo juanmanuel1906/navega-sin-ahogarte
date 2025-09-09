@@ -30,12 +30,16 @@ export class WellnessTest {
   ];
   profileQuestionIndex = 0;
 
-  answerScale = [
+  /*answerScale = [
     { text: 'Nunca', score: 0 }, { text: 'Rara vez', score: 1 }, { text: 'A veces', score: 2 }, { text: 'Frecuentemente', score: 3 }, { text: 'Siempre', score: 4 }
+  ];*/
+
+  answerScale = [
+    { text: 'Siempre', score: 3 }, { text: 'A veces', score: 2 }, { text: 'Rara vez', score: 1 }, { text: 'Nunca', score: 0 }
   ];
 
   // Banco de preguntas principal
-  testQuestions = [
+  /*testQuestions = [
     { text: 'Me siento inquieto/a si no puedo revisar el celular o el computador.' },
     { text: 'Las notificaciones me distraen cuando estoy ocupado/a.' },
     { text: 'He perdido horas de sueño por quedarme frente a una pantalla.' },
@@ -56,6 +60,14 @@ export class WellnessTest {
     { text: 'Paso más tiempo conectado/a del que había planeado.' },
     { text: 'Uso el celular en situaciones peligrosas (ej. conduciendo).' },
     { text: 'He tenido conflictos importantes por el tiempo que paso conectado/a.' }
+  ];*/
+
+  testQuestions = [
+    { text: '¿Sientes la necesidad de revisar tu celular apenas te despiertas?' },
+    { text: '¿Te sientes ansioso/a o de mal humor cuando no tienes acceso a internet?' },
+    { text: '¿Comparas tu vida con la de otros en redes sociales?' },
+    { text: '¿El uso de pantallas afecta tus horas de sueño?' },
+    { text: '¿Sientes que te estás perdiendo de algo importante si no estás conectado/a (FOMO)?' },
   ];
   
   currentQuestionIndex = 0;
@@ -90,13 +102,13 @@ export class WellnessTest {
       title: 'Deportivo', 
       icon: 'ph-fill ph-barbell text-white', 
       color: 'text-green-600',
-      videoId: 'PXvz8zyuob0',
+      videoId: 'wTTxj8JohhQ',
       allies: [
-        { name: 'Comfenalco', description: 'Programas de bienestar y acceso a centros deportivos de alta calidad.', icon: 'ph-fill ph-storefront' },
-        { name: 'Deporte al Parque Colectivo', description: 'Clases grupales al aire libre para entrenar cuerpo y mente.', icon: 'ph-fill ph-plant' }
+        { name: 'Comfenalco', description: 'Programas de bienestar y acceso a centros deportivos de alta calidad.', icon: '/logos/comfenalco.png' },
+        { name: 'Real Sport', description: 'Club deportivo que fomenta el bienestar integral a través del deporte.', icon: '/logos/real-sport.jpeg' }
       ],
       // COMPLETADO
-      offerings: ['Rutinas de ejercicio en casa', 'Clases de meditación guiada', 'Grupos de clicismo y senderismo'],
+      offerings: ['Rutinas de ejercicio en casa', 'Clases de estiramiento guiado', 'Grupos de ciclismo y senderismo'],
       link: '#enlace-deportivo',
       disclaimer: 'Consulta a un médico antes de iniciar cualquier actividad física nueva.' 
     },
@@ -174,13 +186,21 @@ export class WellnessTest {
   }
 
   showFinalResult(): void {
+    console.log('Pantalla', this.currentScreen);
     let resultKey = 'verde';
-  // Los nuevos umbrales están basados en un puntaje máximo de 80.
-    if (this.totalScore >= 54) { 
+    
+    if (this.totalScore > 9) {
+      resultKey = 'rojo';
+    } else if (this.totalScore > 4) {
+      resultKey = 'amarillo';
+    }
+
+    // Los nuevos umbrales están basados en un puntaje máximo de 80.
+    /*if (this.totalScore >= 54) { 
       resultKey = 'rojo';
     } else if (this.totalScore >= 27) {
       resultKey = 'amarillo';
-    }
+    }*/
     // Si el puntaje es de 0 a 26, se mantiene como 'verde'.
 
     const results = {
@@ -195,6 +215,8 @@ export class WellnessTest {
     
     this.finalResult = results[resultKey as keyof typeof results];
     this.currentScreen = 'result';
+
+    console.log('Pantalla 2', this.currentScreen);
 
     this.saveResultsToDatabase(resultKey);
   }
@@ -220,6 +242,7 @@ export class WellnessTest {
 
   retakeTest(): void {
     this.currentScreen = 'start';
+    this.resultStep = 'initial';
     this.userProfile = {};
     this.profileQuestionIndex = 0;
     this.currentQuestionIndex = 0;

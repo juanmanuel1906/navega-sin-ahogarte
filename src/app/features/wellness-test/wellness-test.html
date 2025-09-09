@@ -1,14 +1,14 @@
-<div class="test-wrapper">
+<div class="test-wrapper" id="wellness-test">
   <!-- Pantalla de Inicio del Test -->
   @if (currentScreen === 'start') {
-  <div class="flex flex-col items-center justify-center min-h-screen p-4">
+  <div class="flex flex-col items-center justify-center min-h-screen lg:p-4">
 
     <div
-      class="bg-white rounded-2xl shadow-lg p-8 sm:p-12 w-full max-w-2xl text-center comic-card"
+      class="bg-white rounded-2xl shadow-lg lg:p-8 p-4 w-full max-w-2xl text-center comic-card"
       data-aos="fade-up"
     >
       <div
-        class="mx-auto w-16 h-16 flex items-center justify-center rounded-full bg-purple-100 mb-6"
+        class="mx-auto w-16 h-16 flex items-center justify-center rounded-full bg-purple-100 md:mb-6"
       >
       <div data-aos="fade-right"><i class="ph-fill ph-sailboat text-6xl text-purple-600"></i></div>
       </div>
@@ -22,7 +22,7 @@
         te llevan a aguas seguras o si es momento de ajustar el rumbo.
       </p>
 
-      <div class="mt-8 p-4 rounded-lg" data-aos="fade-up" data-aos-delay="300">
+      <div class="mt-8 p-0 lg:p-4 rounded-lg" data-aos="fade-up" data-aos-delay="300">
         <p class="text-sm text-slate-700 font-medium">
           <i class="ph-fill ph-check-circle text-green-500 mr-1"></i>
           No hay respuestas incorrectas, solo señales para conocerte mejor.
@@ -33,7 +33,7 @@
         (click)="startTest()"
         class="group comic-button mt-10 w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-main-purple text-white font-comic text-3xl py-4 px-10 rounded-lg cursor-pointer transition-all duration-300 ease-in-out hover:bg-purple-700 hover:shadow-lg hover:-translate-y-1 active:scale-95"
       >
-        Comenzar
+      <a href="#wellness-test">Comenzar</a>
       </button>
     </div>
 
@@ -54,7 +54,7 @@
       <h2 class="text-2xl md:text-3xl font-bold">
         {{ profileQuestions[profileQuestionIndex].text }}
       </h2>
-      <div class="mt-8 grid grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         @for (option of profileQuestions[profileQuestionIndex].options; track
         option) {
         <button
@@ -64,7 +64,7 @@
               option
             )
           "
-          class="answer-card-scaled"
+          class="answer-card-scaled bg-amber-300"
         >
           {{ option }}
         </button>
@@ -137,7 +137,7 @@
           (click)="showBoats()"
           class="comic-button bg-main-purple text-white font-comic text-3xl py-3 px-10 rounded-lg cursor-pointer"
         >
-          Continuar
+          <a href="#wellness-test">CONTINUAR</a>
         </button>
       </div>
     </div>
@@ -145,9 +145,6 @@
     <div>
       @if (selectedBoat) {
       <div class="boat-detail-modern" data-aos="fade-up">
-        <button (click)="closeBoatDetail()" class="close-button">
-          &times;
-        </button>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <!-- Columna Izquierda: Video y Título -->
           <div class="text-center">
@@ -174,7 +171,14 @@
               <!-- Se muestra el ícono de cada aliado -->
               @for(ally of selectedBoat.allies; track ally.name) {
               <div class="mt-4 flex items-start gap-3">
+                @if (ally.name === 'Real Sport') {
+                <img class="text-2xl mt-1 ml-5 main-purple w-[30px]" [src]="ally.icon" alt="{{ ally.name }}">
+                }
+                @if (ally.name === 'Comfenalco') {
+                <img class="text-2xl mt-5 main-purple w-[60px]" [src]="ally.icon" alt="{{ ally.name }}">
+                } @else {
                 <i class="text-2xl mt-1 main-purple" [ngClass]="ally.icon"></i>
+                }
                 <div>
                   <p class="font-bold">{{ ally.name }}</p>
                   <p class="text-sm text-gray-600">{{ ally.description }}</p>
@@ -184,7 +188,7 @@
             </div>
             <div>
               <h3 class="font-comic text-2xl border-b-4 border-black pb-1">
-                ¿Qué Ofrece este Barco?
+                ¿Qué ofrece este Barco?
               </h3>
               <ul class="list-disc list-inside mt-2 space-y-1">
                 @for(offering of selectedBoat.offerings; track offering) {
@@ -197,14 +201,14 @@
                 (click)="closeBoatDetail()"
                 class="mx-2 comic-button-secondary cursor-pointer inline-block font-comic md:text-2xl md:py-3 md:px-8 rounded-lg"
               >
-                RETROCEDER
+                <a href="#wellness-test">RETROCEDER</a>
               </button>
               <a
                 [href]="selectedBoat.link"
                 target="_blank"
                 class="comic-button bg-yellow-400 text-black font-comic md:text-2xl py-2 md:py-3 px-4 md:px-8 rounded-lg w-full text-center block"
               >
-                Visitar Puerto
+                <a href="#wellness-test">VISITAR PUERTO</a>
               </a>
             </div>
           </div>
@@ -218,31 +222,13 @@
         <h2 class="font-comic text-4xl">
           Elige un barco para afrontar el reto
         </h2>
-        <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-8">
           @for (boat of boatsOfSupport; track boat.id) {
-          <!--<div
-            (click)="selectBoat(boat)"
-            class="boat-wrapper"
-            data-aos="fade-up"
-            data-aos-delay="$index * 100"
-          >
-            <div class="boat-figure">
-              <div class="boat-hull" [ngClass]="boat.color">
-                <div class="boat-content">
-                  <i class="text-4xl" [ngClass]="boat.icon"></i>
-                </div>
-              </div>
-              <div class="boat-mast"></div>
-              <div class="boat-sail-main"></div>
-              <div class="boat-sail-jib"></div>
-            </div>
-            <h3 class="font-bold text-xl mt-4">{{ boat.title }}</h3>
-          </div>-->
           <div (click)="selectBoat(boat)" class="flex flex-col items-center hover:scale-110 transition-transform cursor-pointer">
-            <div class="absolute w-8 h-8 mt-8 mr-4 rounded-full bg-[var(--main-purple)] text-white flex items-center justify-center" data-aos="fade-up" data-aos-delay="$index * 100">
+            <div class="absolute w-8 h-8 mt-8 mr-4 rounded-full bg-[var(--main-purple)] text-white flex items-center justify-center boat-animation z-10" data-aos="fade-up" data-aos-delay="$index * 100">
                   <i class="text-2xl" [ngClass]="boat.icon"></i>
             </div>
-            <i class="ph-fill ph-sailboat text-9xl " [ngClass]="boat.color"></i>
+            <i class="ph-fill ph-sailboat text-9xl boat-animation" [ngClass]="boat.color"></i>
             <h3 class="font-bold text-xl">{{ boat.title }}</h3>
           </div>
           }
@@ -252,13 +238,13 @@
             (click)="hideBoats()"
             class="mx-2 comic-button-secondary cursor-pointer inline-block font-comic text-2xl py-3 px-8 rounded-lg"
           >
-            RETROCEDER
+            <a href="#wellness-test">RETROCEDER</a>
           </button>
           <button
             (click)="retakeTest()"
             class="mx-2 comic-button bg-main-purple text-white font-comic text-2xl py-3 px-10 mt-5 lg:mt-0 rounded-lg cursor-pointer"
           >
-            REINICIAR
+            <a href="#wellness-test">REINICIAR</a>
           </button>
         </div>
       </div>
