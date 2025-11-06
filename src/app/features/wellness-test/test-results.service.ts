@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { BASE_URL } from '../../app';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TestResultsService {
-  // La URL base de tu API en Node.js
-  private apiUrl = 'http://localhost:3000/api';
-
   constructor(private http: HttpClient) { }
 
   /**
@@ -17,7 +15,7 @@ export class TestResultsService {
    * @returns Un Observable con la respuesta del servidor.
    */
   saveResult(resultData: any): Observable<any> {
-    const endpoint = `${this.apiUrl}/results`;
+    const endpoint = `${BASE_URL}/results`;
     return this.http.post(endpoint, resultData);
   }
 }

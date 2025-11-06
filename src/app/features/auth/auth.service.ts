@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { BASE_URL } from '../../app';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // La URL base de tu API de autenticación
-  private apiUrl = 'http://localhost:3000/api/auth';
-
   constructor(private http: HttpClient) { }
 
   /**
@@ -16,7 +14,7 @@ export class AuthService {
    * @param userData Objeto con name, email, y password.
    */
   register(userData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, userData);
+    return this.http.post(`${BASE_URL}/auth/register`, userData);
   }
 
   /**
@@ -24,7 +22,7 @@ export class AuthService {
    * @param credentials Objeto con email y password.
    */
   login(credentials: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
+    return this.http.post(`${BASE_URL}/auth/login`, credentials).pipe(
       tap((response: any) => {
         // Al iniciar sesión, guarda los tokens en localStorage
         if (response.accessToken && response.refreshToken) {
