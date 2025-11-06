@@ -70,7 +70,9 @@
           <!-- Padding interno reducido -->
           <a routerLink="/dashboard" class="flex items-center p-2.5 comic-button text-black rounded-lg">
             <i class="ph-fill ph-house text-2xl text-[var(--primary-purple)]"></i>
-            <span class="ms-3 font-bold text-base" [class.hidden]="!isSidebarOpen">Dashboard</span>
+            @if(isSidebarOpen){
+              <span class="ms-3 font-bold text-base hidden md:block">Dashboard</span>
+            }
           </a>
           @if (!this.isSidebarOpen) {
           <button (click)="toggleSidebar()" class="hidden md:block md:rounded-md cursor-pointer md:ml-13 md:fixed">
@@ -85,17 +87,20 @@
 
         @if (isAdmin$ | async) {
         <li>
-          <a routerLink="/analytics" routerLinkActive="!bg-yellow-200" routerLinkActive
-            class="flex items-center p-2.5 comic-button bg-white rounded-lg">
+          <a routerLink="/analytics" class="flex items-center p-2.5 comic-button bg-white rounded-lg">
             <i class="ph-fill ph-chart-bar text-2xl text-[var(--primary-purple)]"></i>
-            <span class="ms-3 font-bold text-base" [class.hidden]="!isSidebarOpen">Analíticas</span>
+            @if(isSidebarOpen){
+              <span class="ms-3 font-bold text-base hidden md:block">Analíticas</span>
+            }
           </a>
         </li>
 
         <li>
           <a routerLink="/users" class="flex items-center p-2.5 comic-button bg-white text-black rounded-lg">
             <i class="ph-fill ph-users-three text-2xl text-[var(--primary-purple)]"></i>
-            <span class="ms-3 font-bold text-base" [class.hidden]="!isSidebarOpen">Usuarios</span>
+            @if(isSidebarOpen){
+              <span class="ms-3 font-bold text-base hidden md:block">Usuarios</span>
+            }
           </a>
         </li>
         }
@@ -103,14 +108,18 @@
           <a routerLink="/anonymous-post-admin"
             class="flex items-center p-2.5 comic-button bg-white text-black rounded-lg">
             <i class="ph-fill ph-chats-circle text-2xl text-[var(--primary-purple)]"></i>
-            <span class="ms-3 font-bold text-base" [class.hidden]="!isSidebarOpen">Comunidad</span>
+            @if(isSidebarOpen){
+              <span class="ms-3 font-bold text-base hidden md:block">Comunidad</span>
+            }
           </a>
         </li>
         <li>
           <a routerLink="/wellness-test-panel"
             class="flex items-center p-2.5 comic-button bg-white text-black rounded-lg">
             <i class="ph-fill ph-boat text-2xl text-[var(--primary-purple)]"></i>
-            <span class="ms-3 font-bold text-base" [class.hidden]="!isSidebarOpen">Test</span>
+            @if(isSidebarOpen){
+              <span class="ms-3 font-bold text-base hidden md:block">Test</span>
+            }
           </a>
         </li>
 
