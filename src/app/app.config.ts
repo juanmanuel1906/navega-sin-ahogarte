@@ -8,7 +8,11 @@ import { provideHttpClient } from '@angular/common/http';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { SOCKET_URL } from '../environment';
 
-const config: SocketIoConfig = { url: SOCKET_URL, options: {} };
+const config: SocketIoConfig = {
+  url: SOCKET_URL, options: {
+    path: "/api/socket.io/"
+  }
+};
 
 export const appConfig: ApplicationConfig = {
   providers: [
