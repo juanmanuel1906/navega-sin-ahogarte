@@ -5,6 +5,10 @@ import { provideCacheableAnimationLoader, provideLottieOptions } from 'ngx-lotti
 import player from 'lottie-web';
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+import { SOCKET_URL } from '../environment';
+
+const config: SocketIoConfig = { url: SOCKET_URL, options: {} };
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,6 +17,7 @@ export const appConfig: ApplicationConfig = {
     provideCacheableAnimationLoader(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient()
+    provideHttpClient(),
+    SocketIoModule.forRoot(config).providers || []
   ]
 };

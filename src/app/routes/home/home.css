@@ -22,7 +22,7 @@
 
 /* Textura de Puntos (Halftone) */
 .halftone-bg {
-  background-color: var(--main-purple);
+  background-color: var(--primary-purple);
   background-image: radial-gradient(#8B5CF6 15%, transparent 16%);
   background-size: 25px 25px;
 }

@@ -1,28 +1,23 @@
-/* Estilo base para botones y tarjetas */
-.font-comic {
-  font-family: 'Bangers', cursive;
-  letter-spacing: 0.5px; /* Reducido para un texto más compacto */
+.comic-card {
+  background-color: white;
+  border: 2px solid #1f2937;
+  border-radius: 1.5rem;
+  box-shadow: 5px 5px 0px #1f2937;
+  overflow: hidden;
 }
 
-/* Estilo base para botones y tarjetas (más pequeños) */
 .comic-button {
   transition: all 0.2s ease-in-out;
-  border: 2px solid var(--dark-text); /* Borde más fino */
-  box-shadow: 3px 3px 0px var(--dark-text); /* Sombra más sutil */
-}
-.comic-button:hover {
-  transform: translateY(-2px) translateX(-2px);
-  box-shadow: 5px 5px 0px var(--dark-text);
-}
-.comic-button:active {
-  transform: translateY(1px) translateX(1px);
-  box-shadow: 1px 1px 0px var(--dark-text);
-}
-
-.comic-card {
-  border: 3px solid var(--dark-text); /* Borde más fino */
-  border-radius: 0.75rem; /* Esquinas menos redondeadas */
-  box-shadow: 6px 6px 0px rgba(0,0,0,0.8); /* Sombra más sutil */
+  border: 3px solid var(--dark-text);
+  box-shadow: 2px 2px 0px var(--dark-text);
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 3px 3px 0px var(--dark-text);
+  }
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 2px 2px 0px var(--dark-text);
+  }
 }
 
 /* Ocultar el texto del menú cuando el sidebar está colapsado */

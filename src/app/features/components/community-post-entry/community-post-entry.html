@@ -1,0 +1,43 @@
+<div class="test-wrapper flex justify-center" id="#community-post">
+  <div class="comic-card bg-white p-4 md:p-8 max-w-2xl w-full">
+    
+    @if (currentStep === 'selection') {
+      <div class="text-center">
+        <h1 class="font-comic text-2xl md:text-3xl primary-purple garet-heavy">¡ÚNETE A LA CONVERSACIÓN!</h1>
+        <p class="text-lg text-gray-700 mt-2 montserrat-italic">¿Cómo quieres participar en la comunidad hoy?</p>
+        
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <button (click)="selectAnonymous()" class="comic-button bg-gray-700 text-white p-6 rounded-lg text-center">
+            <i class="ph-fill ph-user-mask text-6xl"></i>
+            <span class="font-comic text-3xl block mt-2 montserrat-bold">ANÓNIMO</span>
+            <p class="text-sm font-medium mt-1 montserrat-italic">Participa con un apodo temporal.</p>
+          </button>
+          
+          <button (click)="selectProfile()" class="comic-button bg-purple-200 text-purple-800 p-6 rounded-lg text-center">
+            <span class="font-comic text-3xl block mt-2 montserrat-bold">{{ this.currentUser?.name || 'INICIA SESIÓN' | uppercase }}</span>
+            <p class="text-sm font-medium mt-1 montserrat-italic">Usa tu cuenta y navega con intención.</p>
+          </button>
+        </div>
+      </div>
+    }
+
+    @if (currentStep === 'nickname') {
+       <div class="text-center">
+        <h1 class="font-comic text-2xl md:text-5xl primary-purple garet-heavy">ELIGE TU APODO</h1>
+        <p class="text-lg primary-black mt-2 montserrat-italic">Este será tu nombre en la comunidad durante esta sesión.</p>
+
+        <form [formGroup]="nicknameForm" (ngSubmit)="confirmNickname()" class="mt-6 flex flex-col items-center">
+          <input 
+            formControlName="nickname"
+            class="comic-input text-center text-2xl p-3 w-full max-w-sm" 
+            placeholder="Ej: Navegante Curioso"
+          />
+          <button type="submit" [disabled]="nicknameForm.invalid" class="comic-button garet-heavy bg-yellow-400 text-black font-comic text-1xl md:text-2xl py-2 px-4 rounded-lg mt-4">
+            ¡CONTINUAR!
+          </button>
+        </form>
+      </div>
+    }
+
+  </div>
+</div>

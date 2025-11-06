@@ -13,7 +13,7 @@ export const routes: Routes = [
   {
     path: 'auth',
     component: Auth,
-    title: 'Navega Sin Ahogarte - Autenticación',
+    title: 'NSA - Autenticación',
   },
   {
     path: 'landing',

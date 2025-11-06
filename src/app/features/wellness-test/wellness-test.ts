@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { YouTubePlayer } from '@angular/youtube-player';
 import { TestResultsService } from './test-results.service';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { DeviceIdService } from '../../core/services/device-id.service';
 
 @Component({
@@ -12,7 +14,7 @@ import { DeviceIdService } from '../../core/services/device-id.service';
   templateUrl: './wellness-test.html',
   styleUrls: ['./wellness-test.css']
 })
-export class WellnessTest {
+export class WellnessTest implements OnInit, AfterViewInit {
 
   // Se simplifican los estados de la pantalla
   currentScreen: 'start' | 'initial-data' | 'test-questions' | 'result' = 'start';
@@ -35,40 +37,47 @@ export class WellnessTest {
   ];*/
 
   answerScale = [
-    { text: 'Siempre', score: 3 }, { text: 'A veces', score: 2 }, { text: 'Rara vez', score: 1 }, { text: 'Nunca', score: 0 }
+    { text: 'Siempre', score: 4 }, { text: 'A veces', score: 3 }, { text: 'Rara vez', score: 1 }, { text: 'Nunca', score: 0 }
+  ];
+
+  answerCriticalScale = [
+    { text: 'Sí', score: 10 }, { text: 'No', score: 0 }
   ];
 
   // Banco de preguntas principal
-  /*testQuestions = [
-    { text: 'Me siento inquieto/a si no puedo revisar el celular o el computador.' },
-    { text: 'Las notificaciones me distraen cuando estoy ocupado/a.' },
-    { text: 'He perdido horas de sueño por quedarme frente a una pantalla.' },
-    { text: 'Me molesta que me interrumpan cuando estoy conectado/a.' },
-    { text: 'He intentado reducir mi uso de pantallas, pero no lo logro.' },
-    { text: 'El uso de pantallas ha afectado mis estudios, trabajo o relaciones.' },
-    { text: 'Interrumpo lo que estoy haciendo para revisar el celular.' },
-    { text: 'Pienso en redes o mensajes incluso cuando no las estoy usando.' },
-    { text: 'Me siento ansioso/a si no respondo rápido un mensaje.' },
-    { text: 'Me pongo nervioso/a cuando no tengo señal o batería.' },
-    { text: 'Me comparo con lo que otros publican y me siento peor.' },
-    { text: 'Siento que me pierdo cosas si no reviso redes seguido.' },
-    { text: 'Uso el teléfono en la cama justo antes de dormir.' },
-    { text: 'Me despierto en la noche para revisar notificaciones.' },
-    { text: 'Dejo de hacer cosas que disfruto por estar conectado/a.' },
-    { text: 'Las interrupciones digitales afectan mi productividad.' },
-    { text: 'Planeo descansar de pantallas, pero termino usándolas igual.' },
-    { text: 'Paso más tiempo conectado/a del que había planeado.' },
-    { text: 'Uso el celular en situaciones peligrosas (ej. conduciendo).' },
-    { text: 'He tenido conflictos importantes por el tiempo que paso conectado/a.' }
-  ];*/
-
   testQuestions = [
+    { text: 'Me siento inquieto/a si no puedo revisar el celular o el computador.', isCritical: false },
+    { text: 'Las notificaciones me distraen incluso cuando estoy ocupado/a en otra cosa.', isCritical: false },
+    { text: 'He perdido horas de sueño por quedarme usando pantallas.', isCritical: false },
+    { text: 'Me pongo de mal humor si me interrumpen cuando estoy conectado/a.', isCritical: false },
+    { text: 'He intentado reducir mi uso de dispositivos, pero no lo logro.', isCritical: false },
+    { text: 'El tiempo en redes o pantallas ha afectado mis estudios, trabajo o relaciones.', isCritical: false },
+    { text: 'Interrumpo lo que estoy haciendo para revisar el celular.', isCritical: false },
+    { text: 'Pienso en redes o mensajes incluso cuando no estoy conectado/a', isCritical: false },
+    { text: 'Paso más tiempo conectado/a de lo que había planeado.', isCritical: false },
+    { text: 'Planeo pausas de desconexión, pero no logro cumplirlas.', isCritical: false },
+    { text: 'Me pongo ansioso/a si no respondo de inmediato un mensaje.', isCritical: false },
+    { text: 'Me estreso cuando no tengo señal o batería.', isCritical: false },
+    { text: 'Uso el celular en la cama, justo antes de dormir.', isCritical: false },
+    { text: 'Me despierto en la noche para revisar notificaciones.', isCritical: false },
+    { text: 'He dejado de hacer actividades que antes disfrutaba por pasar tiempo en pantallas.', isCritical: false },
+    { text: 'Mi rendimiento en el estudio o trabajo ha bajado por distracciones digitales.', isCritical: false },
+    { text: 'He tenido discusiones o conflictos por el tiempo que paso conectado/a.', isCritical: false },
+    { text: 'Me comparo con lo que veo en redes y eso me hace sentir mal.', isCritical: false },
+    { text: 'Siento que me pierdo de cosas importantes si no reviso redes constantemente.', isCritical: false },
+    { text: 'Uso el celular en momentos o lugares donde puede ser peligroso (ejemplo: mientras conduzco).', isCritical: false },
+    { text: 'En los últimos días, mi tristeza o ansiedad han sido tan intensas que me cuesta hacer lo básico.', isCritical: true },
+    { text: 'He pensado que la vida no vale la pena o que preferiría no estar aquí.', isCritical: true },
+    { text: 'He tenido pensamientos de hacerme daño o de quitarme la vida.', isCritical: true }
+  ];
+
+  /*testQuestions = [
     { text: '¿Sientes la necesidad de revisar tu celular apenas te despiertas?' },
     { text: '¿Te sientes ansioso/a o de mal humor cuando no tienes acceso a internet?' },
     { text: '¿Comparas tu vida con la de otros en redes sociales?' },
     { text: '¿El uso de pantallas afecta tus horas de sueño?' },
     { text: '¿Sientes que te estás perdiendo de algo importante si no estás conectado/a (FOMO)?' },
-  ];
+  ];*/
   
   currentQuestionIndex = 0;
   totalScore = 0;
@@ -85,13 +94,12 @@ export class WellnessTest {
   boatsOfSupport = [
     { 
       id: 'clinical', 
-      title: 'Clínico', 
+      title: 'CLÍNICO', 
       icon: 'ph-fill ph-heartbeat text-white', 
       color: 'text-blue-600', 
-      videoId: '_9agX3gY1jU',
+      videoId: 'p_mzd4Ceow4',
       allies: [
-        { name: 'Hospitales Aliados', description: 'Acceso a profesionales en centros de salud mental.', icon: 'ph-fill ph-hospital' },
-        { name: 'Línea Amiga de Apoyo', description: 'Soporte telefónico inmediato y confidencial 24/7.', icon: 'ph-fill ph-phone-call' }
+        { name: 'Hospital Mental de Filandia', description: 'Acceso a profesionales en centros de salud mental.', icon: '/logos/hsm-logo.png' },
       ],
       offerings: ['Talleres de manejo de ansiedad', 'Guías de primeros auxilios psicológicos', 'Terapia individual y grupal'],
       link: '#enlace-clinico', // Enlace directo a la página de recursos
@@ -99,7 +107,7 @@ export class WellnessTest {
     },
     { 
       id: 'sports', 
-      title: 'Deportivo', 
+      title: 'DEPORTIVO', 
       icon: 'ph-fill ph-barbell text-white', 
       color: 'text-green-600',
       videoId: 'wTTxj8JohhQ',
@@ -114,7 +122,7 @@ export class WellnessTest {
     },
     { 
       id: 'spiritual', 
-      title: 'Espiritual', 
+      title: 'ESPIRITUAL', 
       icon: 'ph-fill ph-hands-praying text-white', 
       color: 'text-yellow-400',
       videoId: '7c5t6FkvUG0',
@@ -129,7 +137,7 @@ export class WellnessTest {
     },
     { 
       id: 'nutrition', 
-      title: 'Nutrición', 
+      title: 'NUTRICIÓN', 
       icon: 'ph-fill ph-orange text-white', 
       color: 'text-red-600',
       videoId: 'Q4qWzbP0q7I',
@@ -144,13 +152,41 @@ export class WellnessTest {
     }
   ];
 
-  selectedBoat: any = null;
-
   constructor(private sanitizer: DomSanitizer, 
               private testResultsService: TestResultsService, 
-              private deviceIdService: DeviceIdService
+              private deviceIdService: DeviceIdService,
   ) {}
 
+  ngOnInit(): void {
+
+  }
+
+  // Usar ngAfterViewInit para asegurar que el DOM esté listo
+  ngAfterViewInit(): void {
+    // 1. Registrar el plugin ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
+
+    // 2. Crear la animación
+    gsap.from("#wellness-test", {
+      // Propiedades de la animación
+      opacity: 0,
+      x: -300,
+      duration: 1,
+      ease: 'power2.out',
+
+      // Propiedades de ScrollTrigger
+      scrollTrigger: {
+        trigger: "#wellness-test", // El elemento que dispara la animación
+        start: "top 80%", // Empieza cuando el 80% superior del elemento entra en la vista
+        
+        // (onEnter, onLeave, onEnterBack, onLeaveBack)
+        toggleActions: "play reverse play reverse",
+        // markers: true // Descomentar para depurar y ver las líneas
+      }
+    });
+  }
+
+  selectedBoat: any = null;
 
   startTest(): void {
     this.currentScreen = 'initial-data';
@@ -165,7 +201,7 @@ export class WellnessTest {
     }
   }
 
-  // ACTUALIZADO: Lógica de respuesta simplificada
+  // Lógica de respuesta simplificada
   selectAnswer(score: number): void {
     this.totalScore += score;
     this.currentQuestionIndex++;
@@ -180,28 +216,31 @@ export class WellnessTest {
     return (this.profileQuestionIndex / this.profileQuestions.length) * 100;
   }
 
-  // ACTUALIZADO: Barra de progreso simplificada
+  // Barra de progreso simplificada
   get testProgressPercentage(): number {
     return (this.currentQuestionIndex / this.testQuestions.length) * 100;
   }
 
-  showFinalResult(): void {
-    console.log('Pantalla', this.currentScreen);
+  showFinalResult(): void {    
     let resultKey = 'verde';
-    
+
+    /* Los umbrales están basados en un puntaje máximo de 90.
+      Verde (Uso saludable): 0 - 30 puntos
+      Amarillo (Uso moderado): 31 - 60 puntos
+      Rojo (Uso problemático): 61 - 90 puntos
+    */
+    if (this.totalScore >= 61) { 
+      resultKey = 'rojo';
+    } else if (this.totalScore >= 31) {
+      resultKey = 'amarillo';
+    }
+
+    /*
     if (this.totalScore > 9) {
       resultKey = 'rojo';
     } else if (this.totalScore > 4) {
       resultKey = 'amarillo';
-    }
-
-    // Los nuevos umbrales están basados en un puntaje máximo de 80.
-    /*if (this.totalScore >= 54) { 
-      resultKey = 'rojo';
-    } else if (this.totalScore >= 27) {
-      resultKey = 'amarillo';
     }*/
-    // Si el puntaje es de 0 a 26, se mantiene como 'verde'.
 
     const results = {
       verde: { visualClass: 'bg-green-400', icon: 'ph-fill ph-smiley', title: 'Uso saludable', description: '¡Felicidades! Tu uso de la tecnología parece equilibrado. Sigue así y explora nuestros recursos para mantenerte fuerte.' },
@@ -216,7 +255,7 @@ export class WellnessTest {
     this.finalResult = results[resultKey as keyof typeof results];
     this.currentScreen = 'result';
 
-    console.log('Pantalla 2', this.currentScreen);
+    //console.log('Pantalla 2', this.currentScreen);
 
     this.saveResultsToDatabase(resultKey);
   }
@@ -233,11 +272,10 @@ export class WellnessTest {
       result_category: resultCategory
     };
 
-    /*
     this.testResultsService.saveResult(resultData).subscribe({
       next: (response) => console.log('Resultado guardado con éxito en la BD.', response),
       error: (error) => console.error('Hubo un error al guardar el resultado.', error)
-    });*/
+    });
   }
 
   retakeTest(): void {

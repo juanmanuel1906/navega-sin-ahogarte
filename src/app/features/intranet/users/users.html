@@ -2,172 +2,122 @@
 <div class="mb-8">
   <div class="flex flex-col md:flex-row md:items-center md:justify-between">
     <div>
-      <h1 class="font-comic text-5xl text-purple-600">
-        Administrar Tripulación
-      </h1>
-      <p class="text-lg text-gray-700 mt-1">
+      <h1 class="garet-heavy text-4xl text-[var(--primary-purple)] text-center md:text-left">Administrar tripulación</h1>
+      <p class="text-lg montserrat-regular text-gray-700 mt-1 text-center md:text-left">
         Gestiona los roles y perfiles de los usuarios de la plataforma.
       </p>
     </div>
-    <div class="mt-4 md:mt-0">
-      <a
-        href="#"
-        class="comic-button bg-yellow-400 text-black font-comic text-xl py-3 px-6 rounded-lg flex items-center gap-2"
+    <div class="mt-4 md:mt-0 flex justify-center md:justify-end">
+      <button
+        (click)="openModal()"
+        class="comic-button garet-heavy bg-yellow-400 text-black font-comic text-xm py-3 px-6 rounded-lg flex items-center gap-2"
       >
         <i class="ph-fill ph-user-plus text-2xl"></i>
-        Añadir
-      </a>
+        AÑADIR 
+      </button>
     </div>
-  </div>
-</div>
-
-<!-- Barra de Búsqueda y Filtros -->
-<div class="mb-6">
-  <div class="relative">
-    <!--<div
-      class="absolute inset-y-0 left-0 flex items-center pl-[170vh] pointer-events-none"
-    >
-      <i class="ph-fill ph-magnifying-glass text-xl text-gray-500"></i>
-    </div>-->
-    <input
-      type="text"
-      class="comic-input w-full pl-12 p-3"
-      placeholder="Buscar por nombre o correo electrónico..."
-    />
   </div>
 </div>
 
 <!-- Tabla de Usuarios -->
-<div class="comic-card bg-white p-2 overflow-x-auto">
-  <table class="w-full text-left">
+<div class="comic-card bg-white p-2 !overflow-auto">
+  <table class="w-full h-full text-left">
     <thead class="border-b-4 border-black">
       <tr>
-        <th class="p-4 font-comic text-2xl">Usuario</th>
-        <th class="p-4 font-comic text-2xl">Rol</th>
-        <th class="p-4 font-comic text-2xl">Fecha de Registro</th>
-        <th class="p-4 font-comic text-2xl text-center">Acciones</th>
+        <th class="p-4 font-comic text-1xl">Usuario</th>
+        <th class="p-4 font-comic text-1xl">Rol</th>
+        <th class="p-4 font-comic text-1xl">Registro</th>
+        <th class="p-4 font-comic text-1xl text-center">Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <!-- Fila de Usuario 1 -->
+      <!-- Bucle para renderizar los usuarios -->
+      @for (user of users; track user.id) {
       <tr class="border-b-2 border-gray-200">
         <td class="p-4">
           <div class="flex items-center gap-4">
             <img
-              class="w-12 h-12 rounded-full border-2 border-black"
-              src="https://placehold.co/100x100/C4B5FD/3730A3?text=CN"
+              class="w-6 h-6 rounded-full border-2 border-black"
+              [src]="'https://placehold.co/100x100/?text=' + user.name.charAt(0)"
               alt="Avatar"
             />
             <div>
-              <p class="font-bold text-lg">Capitán Nemo</p>
-              <p class="text-sm text-gray-600">capitan@navegasinahogarte.com</p>
+              <p class="font-bold text-sm">{{ user.name }}</p>
+              <p class="text-xs text-gray-600">{{ user.email }}</p>
             </div>
           </div>
         </td>
         <td class="p-4">
           <span
-            class="px-3 py-1 text-sm font-bold text-white bg-blue-600 rounded-full border-2 border-black"
-            >Administrador</span
+            class="px-3 py-1 text-xs font-bold rounded-full border-2 border-black"
+            [ngClass]="{'bg-blue-600 text-white': user.role === 'administrator', 'bg-gray-300 text-black': user.role === 'user'}"
+            >{{ user.role === 'administrator' ? 'Administrador' : 'Usuario' }}</span
           >
         </td>
-        <td class="p-4 font-medium">01 Sep, 2025</td>
-        <td class="p-4">
+        <td class="p-4 text-sm">{{ user.createdAt | date: 'dd MMM, yyyy' }}</td>
+        <td>
           <div class="flex justify-center gap-3">
             <button
-              class="comic-button bg-white p-2 rounded-lg"
-              title="Editar Rol"
+              (click)="openModal(user)"
+              class="comic-button h-7 flex justify-center bg-white p-1 rounded-lg"
+              title="Editar Usuario"
             >
-              <i class="ph-fill ph-pencil-simple text-xl"></i>
+              <i class="ph-fill ph-pencil-simple text-sm"></i>
             </button>
             <button
-              class="comic-button bg-red-500 text-white p-2 rounded-lg"
+              (click)="onDeleteUser(user.id)"
+              class="comic-button h-7 flex justify-center bg-red-500 text-white p-1 rounded-lg"
               title="Eliminar Usuario"
             >
-              <i class="ph-fill ph-trash text-xl"></i>
+              <i class="ph-fill ph-trash text-sm"></i>
             </button>
           </div>
         </td>
       </tr>
-
-      <!-- Fila de Usuario 2 -->
-      <tr class="border-b-2 border-gray-200">
-        <td class="p-4">
-          <div class="flex items-center gap-4">
-            <img
-              class="w-12 h-12 rounded-full border-2 border-black"
-              src="https://placehold.co/100x100/A7F3D0/047857?text=JV"
-              alt="Avatar"
-            />
-            <div>
-              <p class="font-bold text-lg">Jules Verne</p>
-              <p class="text-sm text-gray-600">jverne@classics.com</p>
-            </div>
-          </div>
-        </td>
-        <td class="p-4">
-          <span
-            class="px-3 py-1 text-sm font-bold text-black bg-gray-300 rounded-full border-2 border-black"
-            >Usuario</span
-          >
-        </td>
-        <td class="p-4 font-medium">28 Ago, 2025</td>
-        <td class="p-4">
-          <div class="flex justify-center gap-3">
-            <button
-              class="comic-button bg-white p-2 rounded-lg"
-              title="Editar Rol"
-            >
-              <i class="ph-fill ph-pencil-simple text-xl"></i>
-            </button>
-            <button
-              class="comic-button bg-red-500 text-white p-2 rounded-lg"
-              title="Eliminar Usuario"
-            >
-              <i class="ph-fill ph-trash text-xl"></i>
-            </button>
-          </div>
-        </td>
-      </tr>
-
-      <!-- Fila de Usuario 3 -->
-      <tr class="border-b-2 border-gray-200">
-        <td class="p-4">
-          <div class="flex items-center gap-4">
-            <img
-              class="w-12 h-12 rounded-full border-2 border-black"
-              src="https://placehold.co/100x100/FDE68A/B45309?text=IS"
-              alt="Avatar"
-            />
-            <div>
-              <p class="font-bold text-lg">Ishmael</p>
-              <p class="text-sm text-gray-600">callmeishmael@sea.com</p>
-            </div>
-          </div>
-        </td>
-        <td class="p-4">
-          <span
-            class="px-3 py-1 text-sm font-bold text-black bg-gray-300 rounded-full border-2 border-black"
-            >Usuario</span
-          >
-        </td>
-        <td class="p-4 font-medium">25 Ago, 2025</td>
-        <td class="p-4">
-          <div class="flex justify-center gap-3">
-            <button
-              class="comic-button bg-white p-2 rounded-lg"
-              title="Editar Rol"
-            >
-              <i class="ph-fill ph-pencil-simple text-xl"></i>
-            </button>
-            <button
-              class="comic-button bg-red-500 text-white p-2 rounded-lg"
-              title="Eliminar Usuario"
-            >
-              <i class="ph-fill ph-trash text-xl"></i>
-            </button>
-          </div>
-        </td>
-      </tr>
+      }
     </tbody>
   </table>
 </div>
+
+<!-- Modal para Crear/Editar Usuario -->
+@if (isModalOpen) {
+<div class="fixed inset-0 backdrop-blur-xs flex items-center justify-center z-50">
+  <div class="comic-card bg-white p-8 rounded-lg w-full max-w-lg z-60">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="font-comic garet-heavy text-4xl text-[var(--primary-purple)] text-center md:text-center">{{ isEditMode ? 'Editar tripulante' : 'Añadir tripulante' }}</h2>
+      <button (click)="closeModal()" class="text-3xl font-bold cursor-pointer">&times;</button>
+    </div>
+
+    <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()" class="space-y-4">
+      <div>
+        <label for="name" class="font-bold">Nombre</label>
+        <input type="text" id="name" formControlName="name" class="comic-input mt-1 w-full" autocomplete="name">
+      </div>
+      <div>
+        <label for="email" class="font-bold">Correo Electrónico</label>
+        <input type="email" id="email" formControlName="email" class="comic-input mt-1 w-full" autocomplete="email">
+      </div>
+      @if (!isEditMode) {
+      <div >
+        <label for="password" class="font-bold">Contraseña</label>
+        <input type="password" id="password" formControlName="password" class="comic-input mt-1 w-full" autocomplete="password">
+      </div>
+      }
+      <div>
+        <label for="role" class="font-bold">Rol</label>
+        <select id="role" formControlName="role" class="comic-input mt-1 w-full">
+          <option value="user">Usuario</option>
+          <option value="administrator">Administrador</option>
+        </select>
+      </div>
+
+      <div class="flex justify-center gap-4 pt-4">
+        <button type="button" (click)="closeModal()" class="comic-button montserrat-bold py-2 px-6">Cancelar</button>
+        <button type="submit" [disabled]="userForm.invalid" class="comic-button montserrat-bold bg-yellow-400 text-black py-2 px-6">
+          {{ isEditMode ? 'Guardar' : 'Crear' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+}

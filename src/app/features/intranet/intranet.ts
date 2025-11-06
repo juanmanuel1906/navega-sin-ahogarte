@@ -1,27 +1,31 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
+import { CurrentUserI } from '../../core/models/current-user';
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-intranet',
   templateUrl: './intranet.html',
   styleUrl: './intranet.css',
-  imports: [RouterOutlet, RouterLink]
+  imports: [RouterOutlet, RouterLink, CommonModule]
 })
 export class Intranet {
   isSidebarOpen: boolean = true;
   isUserMenuOpen: boolean = false; // Nuevo estado para el menú de usuario
+  isAdmin$!: Observable<boolean>;
+  isUser$!: Observable<boolean>;
 
-  // Simulación de los datos del usuario para el diseño
-  currentUser = {
-    name: 'Capitán Nemo',
-    email: 'capitan@navegasinahogarte.com',
-    picture: 'https://placehold.co/100x100/C4B5FD/3730A3?text=CN'
-  };
+  currentUser: CurrentUserI | any = localStorage.getItem("currentUser");
+  picture: string = 'https://placehold.co/100x100/C4B5FD/3730A3?text=CN'
 
-  constructor() {}
+  constructor(public authService:AuthService) {
+    this.currentUser = this.authService.currentUser(this.currentUser);
+    this.isAdmin$ = this.authService.isAdmin;
+  }
 
-  ngOnInit(): void {
-    // Ya no se necesita initFlowbite()
+  ngOnInit(): void {    
     const storedState = localStorage.getItem('isSidebarOpen');
     this.isSidebarOpen = storedState ? JSON.parse(storedState) : true;
   }

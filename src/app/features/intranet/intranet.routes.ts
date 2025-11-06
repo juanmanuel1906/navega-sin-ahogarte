@@ -3,7 +3,7 @@ import { Intranet } from './intranet';
 import { Dashboard } from './dashboard/dashboard';
 import { Analytics } from './analytics/analytics';
 import { Users } from './users/users';
-import { AnonymousChatAdmin } from './anonymous-chat-admin/anonymous-chat-admin';
+import { AnonymousPostAdmin } from './anonymous-post-admin/anonymous-post-admin';
 
 export const IntranetRoutes: Routes = [
   {
@@ -26,8 +26,8 @@ export const IntranetRoutes: Routes = [
         title: "Usuarios"
       },
       {
-        path: 'anonymous-chat-admin',
-        component: AnonymousChatAdmin,
+        path: 'anonymous-post-admin',
+        component: AnonymousPostAdmin,
         title: "Ansiosos anónimos"
       },
     ],

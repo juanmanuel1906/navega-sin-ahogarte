@@ -2,11 +2,16 @@
 <div class="p-1">
   <!-- Encabezado de Bienvenida -->
   <div class="mb-8">
-    <h1 class="font-comic text-5xl text-purple-600">¡Hola, Capitán!</h1>
-    <p class="text-lg text-gray-700 mt-1">Aquí tienes el resumen de la tripulación y la navegación.</p>
+    <h1 class="garet-heavy text-4xl text-[var(--primary-purple)] text-center md:text-left">¡Hola, {{ currentUser.name }}!</h1>
+    @if (isAdmin$ | async) {
+    <p class="text-lg text-gray-700 mt-1 text-center md:text-left">Aquí tienes el resumen de la tripulación y la navegación.</p>
+    } @else {
+    <p class="text-lg text-gray-700 mt-1 text-center md:text-left">Aquí tienes todas las herramientas para navegar sin miedo.</p>
+    }
   </div>
 
   <!-- Tarjetas de Datos Rápidos -->
+  @if (isAdmin$ | async) {
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
     <!-- Card 1: Tests Completados -->
     <div class="comic-card bg-white p-5 flex items-center gap-4">
@@ -14,54 +19,112 @@
         <i class="ph-fill ph-chart-line-up text-3xl text-blue-800"></i>
       </div>
       <div>
-        <p class="text-gray-600 font-medium">Tests Completados</p>
-        <p class="text-3xl font-bold">1,250</p>
+        <p class="text-gray-600 font-medium">Tests completados</p>
+        <p class="text-3xl font-bold">{{ data.totalTests }}</p>
       </div>
     </div>
-    
+
     <!-- Card 2: Usuarios Registrados -->
     <div class="comic-card bg-white p-5 flex items-center gap-4">
       <div class="bg-green-200 p-3 rounded-lg border-2 border-black">
         <i class="ph-fill ph-user-plus text-3xl text-green-800"></i>
       </div>
       <div>
-        <p class="text-gray-600 font-medium">Usuarios Nuevos (Hoy)</p>
-        <p class="text-3xl font-bold">12</p>
+        <p class="text-gray-600 font-medium">Usuarios nuevos (Hoy)</p>
+        <p class="text-3xl font-bold">{{ data.newUsersToday }}</p>
       </div>
     </div>
 
-    <!-- Card 3: Resultado Promedio -->
+    <!-- Card 3: Tarjeta de Resultado Promedio (Dinámica) -->
     <div class="comic-card bg-white p-5 flex items-center gap-4">
+      <!-- El @switch evaluará la variable data.averageResult -->
+      @switch (data.averageResult) {
+
+      <!-- Caso para 'amarillo' -->
+      @case ('amarillo') {
       <div class="bg-yellow-200 p-3 rounded-lg border-2 border-black">
         <i class="ph-fill ph-smiley-meh text-3xl text-yellow-800"></i>
       </div>
+      }
+
+      <!-- Caso para 'verde' -->
+      @case ('verde') {
+      <div class="bg-green-200 p-3 rounded-lg border-2 border-black">
+        <i class="ph-fill ph-smiley text-3xl text-green-800"></i>
+      </div>
+      }
+
+      <!-- Caso para 'rojo' -->
+      @case ('rojo') {
+      <div class="bg-red-200 p-3 rounded-lg border-2 border-black">
+        <i class="ph-fill ph-smiley-sad text-3xl text-red-800"></i>
+      </div>
+      }
+
+      <!-- Caso por defecto (si el valor no coincide con ninguno) -->
+      @default {
+      <div class="bg-gray-200 p-3 rounded-lg border-2 border-black">
+        <i class="ph-fill ph-question text-3xl text-gray-800"></i>
+      </div>
+      }
+      }
+
       <div>
-        <p class="text-gray-600 font-medium">Resultado Promedio</p>
-        <p class="text-3xl font-bold">Amarillo</p>
+        <p class="text-gray-600 font-medium">Resultado promedio</p>
+        <!-- El titlecase pipe asegura que la primera letra sea mayúscula (ej. Amarillo) -->
+        <p class="text-3xl font-bold">{{ data.averageResult | titlecase }}</p>
       </div>
     </div>
   </div>
+  }
 
+  @if(isAdmin$ | async) {
   <!-- Tarjetas de Navegación a Rutas Principales -->
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
     <!-- Tarjeta de Analíticas -->
-    <a routerLink="/analytics" class="block comic-card bg-white p-8 text-center hover:bg-purple-50 transition-colors duration-200">
-      <i class="ph-fill ph-chart-bar text-7xl text-purple-600"></i>
-      <h2 class="font-comic text-4xl mt-4">Ver Analíticas</h2>
-      <p class="text-gray-600 mt-2">Explora los datos, gráficos interactivos y tendencias de los resultados del test.</p>
-      <span class="comic-button inline-block mt-6 bg-yellow-400 text-black font-comic text-xl py-2 px-6 rounded-lg">
-        Explorar Datos
+    <div class="block comic-card bg-white p-8 text-center hover:bg-purple-50 transition-colors duration-200">
+      <i class="ph-fill ph-chart-bar text-7xl text-[var(--primary-purple)]"></i>
+      <h2 class="garet-heavy text-3xl mt-4">Ver analíticas</h2>
+      <p class="text-gray-600 mt-2">Explora los datos, gráficos interactivos y tendencias de los resultados del test.
+      </p>
+      <span class="comic-button inline-block mt-6 bg-yellow-400 text-black garet-heavy text-xl py-2 px-6 rounded-lg">
+        <a routerLink="/analytics">NAVEGAR</a>
       </span>
-    </a>
+    </div>
 
     <!-- Tarjeta de Administración de Usuarios -->
-    <a routerLink="/users" class="block comic-card bg-white p-8 text-center hover:bg-purple-50 transition-colors duration-200">
-      <i class="ph-fill ph-users-three text-7xl text-purple-600"></i>
-      <h2 class="font-comic text-4xl mt-4">Administrar Usuarios</h2>
-      <p class="text-gray-600 mt-2">Gestiona los perfiles, roles y permisos de todos los usuarios registrados en la plataforma.</p>
-      <span class="comic-button inline-block mt-6 bg-yellow-400 text-black font-comic text-xl py-2 px-6 rounded-lg">
-        Gestionar Tripulación
+    <div class="block comic-card bg-white p-8 text-center hover:bg-purple-50 transition-colors duration-200">
+      <i class="ph-fill ph-users-three text-7xl text-[var(--primary-purple)]"></i>
+      <h2 class="garet-heavy text-3xl mt-4">Administrar usuarios</h2>
+      <p class="text-gray-600 mt-2">Gestiona los perfiles, roles y permisos de todos los usuarios registrados en la
+        plataforma.</p>
+      <span class="comic-button inline-block mt-6 bg-yellow-400 text-black garet-heavy text-xl py-2 px-6 rounded-lg">
+        <a routerLink="/users">NAVEGAR</a>
       </span>
-    </a>
+    </div>
+
+    <!-- Tarjeta de Ansiosos anónimos -->
+    <div class="block comic-card bg-white p-8 text-center hover:bg-purple-50 transition-colors duration-200">
+      <i class="ph-fill ph-chats-teardrop text-7xl text-[var(--primary-purple)]"></i>
+      <h2 class="garet-heavy text-3xl mt-4">Ansiosos anónimos</h2>
+      <p class="text-gray-600 mt-2">Gestiona las publicaciones de tus usuarios.</p>
+      <span class="comic-button inline-block mt-6 bg-yellow-400 text-black garet-heavy text-xl py-2 px-6 rounded-lg">
+        <a routerLink="/anonymous-post-admin">NAVEGAR</a>
+      </span>
+    </div>
   </div>
+  }
+
+@if ((isUser$ | async) && !(isAdmin$ | async)) {
+  <div class="grid grid-cols-1 lg:grid-cols-1 gap-8">
+    <div class="block comic-card bg-white p-8 text-center hover:bg-purple-50 transition-colors duration-200">
+      <i class="ph-fill ph-chats-teardrop text-7xl text-[var(--primary-purple)]"></i>
+      <h2 class="garet-heavy text-3xl mt-4">Ansiosos anónimos</h2>
+      <p class="text-gray-600 mt-2">Gestiona las publicaciones de tus usuarios.</p>
+      <span class="comic-button inline-block mt-6 bg-yellow-400 text-black garet-heavy text-xl py-2 px-6 rounded-lg">
+        <a routerLink="/anonymous-post-admin">NAVEGAR</a>
+      </span>
+    </div>
+  </div>
+  }
 </div>

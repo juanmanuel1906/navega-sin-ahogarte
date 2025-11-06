@@ -1,0 +1,17 @@
+<!-- Contenido principal de la página de Moderación de Ansiosos Anónimos -->
+<div class="p-4">
+  <!-- Encabezado y Acciones -->
+  <div class="mb-4 md:mb-8">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+      <div class="text-center lg:text-left">
+        <h1 class="garet-heavy text-4xl text-[var(--primary-purple)]">{{ (isAdmin$ | async) ? "Modera la" : "Interactúa en la" }} comunidad anónima</h1>
+        <p class="text-lg text-gray-700 mt-1">{{ (isAdmin$ | async) ? "Revisa y gestiona las publicaciones de la tripulación." : "Participa sin temor, has llegado a un lugar seguro."}} </p>
+      </div>
+    </div>
+  </div>
+    @if (!participationMode) {
+      <app-community-post-entry (modeSelected)="onModeSelected($event)"></app-community-post-entry>
+    } @else {
+      <app-anonymous-post [participationData]="participationData" (exitParticipation)="handleExit()"></app-anonymous-post>
+    }
+</div>

@@ -1,0 +1,311 @@
+<div class="test-wrapper" >
+  <!-- Pantalla de Inicio del Test -->
+  @if (currentScreen === 'start') {
+  <div class="flex flex-col items-center justify-center min-h-screen lg:p-4">
+    <div
+      class="bg-white rounded-2xl shadow-lg lg:p-8 p-4 w-full max-w-2xl text-center comic-card"
+    >
+      <div
+        class="mx-auto w-16 h-16 flex items-center justify-center rounded-full bg-purple-100 md:mb-6"
+      >
+        <div>
+          <i class="ph-fill ph-sailboat text-6xl text-[var(--primary-purple)]"></i>
+        </div>
+      </div>
+
+      <h1
+        class="text-4xl sm:text-3xl text-slate-800 garet-heavy"
+      >
+        ¿CÓMO ESTÁS NAVEGANDO?
+      </h1>
+
+      <p
+        class="text-lg text-slate-700 mt-4 max-w-xl mx-auto garet-book"
+      >
+        Este breve test es tu brújula digital. Descubre si tus hábitos en línea
+        te llevan a aguas seguras o si es momento de ajustar el rumbo.
+      </p>
+
+      <div
+        class="p-0 lg:p-4 rounded-lg"
+      >
+        <p class="mt-2 text-sm text-slate-700 font-medium montserrat-italic">
+          <i class="ph-fill ph-check-circle text-green-500 mr-1"></i>
+          No hay respuestas incorrectas, sólo señales que nos muestran tu manera de navegar.
+        </p>
+      </div>
+
+      <button
+        (click)="startTest()"
+        class="group comic-button mt-10 w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-primary-purple text-white garet-heavy text-3xl py-4 px-10 rounded-lg cursor-pointer transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1 active:scale-95"
+      >
+        <a>COMENZAR</a>
+      </button>
+    </div>
+  </div>
+  }
+
+  <!-- Pantalla de Datos Iniciales (Perfil Interactivo) -->
+  @if (currentScreen === 'initial-data') {
+  <div class="screen active w-full max-w-3xl">
+    <div class="progress-bar-container">
+      <div
+        class="progress-bar"
+        [style.width.%]="profileProgressPercentage"
+      ></div>
+    </div>
+    @if (profileQuestions[profileQuestionIndex]) {
+    <div class="mt-8 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold">
+        {{ profileQuestions[profileQuestionIndex].text }}
+      </h2>
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        @for (option of profileQuestions[profileQuestionIndex].options; track
+        option) {
+        <button
+          (click)="
+            selectProfileAnswer(
+              profileQuestions[profileQuestionIndex].key,
+              option
+            )
+          "
+          class="answer-card-scaled bg-amber-300"
+        >
+          {{ option }}
+        </button>
+        }
+      </div>
+    </div>
+    }
+  </div>
+  }
+
+  <!-- Pantalla de Preguntas (Test Unificado) -->
+  @if (currentScreen === 'test-questions') {
+  <div class="screen active w-full max-w-3xl">
+    <div class="progress-bar-container">
+      <div class="progress-bar" [style.width.%]="testProgressPercentage"></div>
+    </div>
+    @if (testQuestions[currentQuestionIndex]) {
+    <div class="mt-8 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold">
+        {{ testQuestions[currentQuestionIndex].text }}
+      </h2>
+
+      @if (!testQuestions[currentQuestionIndex].isCritical) {
+      <p class="text-gray-500 mt-2">
+        En las últimas 2 semanas, ¿con qué frecuencia?
+      </p>
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        @for (answer of answerScale; track answer.score; let isLast = $last) {
+        @if (isLast && answerScale.length % 2 !== 0) {
+        <div class="sm:col-span-2 flex justify-center">
+          <button
+            (click)="selectAnswer(answer.score)"
+            class="answer-card-scaled w-full sm:w-1/2"
+          >
+            {{ answer.text }}
+          </button>
+        </div>
+        } @else {
+        <button (click)="selectAnswer(answer.score)" class="answer-card-scaled">
+          {{ answer.text }}
+        </button>
+        } }
+      </div>
+      } @else {
+      <p class="text-red-600 font-bold mt-2">
+        Esta es una pregunta importante. Responde con sinceridad.
+      </p>
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto">
+        @for (answer of answerCriticalScale; track answer.score) {
+        <button
+          (click)="selectAnswer(answer.score)"
+          class="answer-card-scaled font-comic text-3xl py-6"
+        >
+          {{ answer.text }}
+        </button>
+        }
+      </div>
+      }
+    </div>
+    }
+  </div>
+  }
+
+  <!-- Pantalla de Resultados -->
+  @if (currentScreen === 'result' && finalResult) {
+  <div class="screen active text-center max-w-4xl">
+    @if (resultStep === 'initial') {
+    <div>
+      <h1 class="garet-heavy text-4xl">¡TEST COMPLETADO!</h1>
+      <div class="my-8">
+        <div class="result-visual" [ngClass]="finalResult.visualClass">
+          <i [ngClass]="finalResult.icon"></i>
+        </div>
+      </div>
+      <h2 class="text-3xl font-bold">{{ finalResult.title }}</h2>
+      <p class="text-lg text-gray-600 mt-2 max-w-2xl mx-auto">
+        {{ finalResult.description }}
+      </p>
+      <div
+        class="comic-card text-left p-4 mt-6 bg-yellow-100 border-2 rounded-2xl"
+      >
+        <h3 class="font-bold text-lg text-center montserrat-italic">Recomendación rápida:</h3>
+        <p class="text-gray-700 text-center montserrat-italic">{{ selectedRecommendation }}</p>
+      </div>
+      <div class="mt-8">
+        <button
+          (click)="showBoats()"
+          class="comic-button bg-primary-purple text-white garet-heavy text-2xl py-3 px-10 rounded-lg cursor-pointer"
+        >
+          <a>CONTINUAR</a>
+        </button>
+      </div>
+    </div>
+    } @if (resultStep === 'boats') {
+    <div>
+      @if (selectedBoat) {
+      <div class="boat-detail-modern">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <!-- Columna Izquierda: Video y Título -->
+          <div class="text-center">
+            <h2
+              class="garet-heavy text-4xl"
+              [class.text-blue-600]="selectedBoat.id === 'clinical'"
+              [class.text-green-600]="selectedBoat.id === 'sports'"
+              [class.text-yellow-500]="selectedBoat.id === 'spiritual'"
+              [class.text-red-600]="selectedBoat.id === 'nutrition'"
+            >
+              BARCO {{ selectedBoat.title | uppercase  }}
+            </h2>
+            <!-- Iframe para mostrar el video de YouTube -->
+            <div class="video-container">
+              <youtube-player
+                [width]="430"
+                [height]="400"
+                [videoId]="selectedBoat.videoId"
+                loadApi="true"
+                disablePlaceholder
+              ></youtube-player>
+            </div>
+          </div>
+          <!-- Columna Derecha: Información -->
+          <div class="text-left space-y-6">
+            <div>
+              <h3 class="garet-heavy text-2xl border-b-4 border-black pb-1">
+                ¿Quiénes lo tripulan?
+              </h3>
+              <!-- Se muestra el ícono de cada aliado -->
+              @for(ally of selectedBoat.allies; track ally.name) {
+              <div class="mt-4 flex items-start gap-3">
+                @if (ally.name === 'Real Sport') {
+                <img
+                  class="text-2xl mt-1 ml-5 primary-purple w-[30px]"
+                  [src]="ally.icon"
+                  alt="{{ ally.name }}"
+                />
+                } @if (ally.name === 'Comfenalco') {
+                <img
+                  class="text-2xl mt-5 primary-purple w-[60px]"
+                  [src]="ally.icon"
+                  alt="{{ ally.name }}"
+                />
+                } @if (ally.name === 'Hospital Mental de Filandia') {
+                <img
+                  class="text-2xl primary-purple w-[60px]"
+                  [src]="ally.icon"
+                  alt="{{ ally.name }}"
+                />
+                } @else {
+                <i
+                  class="text-2xl mt-1 primary-purple"
+                  [ngClass]="ally.icon"
+                ></i>
+                }
+                <div>
+                  <p class="font-bold">{{ ally.name }}</p>
+                  <p class="text-sm text-gray-600">{{ ally.description }}</p>
+                </div>
+              </div>
+              }
+            </div>
+            <div>
+              <h3 class="garet-heavy text-2xl border-b-4 border-black pb-1">
+                ¿Qué ofrece este barco?
+              </h3>
+              <ul class="list-disc list-inside mt-2 space-y-1">
+                @for(offering of selectedBoat.offerings; track offering) {
+                <li>{{ offering }}</li>
+                }
+              </ul>
+            </div>
+            <div class="flex justify-center">
+              <button
+                (click)="closeBoatDetail()"
+                class="mx-2 comic-button-secondary cursor-pointer inline-block garet-heavy md:text-1xl md:py-3 md:px-8 rounded-lg"
+              >
+                <a>RETROCEDER</a>
+              </button>
+               <!--<a
+                [href]="selectedBoat.link"
+                target="_blank"
+                class="comic-button bg-yellow-400 text-black garet-heavy md:text-1xl py-2 md:py-3 px-4 md:px-8 rounded-lg w-full text-center block"
+              >
+               <a href="#wellness-test">VISITAR PUERTO</a>
+              </a>-->
+            </div>
+          </div>
+        </div>
+        <p class="mt-6 text-xs text-gray-500 italic text-center">
+          {{ selectedBoat.disclaimer }}
+        </p>
+      </div>
+      } @else {
+      <div>
+        <h2 class="garet-heavy text-4xl">
+          Elige un barco para afrontar el reto
+        </h2>
+        <div class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-8">
+          @for (boat of boatsOfSupport; track boat.id) {
+          <div
+            (click)="selectBoat(boat)"
+            class="flex flex-col items-center hover:scale-110 transition-transform cursor-pointer"
+          >
+            <div
+              class="absolute w-8 h-8 mt-8 mr-4 rounded-full bg-[var(--primary-purple)] text-white flex items-center justify-center boat-animation z-10"
+            >
+              <i class="text-2xl" [ngClass]="boat.icon"></i>
+            </div>
+            <i
+              class="ph-fill ph-sailboat text-9xl boat-animation"
+              [ngClass]="boat.color"
+            ></i>
+            <h3 class="font-bold text-xl">{{ boat.title }}</h3>
+          </div>
+          }
+        </div>
+        <p class="text-sm text-slate-700 font-medium mt-6 montserrat-italic">
+          Acompañamos tu viaje por el bienestar ¡Escoge el barco en el que quieres ir!  
+        </p>
+        <div class="mt-12">
+          <button
+            (click)="hideBoats()"
+            class="mx-2 comic-button-secondary cursor-pointer inline-block garet-heavy text-2xl py-3 px-8 rounded-lg"
+          >
+            <a>RETROCEDER</a>
+          </button>
+          <button
+            (click)="retakeTest()"
+            class="mx-2 comic-button bg-primary-purple text-white garet-heavy text-2xl py-3 px-10 mt-5 lg:mt-0 rounded-lg cursor-pointer"
+          >
+            <a>REINICIAR</a>
+          </button>
+        </div>
+      </div>
+      }
+    </div>
+    }
+  </div>
+  }
+</div>

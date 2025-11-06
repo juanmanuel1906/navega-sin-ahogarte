@@ -51,7 +51,6 @@ export class Auth {
 
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
-        console.log('Login exitoso!', response);
         const Toast = Swal.mixin({
         toast: true,
         position: "top-end",
@@ -63,7 +62,8 @@ export class Auth {
           toast.onmouseleave = Swal.resumeTimer;
         }
       });
-      
+      this.authService.setCurrentUser(response.user);
+
       this.route.navigate(['/dashboard']);
 
       Toast.fire({
@@ -77,7 +77,7 @@ export class Auth {
           title: '¡Ooops!',
           text: error.error.message,
           icon: 'error',
-          confirmButtonColor: 'var(--main-purple)',
+          confirmButtonColor: 'var(--primary-purple)',
           confirmButtonText: '<b><i>¡OKEY!</i></b>'
         })
       }
@@ -91,13 +91,11 @@ export class Auth {
       return;
     }
     
-    // Opcional: puedes asignar un rol por defecto si no lo envías desde el front
+    // Se asigna un rol por defecto si no lo envías desde el front
     const formData = { ...this.registerForm.value, role: 'user' };
 
     this.authService.register(formData).subscribe({
       next: (response) => {
-        console.log('Registro y login automáticos exitosos!', response);
-
         // Guarda los tokens recibidos en localStorage
         if (response.accessToken && response.refreshToken) {
           localStorage.setItem('accessToken', response.accessToken);
@@ -120,6 +118,7 @@ export class Auth {
           title: `Es un honor tenerte en la tripulación, ${response.user?.name}🤩.`
         });
         
+        this.authService.setCurrentUser(response.user);
         this.route.navigate(['/dashboard']);
       },
       error: (error) => {
@@ -128,7 +127,7 @@ export class Auth {
           title: '¡Ooops!',
           text: error.error.message,
           icon: 'error',
-          confirmButtonColor: 'var(--main-purple)',
+          confirmButtonColor: 'var(--primary-purple)',
           confirmButtonText: '<b><i>¡OKEY!</i></b>'
         })
 

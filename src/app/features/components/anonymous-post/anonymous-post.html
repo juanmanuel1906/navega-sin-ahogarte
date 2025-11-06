@@ -1,0 +1,114 @@
+<!-- Contenedor Principal del Feed -->
+<div class="max-w-2xl mx-auto">
+  
+  <!-- Formulario para crear un nuevo Post -->
+  <div class="mb-2">
+    <form [formGroup]="postForm" (ngSubmit)="onPostSubmit()" class="comic-card bg-white p-4">
+      <div class="text-left mb-2">
+        <button type="submit" class="comic-button montserrat-italic bg-primary-purple text-white font-comic text-sm py-1 px-1 rounded-lg" (click)="onExitParticipation()">
+          Salir de modo {{  participationData?.mode === 'anonymous' ? 'anónimo' : 'perfil' }}
+        </button>
+      </div>
+      <textarea 
+        formControlName="message"
+        class="comic-input w-full text-sm p-2 text-gray-400 montserrat-italic" 
+        rows="3" 
+        placeholder="¿En qué estás pensando?"></textarea>
+      <div class="text-right mt-2">
+        <button type="submit" [disabled]="postForm.invalid" class="comic-button montserrat-bold bg-yellow-400 text-black font-comic text-sm py-1 px-1 rounded-lg">
+          Publicar
+        </button>
+      </div>
+    </form>
+  </div>
+
+<div class="space-y-4">
+  @for (post of posts; track post.id) {
+  <div class="comic-card bg-white p-3 md:p-5">
+    <div class="flex items-start gap-3 md:gap-4">
+      
+      <div class="flex flex-col items-center">
+        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-purple-200 flex items-center justify-center border-2 border-black">
+          <i class="ph-fill ph-user text-2xl md:text-3xl text-purple-700"></i>
+        </div>
+        <div class="w-0.5 grow bg-gray-200 mt-2"></div>
+      </div>
+
+      <div class="w-full">
+        <div>
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="font-bold text-gray-800">{{ post.User?.name || post.anonymousNickname }}</p>
+              <p class="text-xs text-gray-500">{{ post.createdAt | date:'dd MMM, yyyy - hh:mm a' }}</p>
+            </div>
+            @if ((isAdmin$ | async) || post.deviceId === deviceId) {
+              <button (click)="onDeletePost(post.id)" class="comic-button bg-red-500 text-white py-1 px-2 rounded-lg flex items-center gap-2" title="Eliminar hilo">
+                <i class="ph-fill ph-trash"></i>
+              </button>
+            }
+          </div>
+          <div class="mt-2 md:mt-3 text-gray-800">
+            <p class="text-sm md:text-base">{{ post.message }}</p>
+          </div>
+          <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+            <button (click)="onToggleIdentifyPost(post.id)" class="flex items-center gap-2 transition-colors cursor-pointer" [ngClass]="post.hasIdentified ? 'text-purple-600' : 'text-gray-600 hover:text-purple-600'">
+              <i class="ph-fill ph-heart text-xl"></i>
+              <span class="font-bold text-sm">Me identifica</span>
+            </button>
+            <span class="text-sm text-gray-500 font-medium">
+              {{ post.identifiesCount }}
+              <span class="hidden sm:inline"> personas se identifican</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="mt-6 space-y-6">
+          @for (comment of post.Comments; track comment.id) {
+          <div class="flex items-start gap-3 md:gap-4">
+            <div class="w-8 h-8 md:w-8 md:h-8 rounded-full bg-blue-100 flex items-center justify-center border-2 border-black shrink-0">
+              <i class="ph-fill ph-user text-xl md:text-xl text-blue-700"></i>
+            </div>
+            <div class="w-full">
+              <div class="flex justify-between items-start">
+                  <div>
+                    <p class="font-bold text-gray-700 text-sm">{{ !comment.anonymousNickname && comment.User?.name ? comment.User?.name : '' }}</p>
+                    <p class="font-bold text-gray-700 text-sm">{{ !comment.User && !comment.userId && comment.anonymousNickname ? comment.anonymousNickname : '' }}</p>
+                    <p class="text-xs text-gray-400">{{ comment.createdAt | date:'shortTime' }}</p>
+                  </div>
+                  @if ( (isAdmin$ | async) || ((isUser$ | async) && comment.userId === currentUser.id || comment.deviceId === deviceId) ) {
+                    <button (click)="onDeleteComment(post.id, comment.id)" class="p-1 text-gray-400 hover:text-red-600 cursor-pointer" title="Eliminar comentario">
+                      <i class="ph-fill ph-trash"></i>
+                    </button>
+                  }
+              </div>
+              <p class="text-gray-700 text-sm mt-1">{{ comment.message }}</p>
+              <div class="mt-2 flex items-center gap-4">
+                <button (click)="onToggleIdentifyComment(post.id, comment.id)" class="flex items-center gap-1 text-xs transition-colors cursor-pointer" [ngClass]="comment.hasIdentified ? 'text-purple-600' : 'text-gray-500 hover:text-purple-600'">
+                  <i class="ph-fill ph-heart"></i>
+                  <span class="font-bold">Me identifica ({{ comment.identifiesCount }})</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+
+        <div class="mt-6 flex items-start gap-3 md:gap-4">
+          <div class="w-8 h-8 md:w-8 md:h-8 rounded-full bg-gray-200 flex items-center justify-center border-2 border-black shrink-0">
+            <i class="ph-fill ph-user text-xl md:text-xl text-gray-700"></i>
+          </div>
+          <form [formGroup]="commentForms[post.id]" (ngSubmit)="onCommentSubmit(post.id)" class="w-full">
+            <textarea formControlName="message" class="comic-input w-full text-sm p-2" rows="2" placeholder="Escribe un comentario..."></textarea>
+            <div class="text-right">
+              <button type="submit" [disabled]="commentForms[post.id].invalid" class="comic-button montserrat-bold bg-primary-purple text-white font-comic text-sm py-1 px-3 rounded-lg mt-2">
+                Comentar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>
+</div>

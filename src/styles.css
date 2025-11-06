@@ -1,11 +1,76 @@
 @import "tailwindcss";
 
+/* FONTS IMPORTS *7
+  /* Bangers Regular */
+  @font-face {
+    font-family: bangers-regular;
+    src: url("assets/fonts/Bangers-Regular.ttf");
+  }
+
+  /* Garet Book */
+  @font-face {
+    font-family: garet-book;
+    src: url("assets/fonts/Garet-Book.otf");
+  }
+
+  /* Garet Heavy */
+  @font-face {
+    font-family: garet-heavy;
+    src: url("assets/fonts/Garet-Heavy.otf");
+  }
+
+  /* Montserrat Regular */
+  @font-face {
+    font-family: montserrat-regular;
+    src: url("assets/fonts/Montserrat-VariableFont_wght.ttf");
+  }
+
+  /* Montserrat Italic */
+  @font-face {
+    font-family: montserrat-italic;
+    src: url("assets/fonts/Montserrat-Italic-VariableFont_wght.ttf");
+  }
+
 :root {
-  --main-purple: #6d28d9;
+  --primary-purple: #8505F6;
+  --secondary-purple: #4703CD;
   --light-purple: #e9d5ff;
-  --main-blue: #3b82f6;
+  --main-blue: #003E7C;
+  --secondary-blue: #3b82f6;
+  --primary-black: #080808;
   --dark-text: #1f2937;
   --main-yellow: oklch(85.2% 0.199 91.936);
+}
+
+body {
+  font-family: "montserrat-regular", sans-serif !important;
+}
+
+.bangers-regular {
+  font-family: "bangers-regular", sans-serif !important;
+  letter-spacing: 1px;
+}
+
+.garet-book {
+  font-family: "garet-book", sans-serif !important;
+}
+
+.garet-heavy {
+  font-family: "garet-heavy", sans-serif !important;
+}
+
+.montserrat-regular {
+  font-family: "montserrat-regular", sans-serif !important;
+}
+
+.montserrat-italic {
+  font-family: "montserrat-italic", sans-serif !important;
+  font-style: italic;
+}
+
+.montserrat-bold {
+  font-family: "montserrat-bold", sans-serif !important;
+  font-weight: 700;
 }
 
 body {
@@ -16,8 +81,8 @@ html {
     scroll-behavior: smooth;
 }
 
-.main-purple {
-  color: var(--main-purple);
+.primary-purple {
+  color: var(--primary-purple);
 }
 
 .light-purple {
@@ -28,8 +93,12 @@ html {
   color: var(--main-blue);
 }
 
-.bg-main-purple {
-  background-color: var(--main-purple);
+.secondary-blue {
+  color: var(--secondary-blue);
+}
+
+.bg-primary-purple {
+  background-color: var(--primary-purple);
 }
 
 .bg-light-purple {
@@ -46,11 +115,6 @@ html {
 
 .main-yellow {
   color: var(--main-yellow);
-}
-
-.font-comic {
-  font-family: "Bangers", cursive;
-  letter-spacing: 2px;
 }
 
 .comic-button {
