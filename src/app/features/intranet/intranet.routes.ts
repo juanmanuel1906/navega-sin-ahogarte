@@ -31,12 +31,12 @@ export const IntranetRoutes: Routes = [
       {
         path: 'anonymous-post-admin',
         component: AnonymousPostAdmin,
-        title: "Comunidad anónimos"
+        title: "Comunidad anónima"
       },
       {
         path: 'wellness-test-panel',
         component: WellnessTestPanel,
-        title: "Comunidad anónimos"
+        title: "Test bienestar digital"
       },
     ],
   },

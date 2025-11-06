@@ -25,7 +25,7 @@ export const routes: Routes = [
   {
     path: 'wellness-test',
     loadComponent: () =>
-      import('././features/wellness-test/wellness-test').then(
+      import('./././features/components/wellness-test/wellness-test').then(
         (m) => m.WellnessTest
       ),
     //canActivate: [authGuard],

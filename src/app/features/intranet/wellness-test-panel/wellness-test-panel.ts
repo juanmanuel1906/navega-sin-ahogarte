@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { WellnessTest } from "../../wellness-test/wellness-test";
+import { WellnessTest } from '../../components/wellness-test/wellness-test';
 
 @Component({
   selector: 'app-wellness-test-panel',
