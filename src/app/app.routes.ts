@@ -18,7 +18,7 @@ export const routes: Routes = [
   {
     path: 'landing',
     component: Landing,
-    title: 'Navega Sin Ahogarte - Tu Bienestar Digital',
+    title: 'NSA - Tu Bienestar Digital',
   },
   {
     path: 'wellness-test',
@@ -27,7 +27,7 @@ export const routes: Routes = [
         (m) => m.WellnessTest
       ),
     //canActivate: [authGuard],
-    title: 'Test de Bienestar Digital',
+    title: 'NSA - Test de Bienestar Digital',
   },
   {
     path: '',
