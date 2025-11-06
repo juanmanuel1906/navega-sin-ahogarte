@@ -96,6 +96,8 @@ export class Auth {
 
     this.authService.register(formData).subscribe({
       next: (response) => {
+        this.authService.setCurrentUser(response.user);
+
         // Guarda los tokens recibidos en localStorage
         if (response.accessToken && response.refreshToken) {
           localStorage.setItem('accessToken', response.accessToken);
@@ -118,8 +120,6 @@ export class Auth {
           title: `Es un honor tenerte en la tripulación, ${response.user?.name}🤩.`
         });
         
-        this.authService.setCurrentUser(response.user);
-        this.route.navigate(['/dashboard']);
       },
       error: (error) => {
         console.error('Error en el registro:', error);
@@ -134,6 +134,8 @@ export class Auth {
         if(error.error.message === "Ya existe un tripulante con este correo electrónico, intenta iniciar sesión.") {
           this.isLoginVisible = true;
         }
+      }, complete: () => {
+        this.route.navigate(['/dashboard']);
       }
     });
   }

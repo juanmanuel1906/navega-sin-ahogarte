@@ -16,6 +16,7 @@ import { CommunityPostEntryComponent } from '../../features/components/community
 export class Home implements OnInit {
   participationMode: 'profile' | 'anonymous' | null = null;
   participationData: any = {};
+  finalUrl: string = '';
 
   slides: any[] = [
     {

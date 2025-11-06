@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
             <img src="logos/main-logo.webp" alt="Main logo" class="w-26 h-26">
-            <a routerLink="/auth" class="comic-button bg-primary-purple text-white garet-heavy text-1xl py-2 px-6 rounded-lg">
+            <a routerLink="/auth" class="comic-button bg-[var(--primary-purple)] text-white garet-heavy text-1xl py-2 px-6 rounded-lg">
                 ÚNETE
             </a>
         </div>
@@ -116,7 +116,7 @@
     <app-wellness-test id="wellness-test"></app-wellness-test>
 </section>
 
-<!-- Ansiosos anónimos -->
+<!-- Comunidad Anónima -->
  <section class="py-24 px-4 halftone-bg">
     @if (!participationMode) {
       <app-community-post-entry (modeSelected)="onModeSelected($event)"></app-community-post-entry>

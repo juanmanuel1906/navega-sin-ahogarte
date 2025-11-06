@@ -1,18 +1,4 @@
 /* Componentes Estilo Cómic */
-.comic-button {
-  transition: all 0.2s ease-in-out;
-  border: 3px solid var(--dark-text);
-  box-shadow: 5px 5px 0px var(--dark-text);
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 9px 9px 0px var(--dark-text);
-  }
-  &:active {
-    transform: translateY(2px);
-    box-shadow: 3px 3px 0px var(--dark-text);
-  }
-}
-
 .comic-card {
   background-color: white;
   border: 3px solid var(--dark-text);

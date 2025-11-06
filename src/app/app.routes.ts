@@ -3,6 +3,7 @@ import { NotFound } from './routes/not-found/not-found';
 import { Home } from './routes/home/home';
 import { Landing } from './routes/landing/landing';
 import { Auth } from './features/auth/auth';
+import { publicGuard } from './features/auth/guards/public-guard';
 
 export const routes: Routes = [
   {
@@ -14,6 +15,7 @@ export const routes: Routes = [
     path: 'auth',
     component: Auth,
     title: 'NSA - Autenticación',
+    canActivate: [publicGuard]
   },
   {
     path: 'landing',

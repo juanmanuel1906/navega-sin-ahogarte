@@ -77,7 +77,7 @@ export class AuthService {
     this.isUser.next(false);
 
     this.ngZone.run(() => {
-      this.route.navigate(['/']).then(() => window.location.reload());
+      this.route.navigate(['/']);
     });
   }
 

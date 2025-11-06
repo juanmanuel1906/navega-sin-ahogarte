@@ -41,7 +41,7 @@
               <p class="font-bold text-gray-800">{{ post.User?.name || post.anonymousNickname }}</p>
               <p class="text-xs text-gray-500">{{ post.createdAt | date:'dd MMM, yyyy - hh:mm a' }}</p>
             </div>
-            @if ((isAdmin$ | async) || post.deviceId === deviceId) {
+            @if ((isAdmin$ | async) || post.deviceId === deviceId || post.userId === currentUser.id) {
               <button (click)="onDeletePost(post.id)" class="comic-button bg-red-500 text-white py-1 px-2 rounded-lg flex items-center gap-2" title="Eliminar hilo">
                 <i class="ph-fill ph-trash"></i>
               </button>

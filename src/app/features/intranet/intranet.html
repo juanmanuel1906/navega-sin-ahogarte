@@ -73,23 +73,20 @@
             <span class="ms-3 font-bold text-base" [class.hidden]="!isSidebarOpen">Dashboard</span>
           </a>
           @if (!this.isSidebarOpen) {
-            <button 
-              (click)="toggleSidebar()" 
-              class="hidden md:block md:rounded-md cursor-pointer md:ml-13 md:fixed">
-              <i class="ph-fill ph-caret-circle-double-right text-4xl text-[var(--primary-purple)]"></i>
-            </button>
+          <button (click)="toggleSidebar()" class="hidden md:block md:rounded-md cursor-pointer md:ml-13 md:fixed">
+            <i class="ph-fill ph-caret-circle-double-right text-4xl text-[var(--primary-purple)]"></i>
+          </button>
           } @else {
-            <button 
-              (click)="toggleSidebar()" 
-              class="hidden md:block md:rounded-md cursor-pointer md:ml-48.5 md:fixed">
-              <i class="ph-fill ph-caret-circle-double-left text-4xl text-[var(--primary-purple)]"></i>
-            </button>
+          <button (click)="toggleSidebar()" class="hidden md:block md:rounded-md cursor-pointer md:ml-48.5 md:fixed">
+            <i class="ph-fill ph-caret-circle-double-left text-4xl text-[var(--primary-purple)]"></i>
+          </button>
           }
         </li>
-        
+
         @if (isAdmin$ | async) {
         <li>
-          <a routerLink="/analytics" routerLinkActive="!bg-yellow-200" routerLinkActive class="flex items-center p-2.5 comic-button bg-white rounded-lg">
+          <a routerLink="/analytics" routerLinkActive="!bg-yellow-200" routerLinkActive
+            class="flex items-center p-2.5 comic-button bg-white rounded-lg">
             <i class="ph-fill ph-chart-bar text-2xl text-[var(--primary-purple)]"></i>
             <span class="ms-3 font-bold text-base" [class.hidden]="!isSidebarOpen">Analíticas</span>
           </a>
@@ -104,13 +101,19 @@
         }
         <li>
           <a routerLink="/anonymous-post-admin"
-            
             class="flex items-center p-2.5 comic-button bg-white text-black rounded-lg">
             <i class="ph-fill ph-chats-circle text-2xl text-[var(--primary-purple)]"></i>
-            <span class="ms-3 font-bold text-base" [class.hidden]="!isSidebarOpen">Ansiosos anónimos</span>
+            <span class="ms-3 font-bold text-base" [class.hidden]="!isSidebarOpen">Comunidad</span>
           </a>
         </li>
-        
+        <li>
+          <a routerLink="/wellness-test-panel"
+            class="flex items-center p-2.5 comic-button bg-white text-black rounded-lg">
+            <i class="ph-fill ph-boat text-2xl text-[var(--primary-purple)]"></i>
+            <span class="ms-3 font-bold text-base" [class.hidden]="!isSidebarOpen">Test</span>
+          </a>
+        </li>
+
       </ul>
     </div>
   </aside>

@@ -103,10 +103,10 @@
       </span>
     </div>
 
-    <!-- Tarjeta de Ansiosos anónimos -->
+    <!-- Tarjeta de Comunidad Anónima -->
     <div class="block comic-card bg-white p-8 text-center hover:bg-purple-50 transition-colors duration-200">
       <i class="ph-fill ph-chats-teardrop text-7xl text-[var(--primary-purple)]"></i>
-      <h2 class="garet-heavy text-3xl mt-4">Ansiosos anónimos</h2>
+      <h2 class="garet-heavy text-3xl mt-4">Comunidad Anónima</h2>
       <p class="text-gray-600 mt-2">Gestiona las publicaciones de tus usuarios.</p>
       <span class="comic-button inline-block mt-6 bg-yellow-400 text-black garet-heavy text-xl py-2 px-6 rounded-lg">
         <a routerLink="/anonymous-post-admin">NAVEGAR</a>
@@ -115,14 +115,23 @@
   </div>
   }
 
-@if ((isUser$ | async) && !(isAdmin$ | async)) {
-  <div class="grid grid-cols-1 lg:grid-cols-1 gap-8">
+@else {
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
     <div class="block comic-card bg-white p-8 text-center hover:bg-purple-50 transition-colors duration-200">
       <i class="ph-fill ph-chats-teardrop text-7xl text-[var(--primary-purple)]"></i>
-      <h2 class="garet-heavy text-3xl mt-4">Ansiosos anónimos</h2>
+      <h2 class="garet-heavy text-3xl mt-4">Comunidad Anónima</h2>
       <p class="text-gray-600 mt-2">Gestiona las publicaciones de tus usuarios.</p>
       <span class="comic-button inline-block mt-6 bg-yellow-400 text-black garet-heavy text-xl py-2 px-6 rounded-lg">
         <a routerLink="/anonymous-post-admin">NAVEGAR</a>
+      </span>
+    </div>
+
+    <div class="block comic-card bg-white p-8 text-center hover:bg-purple-50 transition-colors duration-200">
+      <i class="ph-fill ph-boat text-7xl text-[var(--primary-purple)]"></i>
+      <h2 class="garet-heavy text-3xl mt-4">Test de bienestar digital</h2>
+      <p class="text-gray-600 mt-2">Encuentra puntos a mejorar realizando este test.</p>
+      <span class="comic-button inline-block mt-6 bg-yellow-400 text-black garet-heavy text-xl py-2 px-6 rounded-lg">
+        <a routerLink="/wellness-test-panel">NAVEGAR</a>
       </span>
     </div>
   </div>
