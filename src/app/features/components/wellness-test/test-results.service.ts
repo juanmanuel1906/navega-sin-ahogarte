@@ -53,4 +53,14 @@ export class TestResultsService {
   getAnalyticsSummary(): Observable<any> {
     return this.http.get(`${BASE_URL}/analytics/summary`, { headers: this.getAuthHeaders() });
   }
+
+  /**
+   * Obtiene el último resultado del test para un usuario específico.
+   * @param userId El ID del usuario.
+   * @returns Un Observable con la respuesta del servidor.
+   */
+  getLatestResult(userId: string): Observable<any> {
+    // Llama a la ruta que definimos en el back
+    return this.http.get(`${BASE_URL}/results/latest/${userId}`, { headers: this.getAuthHeaders() });
+  }
 }

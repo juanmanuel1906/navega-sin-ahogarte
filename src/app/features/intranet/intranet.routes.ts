@@ -16,27 +16,27 @@ export const IntranetRoutes: Routes = [
       {
         path: 'dashboard',
         component: Dashboard,
-        title: "Tablero"
+        title: "NSA - Tablero"
       },
       {
         path: 'analytics',
         component: Analytics,
-        title: "Analíticas"
+        title: "NSA - Analíticas"
       },
       {
         path: 'users',
         component: Users,
-        title: "Usuarios"
+        title: "NSA - Usuarios"
       },
       {
         path: 'anonymous-post-admin',
         component: AnonymousPostAdmin,
-        title: "Comunidad anónima"
+        title: "NSA - Comunidad anónima"
       },
       {
         path: 'wellness-test-panel',
         component: WellnessTestPanel,
-        title: "Test bienestar digital"
+        title: "NSA - Test bienestar digital"
       },
     ],
   },

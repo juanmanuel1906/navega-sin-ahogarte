@@ -6,6 +6,8 @@ import { TestResultsService } from './test-results.service';
 import { DeviceIdService } from '../../../core/services/device-id.service';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { AuthService } from '../../auth/auth.service';
+import { CurrentUserI } from '../../../core/models/current-user';
 
 @Component({
   selector: 'app-wellness-test',
@@ -15,6 +17,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
   styleUrls: ['./wellness-test.css']
 })
 export class WellnessTest implements OnInit, AfterViewInit {
+  currentUser: CurrentUserI | any = localStorage.getItem("currentUser");
 
   // Se simplifican los estados de la pantalla
   currentScreen: 'start' | 'initial-data' | 'test-questions' | 'result' = 'start';
@@ -155,7 +158,10 @@ export class WellnessTest implements OnInit, AfterViewInit {
   constructor(private sanitizer: DomSanitizer, 
               private testResultsService: TestResultsService, 
               private deviceIdService: DeviceIdService,
-  ) {}
+              private authService: AuthService
+  ) {
+    this.currentUser = this.authService.currentUser(this.currentUser);
+  }
 
   ngOnInit(): void {
 
@@ -260,8 +266,20 @@ export class WellnessTest implements OnInit, AfterViewInit {
 
   // 5. Nueva función que prepara y envía los datos
   saveResultsToDatabase(resultCategory: string): void {
+    console.log(this.authService.currentUser);
+    let userId;
+    let deviceId;
+    if(this.authService.hasToken() && this.currentUser) {
+      userId = this.currentUser?.id;
+      deviceId = null;
+    } else {
+      deviceId = this.deviceIdService.getDeviceId();
+      userId = null;
+    }
+    
     const resultData = {
-      device_id: this.deviceIdService.getDeviceId(),
+      device_id: deviceId,
+      user_id: userId,
       age_range: this.userProfile['age'],
       gender: this.userProfile['gender'],
       user_role: this.userProfile['role'],
