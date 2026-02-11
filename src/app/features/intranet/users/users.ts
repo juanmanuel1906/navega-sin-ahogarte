@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from './users.service';
 import Swal from 'sweetalert2';
+import { MainLoader } from "../../../core/shared/main-loader/main-loader";
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MainLoader],
   templateUrl: './users.html',
   styleUrls: ['./users.css', '../../intranet/intranet.css'],
 })
@@ -20,6 +21,7 @@ export class Users implements OnInit {
   userForm: FormGroup;
   isEditMode = false;
   currentUserId: number | null = null;
+  loading: boolean = true;
 
   constructor(
     private usersService: UsersService,
@@ -41,6 +43,7 @@ export class Users implements OnInit {
     this.usersService.getUsers().subscribe({
       next: (response) => {
         this.users = response.users;
+        this.loading = false;
       },
       error: (error) => console.error('Error al cargar usuarios:', error)
     });

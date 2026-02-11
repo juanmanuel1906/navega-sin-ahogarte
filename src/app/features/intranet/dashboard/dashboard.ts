@@ -7,6 +7,7 @@ import { CurrentUserI } from '../../../core/models/current-user';
 import { Observable, take } from 'rxjs'; // Importamos take
 import { AuthService } from '../../auth/auth.service';
 import { WellnessTestResume } from "../../components/wellness-test-resume/wellness-test-resume";
+import { MainLoader } from "../../../core/shared/main-loader/main-loader";
 
 // 1. Definimos una interfaz para las tarjetas
 interface NavigationCard {
@@ -19,7 +20,7 @@ interface NavigationCard {
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, RouterLink, WellnessTestResume],
+  imports: [CommonModule, RouterLink, WellnessTestResume, MainLoader],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css', '../../intranet/intranet.css'],
 })
@@ -27,6 +28,7 @@ export class Dashboard implements OnInit {
   currentUser: CurrentUserI | any = localStorage.getItem("currentUser");
   isAdmin$!: Observable<boolean>;
   isUser$!: Observable<boolean>;
+  loading: boolean = true;
 
   data: dashboardStatsI = {
     totalTests: 0,
@@ -46,14 +48,14 @@ export class Dashboard implements OnInit {
       title: 'Ver analíticas',
       description: 'Explora los datos, gráficos interactivos y tendencias de los resultados del test.',
       link: '/analytics',
-      buttonText: 'NAVEGAR'
+      buttonText: 'Navegar'
     },
     {
       icon: 'ph-fill ph-users-three',
       title: 'Administrar usuarios',
       description: 'Gestiona los perfiles, roles y permisos de todos los usuarios registrados en la plataforma.',
       link: '/users',
-      buttonText: 'NAVEGAR'
+      buttonText: 'Navegar'
     }
   ];
 
@@ -64,15 +66,22 @@ export class Dashboard implements OnInit {
       title: 'Comunidad Anónima',
       description: 'Gestiona las publicaciones de tus usuarios.',
       link: '/anonymous-post-admin',
-      buttonText: 'NAVEGAR'
+      buttonText: 'Navegar'
     },
     {
       icon: 'ph-fill ph-boat',
       title: 'Test de bienestar digital',
       description: 'Encuentra puntos a mejorar realizando este test.',
       link: '/wellness-test-panel',
-      buttonText: 'NAVEGAR'
-    }
+      buttonText: 'Navegar'
+    },
+    {
+      icon: 'ph-fill ph-monitor-play',
+      title: 'E-Learning',
+      description: 'Conviértete en Salva',
+      link: '/e-learning',
+      buttonText: 'Navegar'
+    },
   ];
 
   constructor(private testResultsService: TestResultsService, private authService: AuthService) {
@@ -89,9 +98,11 @@ export class Dashboard implements OnInit {
         // Si es admin, cargamos los stats y combinamos AMBAS listas
         this.loadDashboardStats();
         this.navigationCards = [...this.adminOnlyCards, ...this.sharedCards];
+        this.loading = false;
       } else {
         // Si es usuario normal, SÓLO cargamos las tarjetas compartidas
         this.navigationCards = [...this.sharedCards];
+        this.loading = false;
       }
     });
   }

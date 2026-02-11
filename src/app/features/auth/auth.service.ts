@@ -1,5 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { CurrentUserI } from '../../core/models/current-user';
 import { Router } from '@angular/router';
@@ -11,8 +11,6 @@ import { BASE_URL } from '../../../environment';
 export class AuthService {
   private apiUrl = `${BASE_URL}/auth`;
   
-  // --- INICIO DE LA CORRECCIÓN ---
-
   // 1. Los BehaviorSubjects se inicializan leyendo el valor ACTUAL
   //    de localStorage usando métodos privados y seguros.
   private currentUser$ = new BehaviorSubject<CurrentUserI | null>(this.getSafeCurrentUser());
@@ -24,6 +22,24 @@ export class AuthService {
   //    Se volverían obsoletos (stale) inmediatamente.
 
   constructor(private http: HttpClient, private ngZone: NgZone, private route: Router) { }
+  // --- Acciones del Usuario (HTTP) ---
+  public getAuthHeaders(): HttpHeaders {
+    const isAnonymous = sessionStorage.getItem('participationMode') === 'anonymous';
+    
+    // Si el usuario es anónimo, devolvemos encabezados vacíos sin token.
+    if (isAnonymous) {
+      return new HttpHeaders();
+    }
+    
+    // Si el usuario eligió su perfil, buscamos y adjuntamos el token.
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    }
+    
+    // Si no hay token, devolvemos encabezados vacíos.
+    return new HttpHeaders();
+  }
 
   /**
    * Registra un nuevo usuario.
@@ -126,7 +142,17 @@ export class AuthService {
     return this.getSafeUserRole() === 'user';
   }
 
-  // --- FIN DE LA CORRECCIÓN ---
+  // Llamada al backend para refrescar
+  refreshToken() {
+    const token = localStorage.getItem('refreshToken');
+    return this.http.post<any>(`${this.apiUrl}/refresh-token`, { token }).pipe(
+      tap((response) => {
+        // Guardamos el nuevo token
+        localStorage.setItem('accessToken', response.accessToken);
+        // Si el backend devolviera un nuevo refresh token, lo guardamos aquí también
+      })
+    );
+  }
 
   // Estos métodos parecen ser para un flujo de Google Login,
   // pero no estaban siendo usados en el login normal.

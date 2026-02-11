@@ -4,8 +4,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { YouTubePlayer } from '@angular/youtube-player';
 import { TestResultsService } from './test-results.service';
 import { DeviceIdService } from '../../../core/services/device-id.service';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { AuthService } from '../../auth/auth.service';
 import { CurrentUserI } from '../../../core/models/current-user';
 
@@ -16,7 +14,7 @@ import { CurrentUserI } from '../../../core/models/current-user';
   templateUrl: './wellness-test.html',
   styleUrls: ['./wellness-test.css']
 })
-export class WellnessTest implements OnInit, AfterViewInit {
+export class WellnessTest implements OnInit {
   currentUser: CurrentUserI | any = localStorage.getItem("currentUser");
 
   // Se simplifican los estados de la pantalla
@@ -97,7 +95,7 @@ export class WellnessTest implements OnInit, AfterViewInit {
   boatsOfSupport = [
     { 
       id: 'clinical', 
-      title: 'CLÍNICO', 
+      title: 'Clínico', 
       icon: 'ph-fill ph-heartbeat text-white', 
       color: 'text-blue-600', 
       videoId: 'p_mzd4Ceow4',
@@ -110,7 +108,7 @@ export class WellnessTest implements OnInit, AfterViewInit {
     },
     { 
       id: 'sports', 
-      title: 'DEPORTIVO', 
+      title: 'Deportivo', 
       icon: 'ph-fill ph-barbell text-white', 
       color: 'text-green-600',
       videoId: 'wTTxj8JohhQ',
@@ -125,7 +123,7 @@ export class WellnessTest implements OnInit, AfterViewInit {
     },
     { 
       id: 'spiritual', 
-      title: 'ESPIRITUAL', 
+      title: 'Espiritual', 
       icon: 'ph-fill ph-hands-praying text-white', 
       color: 'text-yellow-400',
       videoId: '7c5t6FkvUG0',
@@ -140,7 +138,7 @@ export class WellnessTest implements OnInit, AfterViewInit {
     },
     { 
       id: 'nutrition', 
-      title: 'NUTRICIÓN', 
+      title: 'Nutrición', 
       icon: 'ph-fill ph-orange text-white', 
       color: 'text-red-600',
       videoId: 'Q4qWzbP0q7I',
@@ -163,34 +161,7 @@ export class WellnessTest implements OnInit, AfterViewInit {
     this.currentUser = this.authService.currentUser(this.currentUser);
   }
 
-  ngOnInit(): void {
-
-  }
-
-  // Usar ngAfterViewInit para asegurar que el DOM esté listo
-  ngAfterViewInit(): void {
-    // 1. Registrar el plugin ScrollTrigger
-    gsap.registerPlugin(ScrollTrigger);
-
-    // 2. Crear la animación
-    gsap.from("#wellness-test", {
-      // Propiedades de la animación
-      opacity: 0,
-      x: -300,
-      duration: 1,
-      ease: 'power2.out',
-
-      // Propiedades de ScrollTrigger
-      scrollTrigger: {
-        trigger: "#wellness-test", // El elemento que dispara la animación
-        start: "top 80%", // Empieza cuando el 80% superior del elemento entra en la vista
-        
-        // (onEnter, onLeave, onEnterBack, onLeaveBack)
-        toggleActions: "play reverse play reverse",
-        // markers: true // Descomentar para depurar y ver las líneas
-      }
-    });
-  }
+  ngOnInit(): void {}
 
   selectedBoat: any = null;
 
@@ -250,7 +221,7 @@ export class WellnessTest implements OnInit, AfterViewInit {
 
     const results = {
       verde: { visualClass: 'bg-green-400', icon: 'ph-fill ph-smiley', title: 'Uso saludable', description: '¡Felicidades! Tu uso de la tecnología parece equilibrado. Sigue así y explora nuestros recursos para mantenerte fuerte.' },
-      amarillo: { visualClass: 'bg-yellow-400', icon: 'ph-fill ph-smiley-meh', title: 'Uso moderado con riesgos', description: 'Hay algunas áreas donde puedes mejorar. Estás en el lugar correcto para aprender y encontrar un mejor equilibrio.' },
+      amarillo: { visualClass: 'bg-white', icon: 'ph-fill ph-smiley-meh', title: 'Uso moderado con riesgos', description: 'Hay algunas áreas donde puedes mejorar. Estás en el lugar correcto para aprender y encontrar un mejor equilibrio.' },
       rojo: { visualClass: 'bg-red-500', icon: 'ph-fill ph-smiley-sad', title: 'Uso alto o problemático', description: 'Es momento de tomar acción. Te recomendamos empezar por nuestro Kit de Emergencia y conectar con la comunidad para obtener apoyo.' }
     };
 

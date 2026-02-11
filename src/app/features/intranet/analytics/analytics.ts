@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 
 import * as Highcharts from 'highcharts';
 import { TestResultsService } from '../../components/wellness-test/test-results.service';
+import { NotResults } from "../../../core/shared/not-results/not-results";
+import { MainLoader } from "../../../core/shared/main-loader/main-loader";
 
 @Component({
   selector: 'app-analytics',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NotResults, MainLoader],
   templateUrl: './analytics.html',
   styleUrls: ['./analytics.css', '../../intranet/intranet.css'],
 })
@@ -30,6 +32,7 @@ export class Analytics {
   };
 
   kpiData: any = {};
+  loading: boolean = true;
 
   constructor(private testResultsService: TestResultsService) {}
 
@@ -41,6 +44,7 @@ export class Analytics {
   private loadAnalyticsData() {
     this.testResultsService.getDashboardStats().subscribe((stats) => {
       this.generalData = stats;
+      this.loading = false
     });
   }
 

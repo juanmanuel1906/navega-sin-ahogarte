@@ -40,7 +40,7 @@ export class CommunityPostEntryComponent implements OnInit {
   }
 
   // Confirma el apodo y emite el evento para iniciar en modo anónimo
-  confirmNickname(): void {
+  confirmNickname(): void {    
     if (this.nicknameForm.invalid) return;
     this.modeSelected.emit({
       mode: 'anonymous',

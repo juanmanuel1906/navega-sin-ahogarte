@@ -1,0 +1,61 @@
+.main-content {
+    background: linear-gradient(206deg, #8b4bff, #4703cd, #2e86ff);
+    clip-path: ellipse(150% 100% at 50% 0%);
+    padding-bottom: 100px;
+}
+
+.call-to-action-button {
+    background-color: var(--light-pink);
+    color: var(--white);
+    border-radius: 20px;
+    padding: 3%;
+    cursor: pointer;
+    box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 1);
+
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes shadow-scale {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: scale(0.6);
+        opacity: 0.1;
+    }
+
+    /* Al subir, la sombra se encoge */
+}
+
+.animate-float {
+    animation: float 2s ease-in-out infinite;
+}
+
+.animate-shadow {
+    animation: shadow-scale 2s ease-in-out infinite;
+}
+
+#particles-container {
+    overflow: visible; /* Permite que las burbujas salgan del recuadro del niño */
+}
+
+/* Opcional: añade un filtro de brillo a los likes para que resalten */
+#particles-container img[src*="like"] {
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}

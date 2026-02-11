@@ -1,15 +1,13 @@
 <div class="p-1 mb-12 md:mb-0">
   <div class="mb-8">
     @if (isAdmin$ | async) {
-    <h1 class="garet-heavy text-4xl text-[var(--primary-purple)] text-center md:text-left">¡Hola, {{ currentUser.name}}!</h1>
+    <h1 class="montserrat-bold text-4xl text-[var(--primary-purple)] text-center md:text-left">¡Hola, {{ currentUser.name}}!
+    </h1>
     <p class="text-lg text-gray-700 mt-1 text-center md:text-left">Aquí tienes el resumen de la tripulación y la
       navegación.</p>
-    } <!--@else {
-    <p class="text-lg text-gray-700 mt-1 text-center md:text-left">Aquí tienes todas las herramientas para navegar sin
-      miedo.</p>
-    }-->
+    }
   </div>
-
+  @if(!loading) {
   @if (isAdmin$ | async) {
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
     <div class="comic-card bg-white p-5 flex items-center gap-4">
@@ -70,14 +68,18 @@
     @for (card of navigationCards; track card.link) {
     <div class="block comic-card bg-white p-8 text-center hover:bg-purple-50 transition-colors duration-200">
       <i class="{{ card.icon }} text-7xl text-[var(--primary-purple)]"></i>
-      <h2 class="garet-heavy text-3xl mt-4">{{ card.title }}</h2>
+      <h2 class="montserrat-bold text-3xl mt-4">{{ card.title }}</h2>
       <p class="text-gray-600 mt-2">{{ card.description }}</p>
-      <span class="comic-button inline-block mt-6 bg-yellow-400 text-black garet-heavy text-xl py-2 px-6 rounded-lg">
+      <span class="comic-button inline-block mt-6 bg-[var(--primary-purple)] text-white montserrat-italic font-bold text-xl py-2 px-6 rounded-lg">
         <a [routerLink]="card.link">{{ card.buttonText }}</a>
       </span>
     </div>
     }
 
   </div>
-
+  }
 </div>
+
+@if(loading) {
+<app-main-loader></app-main-loader>
+}

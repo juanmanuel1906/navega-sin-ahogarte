@@ -4,48 +4,50 @@
   <div class="mb-3">
     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
       <div class="top-0">
-        <h1 class="garet-heavy text-4xl text-[var(--primary-purple)] text-center md:text-left">Analíticas del test</h1>
-        <p class="text-lg text-gray-700 mt-1 text-center md:text-left">Explora los datos y tendencias de bienestar digital.</p>
+        <h1 class="montserrat-bold text-4xl text-[var(--primary-purple)] text-center md:text-left">Analíticas del test</h1>
+        <p class="text-lg text-gray-700 mt-1 text-center md:text-left">Explora los datos y tendencias de bienestar
+          digital.</p>
       </div>
     </div>
   </div>
-
+  @if (!loading) {
   <!-- Tarjetas de Métricas Clave (KPIs) -->
+  @if (generalData.totalTests > 0) {
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-3">
     <div class="comic-card bg-white p-5">
       <p class="text-gray-600 font-medium text-center md:text-left">Tests totales</p>
       <p class="text-3xl font-bold text-[var(--primary-purple)] text-center">{{ generalData.totalTests }}</p>
     </div>
-      <!-- Card 3: Tarjeta de Resultado Promedio (Dinámica) -->
+    <!-- Card 3: Tarjeta de Resultado Promedio (Dinámica) -->
     <div class="comic-card bg-white p-5 gap-4">
       <div class="text-center md:text-left">
-        <p class="text-gray-600 font-medium">Resultado promedio</p>        
+        <p class="text-gray-600 font-medium">Resultado promedio</p>
         <!-- El @switch evaluará la variable data.averageResult -->
         @switch (generalData.averageResult) {
-          
-          <!-- Caso para 'amarillo' -->
-          @case ('amarillo') {
-            <p class="text-3xl font-bold text-yellow-200 text-center">{{ generalData.averageResult | titlecase }}</p>
-          }
 
-          <!-- Caso para 'verde' -->
-          @case ('verde') {
-            <p class="text-3xl font-bold text-green-800 text-center">{{ generalData.averageResult | titlecase }}</p>
+        <!-- Caso para 'amarillo' -->
+        @case ('amarillo') {
+        <p class="text-3xl font-bold text-yellow-200 text-center">{{ generalData.averageResult | titlecase }}</p>
+        }
 
-          }
+        <!-- Caso para 'verde' -->
+        @case ('verde') {
+        <p class="text-3xl font-bold text-green-800 text-center">{{ generalData.averageResult | titlecase }}</p>
 
-          <!-- Caso para 'rojo' -->
-          @case ('rojo') {
-            <p class="text-3xl font-bold text-red-600 text-center">{{ generalData.averageResult | titlecase }}</p>
-          }
+        }
 
-          <!-- Caso por defecto (si el valor no coincide con ninguno) -->
-          @default {
-            <p class="text-3xl font-bold text-gray-800">N/A</p>
-          }
+        <!-- Caso para 'rojo' -->
+        @case ('rojo') {
+        <p class="text-3xl font-bold text-red-600 text-center">{{ generalData.averageResult | titlecase }}</p>
+        }
+
+        <!-- Caso por defecto (si el valor no coincide con ninguno) -->
+        @default {
+        <p class="text-3xl font-bold text-gray-800">N/A</p>
+        }
         }
       </div>
-  </div>
+    </div>
 
     <div class="comic-card bg-white p-5 text-center md:text-left">
       <p class="text-gray-600 font-medium">Rol más activo</p>
@@ -56,6 +58,7 @@
       <p class="text-3xl font-bold text-green-500 text-center">{{ generalData.newUsersToday }}</p>
     </div>
   </div>
+
 
   <!-- Sección de Gráficos -->
   <div class="comic-analytic-card grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -71,7 +74,13 @@
     <!-- Gráfico de Barras: Resultados por Rol -->
     <div class="lg:col-span-2 comic-card bg-white p-2">
       <h3 class="garet-regular text-2xl mb-4 text-center">Resultados por rol de usuario</h3>
-        <div id="barChartOptions"></div>
+      <div id="barChartOptions"></div>
     </div>
   </div>
+  } @else {
+  <app-not-results></app-not-results>
+  }
+  } @else {
+    <app-main-loader></app-main-loader>
+  }
 </div>

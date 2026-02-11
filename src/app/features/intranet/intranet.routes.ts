@@ -6,6 +6,7 @@ import { Users } from './users/users';
 import { AnonymousPostAdmin } from './anonymous-post-admin/anonymous-post-admin';
 import { authGuard } from '../auth/guards/auth-guard';
 import { WellnessTestPanel } from './wellness-test-panel/wellness-test-panel';
+import { ELearning } from '../components/e-learning/e-learning';
 
 export const IntranetRoutes: Routes = [
   {
@@ -37,6 +38,11 @@ export const IntranetRoutes: Routes = [
         path: 'wellness-test-panel',
         component: WellnessTestPanel,
         title: "NSA - Test bienestar digital"
+      },
+      {
+        path: 'e-learning',
+        component: ELearning,
+        title: "NSA - E-Learning"
       },
     ],
   },

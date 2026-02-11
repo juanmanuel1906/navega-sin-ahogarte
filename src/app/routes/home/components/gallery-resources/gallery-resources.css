@@ -1,0 +1,23 @@
+.bg-dots {
+    background-color: white;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.2) 2px, transparent 2px),
+                      linear-gradient(to bottom, black 80%, black 100%);
+    background-size: 15px 15px, 100% 100%;
+    
+    /* Esto mezcla el gradiente con los puntos */
+    background-blend-mode: multiply;}
+
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+/* Opcional: un redondeado muy sutil de 2px para suavizar los bordes */
+.grid div {
+  border-radius: 20px;
+}
+
+/* Quitamos cualquier rastro de la línea gráfica anterior */
+.post-card, .comic-card {
+  border: none !important;
+  box-shadow: none !important;
+}

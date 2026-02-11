@@ -1,6 +1,31 @@
 section {
-  font-family: "Inter", sans-serif;
   background-color: #e9d5ff; /* Morado claro de fondo */
   background-image: radial-gradient(#ddd6fe 1px, transparent 1px);
   background-size: 16px 16px;
+}
+
+.bg-snake {
+    /* Usamos min-h-screen para asegurar que cubra todo si el contenido crece */
+    min-height: 100vh; 
+    width: 100%;
+    
+    background-color: var(--secondary-blue);
+    background-image: url('/textures/snake-bg.png'); /* Tu textura de pinceladas */
+    
+    /* 'overlay' o 'soft-light' suelen dar un efecto más integrado que color-dodge */
+    background-blend-mode: overlay; 
+    
+    /* 'fixed' hace que la textura no se mueva al hacer scroll, dando profundidad */
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.comic-card {
+  border: 4px solid black;
+  box-shadow: 12px 12px 0px var(--main-blue);
 }

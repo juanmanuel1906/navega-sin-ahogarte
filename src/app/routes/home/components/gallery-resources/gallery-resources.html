@@ -1,0 +1,75 @@
+<div class="min-h-screen bg-dots pt-20 pb-10">
+
+    <div class="w-full flex flex-col items-center">
+        <div class="text-center px-4 max-w-4xl">
+            <h2 class="text-5xl md:text-8xl montserrat-bold text-white mb-4 drop-shadow-lg drop-shadow-gray-500">
+                Recursos de <span class="text-[var(--light-pink)]">calma </span>
+            </h2>
+        </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-1 md:gap-4 p-4 max-w-6xl mx-auto">
+        @for (post of posts; track post.id) {
+        <div (click)="openModal(post)" class="relative aspect-[4/5] cursor-pointer group overflow-hidden bg-gray-200 mb-5 md:mb-0">
+            <img [src]="post.images[0]" class="w-full h-full object-cover">
+
+            @if (post.images.length > 1) {
+            <div class="absolute top-3 right-3 drop-shadow-md"
+                [ngClass]="post.theme === 'light' ? 'text-white' : 'text-black'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                    viewBox="0 0 256 256">
+                    <path
+                        d="M216,40H88A16,16,0,0,0,72,56V184a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,144H88V56H216V184ZM184,216a8,8,0,0,1-8,8H40a16,16,0,0,1-16-16V80a8,8,0,0,1,16,0V208H168A8,8,0,0,1,184,216Z">
+                    </path>
+                </svg>
+            </div>
+            }
+        </div>
+        }
+    </div>
+
+    @if (selectedPost) {
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+        (click)="closeModal()">
+        <div class="modal-content relative max-w-lg w-full aspect-[4/5] bg-black overflow-hidden flex items-center"
+            (click)="$event.stopPropagation()">
+
+            <button (click)="closeModal()" [class]="selectedPost.theme == 'dark' ? 'text-black' : 'text-white'"
+                class="absolute top-4 right-4 z-[60] text-3xl cursor-pointer">&times;</button>
+
+            <div class="relative w-full h-full flex transition-transform duration-500"
+                [style.transform]="'translateX(' + (-selectedPost.currentSlide * 100) + '%)'">
+                @for (img of selectedPost.images; track img) {
+                <img [src]="img" class="w-full h-full object-contain flex-shrink-0">
+                }
+            </div>
+
+            @if (selectedPost.images.length > 1) {
+            <button (click)="prevSlide($event)" [class.opacity-0]="selectedPost.currentSlide === 0"
+                [class]="selectedPost.theme == 'light' ? 'bg-white/20 hover:bg-white/40 text-white' : 'bg-black/10 hover:bg-black/10 text-black'"
+                class="absolute left-2 p-2 rounded-full transition-opacity cursor-pointer">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+
+            <button (click)="nextSlide($event)"
+                [class]="selectedPost.theme == 'light' ? 'bg-white/20 hover:bg-white/40 text-white' : 'bg-black/10 hover:bg-black/10 text-black'"
+                [class.opacity-0]="selectedPost.currentSlide === selectedPost.images.length - 1"
+                class="absolute right-2 p-2 rounded-full  transition-opacity cursor-pointer">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+
+            <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-1.5">
+                @for (img of selectedPost.images; track $index) {
+                <div class="w-1.5 h-1.5 rounded-full transition-colors"
+                    [class]="selectedPost.currentSlide === $index ? 'bg-blue-500' : 'bg-white/50'"></div>
+                }
+            </div>
+            }
+        </div>
+    </div>
+    }
+
+</div>

@@ -1,90 +1,80 @@
 <!-- Encabezado y Acciones -->
-<div>
-  <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-    <div>
-      <h1 class="garet-heavy text-4xl text-[var(--primary-purple)] text-center md:text-left">Administrar tripulación</h1>
-      <p class="text-lg montserrat-regular text-gray-700 mt-1 text-center md:text-left">
-        Gestiona los roles y perfiles de los usuarios de la plataforma.
-      </p>
-    </div>
-    <div class="mt-4 md:mt-0 flex justify-center md:justify-end">
-      <button
-        (click)="openModal()"
-        class="comic-button garet-heavy bg-yellow-400 text-black font-comic text-xm py-3 px-6 rounded-lg flex items-center gap-2"
-      >
-        <i class="ph-fill ph-user-plus text-2xl"></i>
-        AÑADIR 
-      </button>
-    </div>
+<div class="flex flex-col md:flex-row md:items-center md:justify-between">
+  <div>
+    <h1 class="montserrat-bold text-4xl text-[var(--primary-purple)] text-center md:text-left">Administrar tripulación</h1>
+    <p class="text-lg montserrat-regular text-gray-700 mt-1 text-center md:text-left">
+      Gestiona los roles y perfiles de los usuarios de la plataforma.
+    </p>
+  </div>
+  <div class="mt-4 md:mt-0 flex justify-center md:justify-end">
+    <button (click)="openModal()"
+      class="comic-button montserrat-bold bg-white text-black font-comic text-xm py-3 px-6 rounded-lg flex items-center gap-2">
+      <i class="ph-fill ph-user-plus text-2xl"></i>
+      AÑADIR
+    </button>
   </div>
 </div>
 
 <!-- Tabla de Usuarios -->
-<div class="comic-card bg-white p-2 !overflow-auto mb-16 md:mb-8 mt-2">
-  <table class="w-full h-full text-left">
-    <thead class="border-b-4 border-black">
-      <tr>
-        <th class="p-4 font-comic text-1xl">Usuario</th>
-        <th class="p-4 font-comic text-1xl">Rol</th>
-        <th class="p-4 font-comic text-1xl">Registro</th>
-        <th class="p-4 font-comic text-1xl text-center">Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Bucle para renderizar los usuarios -->
-      @for (user of users; track user.id) {
-      <tr class="border-b-2 border-gray-200">
-        <td class="p-4">
-          <div class="flex items-center gap-4">
-            <img
-              class="w-6 h-6 rounded-full border-2 border-black"
-              [src]="'https://placehold.co/100x100/?text=' + user.name.charAt(0)"
-              alt="Avatar"
-            />
-            <div>
-              <p class="font-bold text-sm">{{ user.name }}</p>
-              <p class="text-xs text-gray-600">{{ user.email }}</p>
+@if (!loading) {
+  <div class="comic-card bg-white p-2 !overflow-auto mb-16 md:mb-8 mt-2">
+    <table class="w-full h-full text-left">
+      <thead class="border-b-4 border-black">
+        <tr>
+          <th class="p-4 font-comic text-1xl">Usuario</th>
+          <th class="p-4 font-comic text-1xl">Rol</th>
+          <th class="p-4 font-comic text-1xl">Registro</th>
+          <th class="p-4 font-comic text-1xl text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Bucle para renderizar los usuarios -->
+        @for (user of users; track user.id) {
+        <tr class="border-b-2 border-gray-200">
+          <td class="p-4">
+            <div class="flex items-center gap-4">
+              <img class="w-6 h-6 rounded-full border-2 border-black"
+                [src]="'https://placehold.co/100x100/?text=' + user.name.charAt(0)" alt="Avatar" />
+              <div>
+                <p class="font-bold text-sm">{{ user.name }}</p>
+                <p class="text-xs text-gray-600">{{ user.email }}</p>
+              </div>
             </div>
-          </div>
-        </td>
-        <td class="p-4">
-          <span
-            class="px-3 py-1 text-xs font-bold rounded-full border-2 border-black"
-            [ngClass]="{'bg-blue-600 text-white': user.role === 'administrator', 'bg-gray-300 text-black': user.role === 'user'}"
-            >{{ user.role === 'administrator' ? 'Administrador' : 'Usuario' }}</span
-          >
-        </td>
-        <td class="p-4 text-sm">{{ user.createdAt | date: 'dd MMM, yyyy' }}</td>
-        <td>
-          <div class="flex justify-center gap-3">
-            <button
-              (click)="openModal(user)"
-              class="comic-button h-7 flex justify-center bg-white p-1 rounded-lg"
-              title="Editar Usuario"
-            >
-              <i class="ph-fill ph-pencil-simple text-sm"></i>
-            </button>
-            <button
-              (click)="onDeleteUser(user.id)"
-              class="comic-button h-7 flex justify-center bg-red-500 text-white p-1 rounded-lg"
-              title="Eliminar Usuario"
-            >
-              <i class="ph-fill ph-trash text-sm"></i>
-            </button>
-          </div>
-        </td>
-      </tr>
-      }
-    </tbody>
-  </table>
-</div>
-
+          </td>
+          <td class="p-4">
+            <span class="px-3 py-1 text-xs font-bold rounded-full border-2 border-black"
+              [ngClass]="{'bg-blue-600 text-white': user.role === 'administrator', 'bg-gray-300 text-black': user.role === 'user'}">{{
+              user.role === 'administrator' ? 'Administrador' : 'Usuario' }}</span>
+          </td>
+          <td class="p-4 text-sm">{{ user.createdAt | date: 'dd MMM, yyyy' }}</td>
+          <td>
+            <div class="flex justify-center gap-3">
+              <button (click)="openModal(user)" class="comic-button h-7 flex justify-center bg-white p-1 rounded-lg"
+                title="Editar Usuario">
+                <i class="ph-fill ph-pencil-simple text-sm"></i>
+              </button>
+              <button (click)="onDeleteUser(user.id)"
+                class="comic-button h-7 flex justify-center bg-red-500 text-white p-1 rounded-lg"
+                title="Eliminar Usuario">
+                <i class="ph-fill ph-trash text-sm"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+} @else {
+  <app-main-loader></app-main-loader>
+}
 <!-- Modal para Crear/Editar Usuario -->
 @if (isModalOpen) {
 <div class="fixed inset-0 backdrop-blur-xs flex items-center justify-center z-50">
   <div class="comic-card bg-white p-8 rounded-lg w-full max-w-lg z-60">
     <div class="flex justify-between items-center mb-6">
-      <h2 class="font-comic garet-heavy text-4xl text-[var(--primary-purple)] text-center md:text-center">{{ isEditMode ? 'Editar tripulante' : 'Añadir tripulante' }}</h2>
+      <h2 class="font-comic montserrat-bold text-4xl text-[var(--primary-purple)] text-center md:text-center">{{ isEditMode
+        ? 'Editar tripulante' : 'Añadir tripulante' }}</h2>
       <button (click)="closeModal()" class="text-3xl font-bold cursor-pointer">&times;</button>
     </div>
 
@@ -98,9 +88,10 @@
         <input type="email" id="email" formControlName="email" class="comic-input mt-1 w-full" autocomplete="email">
       </div>
       @if (!isEditMode) {
-      <div >
+      <div>
         <label for="password" class="font-bold">Contraseña</label>
-        <input type="password" id="password" formControlName="password" class="comic-input mt-1 w-full" autocomplete="password">
+        <input type="password" id="password" formControlName="password" class="comic-input mt-1 w-full"
+          autocomplete="password">
       </div>
       }
       <div>
@@ -113,7 +104,8 @@
 
       <div class="flex justify-center gap-4 pt-4">
         <button type="button" (click)="closeModal()" class="comic-button montserrat-bold py-2 px-6">Cancelar</button>
-        <button type="submit" [disabled]="userForm.invalid" class="comic-button montserrat-bold bg-yellow-400 text-black py-2 px-6">
+        <button type="submit" [disabled]="userForm.invalid"
+          class="comic-button montserrat-bold bg-white text-black py-2 px-6">
           {{ isEditMode ? 'Guardar' : 'Crear' }}
         </button>
       </div>

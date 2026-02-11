@@ -1,0 +1,22 @@
+.bg-dots {
+    background-color: white;
+    background-image: radial-gradient(rgba(216, 209, 209, 0.2) 2px, transparent 2px);
+    background-size: 15px 15px;
+}
+
+.bg-dots-fade {
+    /* Color de fondo base */
+    background-color: white;
+    
+    /* Capa 1: El patrón de puntos (dots) */
+    /* Capa 2: El gradiente de blanco a negro (fade) */
+    background-image: 
+        radial-gradient(rgba(216, 209, 209, 0.2) 2px, transparent 2px),
+        linear-gradient(to bottom, white 0%, black 100%);
+    
+    /* Tamaño del patrón de puntos */
+    background-size: 15px 15px, 100% 100%;
+    
+    /* Esto mezcla el gradiente con los puntos */
+    background-blend-mode: multiply;
+}

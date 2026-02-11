@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WellnessTest } from "../../features/components/wellness-test/wellness-test";
-import * as AOS from 'aos';
-import { RouterLink } from '@angular/router';
-import { AnonymousPost } from '../../features/components/anonymous-post/anonymous-post';
-import { CommunityPostEntryComponent } from '../../features/components/community-post-entry/community-post-entry';
+import { MainHero } from "./components/main-hero/main-hero";
+import { PartnerBrands } from "./components/partner-brands/partner-brands";
+import { ReviewAnonymousPost } from "./components/review-anonymous-post/review-anonymous-post";
+import { ReviewWellnessTest } from "./components/review-wellness-test/review-wellness-test";
+import { GalleryResources } from "./components/gallery-resources/gallery-resources";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, WellnessTest, AnonymousPost, RouterLink, AnonymousPost, CommunityPostEntryComponent],
+  imports: [CommonModule, MainHero, PartnerBrands, ReviewAnonymousPost, ReviewWellnessTest, GalleryResources],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
@@ -66,7 +66,6 @@ export class Home implements OnInit {
   }
 
   ngOnInit(): void {
-    AOS.init();
     this.startCarousel();
   }
 

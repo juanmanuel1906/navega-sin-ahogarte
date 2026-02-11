@@ -1,0 +1,36 @@
+<section class="bg-[var(--bg-cream)]">
+    <div
+        class="main-content lg:h-screen flex flex-col md:flex-row justify-center items-center md:items-end gap-10 md:gap-20 lg:gap-40 px-6">
+
+        <div class="flex flex-col w-full md:w-2/3 lg:w-1/3 order-1 md:order-2 text-center md:text-left">
+            <div class="absolute hidden lg:flex top-[-10em] left-[-6em] w-full h-1/2 z-20 pointer-events-none">
+                <img class="w-full h-full object-cover opacity-40 mix-blend-screen" src="animations/waves.png"
+                    alt="Waves">
+            </div>
+            <img class="w-full max-w-[350px] md:max-w-none mx-auto md:mx-0 h-auto" src="logos/light-logo.webp"
+                alt="Light Logo">
+
+            <div class="text-white">
+                <h1 class="text-2xl lg:text-3xl montserrat-italic leading-tight">
+                    Tu espacio seguro para encontrar <b>el equilibrio</b> en el mundo
+                    digital. Herramientas, comunidad y <b>apoyo real</b>.
+                </h1>
+
+                <div class="flex justify-center text-nowrap mt-2">
+                    <a routerLink="/auth">
+                        <button
+                            class="call-to-action-button animate-float text-2xl montserrat-italic font-bold">¡Comienza
+                            ahora!</button></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-2/3 sm:w-1/2 md:w-2/5 lg:w-1/4 order-2 md:order-1 relative" id="character-container">
+            <img class="w-full h-auto animate-float relative z-10" src="characters/kid-floating.png"
+                alt="Kid Illustration">
+            <div id="mouth-emitter" class="absolute left-[72%] top-[42%] w-1 h-1 z-10"></div>
+            <div id="phone-emitter" class="absolute left-[65%] top-[65%] w-1 h-1 z-10"></div>
+        </div>
+
+    </div>
+</section>

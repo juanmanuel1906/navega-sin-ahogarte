@@ -46,7 +46,7 @@ export class AnonymousPost implements OnInit, OnDestroy {
 
     // (En AnonymousPost constructor)
     this.isAdmin$ = this.authService.isAdmin;
-    this.isUser$ = this.authService.isUser; // <-- CORREGIDO
+    this.isUser$ = this.authService.isUser;
 
     this.deviceId = this.deviceIdService.getDeviceId();
     this.postForm = this.fb.group({
@@ -162,7 +162,8 @@ export class AnonymousPost implements OnInit, OnDestroy {
       postPayload.nickname = this.participationData?.nickname;
     }
     // Si el modo es 'profile', no añadimos nada extra. El backend usará el token.
-
+    console.log("payload: ", postPayload);
+    
     this.postService.createPost(postPayload).subscribe({
       next: () => this.postForm.reset(),
       error: (err) => Swal.fire('Error', err.error.message, 'error'),

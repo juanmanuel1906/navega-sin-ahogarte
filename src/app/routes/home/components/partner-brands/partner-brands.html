@@ -1,0 +1,26 @@
+<section class="bg-[var(--secondary-blue)]">
+    <div
+        class="main-content flex flex-col md:flex-row items-center lg:justify-between lg:gap-10 px-10 lg:py-20 h-screen bg-[var(--bg-cream)]">
+        <div class="lg:flex-1 space-y-4">
+            <div class="text-5xl lg:text-6xl font-bold uppercase mt-30 lg:mt-0">
+                <span class="montserrat-italic font-medium">Nuestros </span> <span
+                    class="montserrat-bold italic text-[var(--light-pink)]">aliados</span>
+            </div>
+            <p class="text-black text-lg max-w-lg montserrat-regular">
+                Trabajamos con las <b class="text-[var(--light-pink)]">mejores marcas</b> para garantizar que nadie se
+                sienta solo en nuestra comunidad.
+            </p>
+        </div>
+
+        <div class="lg:flex-1 flex justify-center w-3/3 sm:w-1/4 md:w-3/3 lg:w-1/4 items-center relative lg:h-[500px]">
+            <img class="w-full h-auto relative z-10 opacity-40" src="characters/meditating.png"
+                alt="Meditating Boy">
+
+            @for (ally of allies; track $index) {
+            <div #allyLogo class="absolute z-20 w-20 h-20 md:w-24 md:h-24 lg:w-30 lg:h-30 flex items-center justify-center">
+                <img [src]="ally.image" [alt]="ally.name" class="w-full h-full object-contain filter drop-shadow-md">
+            </div>
+            }
+        </div>
+    </div>
+</section>

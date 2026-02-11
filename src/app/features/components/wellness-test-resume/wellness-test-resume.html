@@ -4,7 +4,7 @@
 </div>
 } @else if (noResults) {
 <div class="comic-card bg-white !mb-5 p-6 md:p-8 border-2 border-black rounded-xl">
-    <h1 class="garet-heavy text-3xl md:text-4xl text-gray-900 mb-2">
+    <h1 class="montserrat-bold text-3xl md:text-4xl text-gray-900 mb-2">
         ¡Bienvenido, <span class="text-[var(--primary-purple)]">{{ userName }}</span>!
     </h1>
     <p class="text-base md:text-lg text-gray-600 mb-8">
@@ -12,19 +12,20 @@
     </p>
     <a routerLink="/wellness-test-panel">
         <button class="cursor-pointer w-full flex items-center justify-center gap-3 mt-8 
-                   bg-[var(--primary-purple)] text-white garet-heavy 
+                   bg-[var(--primary-purple)] text-white 
                    text-lg md:text-xl py-3 px-6 rounded-lg 
                    border-2 border-black 
-                   transition-all active:translate-y-1 active:shadow-none" style="box-shadow: 4px 4px 0px #000;">
+                   transition-all active:translate-y-1 active:shadow-none montserrat-italic font-bold"
+            style="box-shadow: 4px 4px 0px #000;">
             <i class="ph-fill ph-play-circle text-2xl"></i>
-            REALIZAR TEST POR PRIMERA VEZ
+            Realizar test de nuevo
         </button>
     </a>
 </div>
 } @else {
 <div class="comic-card bg-white !mb-5 p-6 md:p-8 border-2 border-black rounded-xl">
 
-    <h1 class="garet-heavy text-3xl md:text-4xl text-gray-900 mb-2">
+    <h1 class="montserrat-bold text-3xl md:text-4xl text-gray-900 mb-2">
         ¡Qué bueno verte,
         <span class="text-[var(--primary-purple)]">{{ userName }}</span>!
     </h1>
@@ -39,7 +40,7 @@
     <div class="w-full bg-gray-200 rounded-full h-5 border-2 border-black overflow-hidden">
         <div class="h-full rounded-full transition-all duration-500" [style.width.%]="progressPercentage" [ngClass]="{
              'bg-green-500': colorClass === 'green',
-             'bg-yellow-400': colorClass === 'yellow',
+             'bg-white': colorClass === 'yellow',
              'bg-red-500': colorClass === 'red',
              'bg-gray-400': colorClass === 'gray'
            }">
@@ -61,12 +62,13 @@
 
     <a routerLink="/wellness-test-panel">
         <button class="comic-button cursor-pointer w-full flex items-center justify-center gap-3 mt-8 
-                   bg-[var(--primary-purple)] text-white garet-heavy 
+                   bg-[var(--primary-purple)] text-white 
                    text-lg md:text-xl py-3 px-6 rounded-lg 
                    border-2 border-black 
-                   transition-all active:translate-y-1 active:shadow-none" style="box-shadow: 4px 4px 0px #000;">
+                   transition-all active:translate-y-1 active:shadow-none montserrat-italic font-bold"
+            style="box-shadow: 4px 4px 0px #000;">
             <i class="ph-fill ph-play-circle text-2xl"></i>
-            REALIZAR TEST DE NUEVO
+            Realizar test de nuevo
         </button>
     </a>
 </div>

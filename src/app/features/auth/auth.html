@@ -1,17 +1,19 @@
 <!-- auth.html (Versión actualizada con formularios reactivos) -->
-<section class="antialiased">
-  <div class="min-h-screen flex items-center justify-center p-4 bg-white">
+<section class="h-screen bg-snake">
+  <div class="min-h-screen flex items-center justify-center p-4">
     <div class="w-full max-w-5xl comic-card">
       <div class="grid grid-cols-1 lg:grid-cols-2">
         <!-- Columna de Ilustración -->
-        <div class="hidden lg:flex flex-col items-center justify-center p-12 bg-primary-purple border-r-4 border-black">
-          <img src="logos/light-logo.webp" alt="Personajes de Navega Sin Ahogarte" class="w-full max-w-xs rounded-full border-4 border-white"/>
-          <h2 class="garet-heavy text-5xl text-white mt-8 text-center">
+        <div class="hidden lg:flex flex-col items-center justify-center p-12 bg-[var(--bg-cream)] border-r-4 border-black">
+          <img src="characters/main-character.png" alt="Navega Sin Ahogarte" class="w-full max-w-xs"/>
+
+          <h2 class="montserrat-bold text-5xl text-[var(--primary-purple)] mt-8 text-center">
             ¡Bienvenido a bordo!
           </h2>
-          <p class="text-white text-center mt-2 font-medium">
+          <p class="text-dark text-center mt-2 font-medium montserrat-italic">
             Tu viaje hacia un bienestar digital más saludable comienza aquí.
           </p>
+          <img src="logos/dark-logo.webp" alt="Navega Sin Ahogarte" class="w-30 max-w-xs rounded-full"/>
         </div>
 
         <!-- Columna de Formulario -->
@@ -21,8 +23,8 @@
             <!-- Panel de Login -->
             <div class="w-1/2 shrink-0">
               <div class="p-8 md:p-12">
-                <h2 class="garet-heavy text-4xl primary-purple text-center">INICIAR SESIÓN</h2>
-                <p class="text-gray-600 mt-2 text-center">¿Listo para seguir navegando?</p>
+                <h2 class="montserrat-bold italic text-5xl primary-purple text-center">Iniciar sesión</h2>
+                <p class="text-gray-600 mt-2 text-center montserrat-italic">¿Listo para seguir navegando?</p>
 
                 <!-- FORMULARIO DE LOGIN ACTUALIZADO -->
                 <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" class="mt-8 space-y-6">
@@ -34,8 +36,8 @@
                     <label for="login-password" class="text-lg font-bold">Contraseña</label>
                     <input type="password" id="login-password" class="comic-input mt-2" placeholder="••••••••" formControlName="password" />
                   </div>
-                  <button type="submit" [disabled]="loginForm.invalid" class="w-full comic-button bg-[var(--main-yellow)] text-black garet-heavy text-2xl py-3 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">
-                    ENTRAR
+                  <button type="submit" [disabled]="loginForm.invalid" class="w-full comic-button bg-[var(--primary-purple)] text-white montserrat-bold text-2xl py-3 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                    Entrar
                   </button>
                 </form>
 
@@ -51,8 +53,8 @@
             <!-- Panel de Registro -->
             <div class="w-1/2 shrink-0">
               <div class="p-8 md:p-12">
-                <h2 class="garet-heavy text-4xl primary-purple text-center">CREAR CUENTA</h2>
-                <p class="text-gray-600 text-center mt-2">
+                <h2 class="montserrat-bold italic text-5xl primary-purple text-center">Registro</h2>
+                <p class="text-gray-600 text-center mt-2 montserrat-italic">
                   ¡Sube a bordo y empecemos a navegar!
                 </p>
 
@@ -70,8 +72,8 @@
                     <label for="register-password" class="text-lg font-bold">Contraseña</label>
                     <input type="password" id="register-password" class="comic-input mt-2" placeholder="Crea una contraseña segura" formControlName="password" />
                   </div>
-                  <button type="submit" [disabled]="registerForm.invalid" class="w-full comic-button bg-[var(--main-yellow)] text-black garet-heavy text-2xl py-3 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">
-                    REGISTRARSE
+                  <button type="submit" [disabled]="registerForm.invalid" class="w-full comic-button bg-[var(--primary-purple)] text-white montserrat-bold text-2xl py-3 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                    Registrarse
                   </button>
                 </form>
 

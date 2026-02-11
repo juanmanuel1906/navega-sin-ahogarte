@@ -1,4 +1,4 @@
-<div class="bg-purple-100 min-h-screen">
+<div class="bg-[var(--bg-cream)] min-h-screen">
   <!-- NAVBAR SECTION -->
   <nav class="sticky top-0 z-40">
     <div class="px-4 sm:px-6 lg:px-8 bg-white border-b-2 border-black">
@@ -122,12 +122,22 @@
           </a>
         </li>
 
+        <li>
+          <a routerLink="/e-learning"
+            class="flex items-center p-2.5 comic-button bg-white text-black rounded-lg">
+            <i class="ph-fill ph-monitor-play text-2xl text-[var(--primary-purple)]"></i>
+            @if(isSidebarOpen){
+              <span class="ms-3 font-bold text-base hidden md:block">E-Learning</span>
+            }
+          </a>
+        </li>
+
       </ul>
     </div>
   </aside>
 
   <!-- CONTENT SECTION -->
-  <div class="p-4 transition-all duration-300 ease-in-out" [class.sm:ml-56]="isSidebarOpen"
+  <div class="p-4 bg-snake min-h-[93vh]" [class.sm:ml-56]="isSidebarOpen"
     [class.sm:ml-20]="!isSidebarOpen">
     <div>
       <router-outlet />

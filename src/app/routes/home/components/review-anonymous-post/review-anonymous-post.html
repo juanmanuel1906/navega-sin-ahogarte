@@ -1,0 +1,59 @@
+<div class="bg-dots-secondary" id="water-dots">
+    <div class="main-content">
+        <div class="flex justify-start p-4 sm:p-8 md:p-20 lg:p-30 min-h-screen bg-[var(--secondary-blue)]">
+            <div class="flex flex-col lg:flex-row gap-6 lg:gap-10 bg-dots w-full" id="water-dots">
+                <div class="space-y-3 w-full lg:w-auto">
+                    <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl montserrat-bold text-[var(--light-pink)] drop-shadow-lg">
+                        ¿ESTÁS <br> BIEN?
+                    </h2>
+                    <span class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white montserrat-regular italic">
+                        ¿estás navegando en <br> 
+                        <b class="montserrat-bold">aguas seguras?</b>
+                    </span>
+
+                    <div class="relative mt-5 bg-white px-4 sm:px-6 md:px-8 py-3 sm:py-4 rounded-[40px] rounded-bl-none shadow-xl border border-gray-100">
+                        <p class="text-xl sm:text-2xl md:text-3xl font- text-gray-800 tracking-tight montserrat-regular">
+                            ¿Necesitas apoyo?
+                        </p>
+
+                        <div class="absolute -left-4 bottom-0 w-8 h-8 bg-white"
+                            style="clip-path: polygon(100% 0, 100% 100%, 0 100%);">
+                        </div>
+                    </div>
+
+                    <div class="flex items-end gap-1">
+                        <div class="flex flex-1 items-center gap-2 bg-gray-100 p-2 sm:p-3 rounded-2xl border border-gray-200">
+                            <span id="typing-text" class="text-base sm:text-lg md:text-xl text-gray-600 font-medium italic"></span>
+                            <span class="w-0.5 h-5 sm:h-6 bg-[var(--light-pink)] animate-pulse"></span>
+                        </div>
+
+                        <a href="#anonymous-post">
+                            <button class="flex items-center cursor-pointer justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[var(--light-pink)] text-white scale-100 sm:scale-170 shadow-lg hover:scale-110 active:scale-95 transition-all duration-200">
+                                <i class="ph ph-paper-plane-right text-lg sm:text-xl"></i>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex-1 flex justify-center lg:justify-end items-center relative mx-4 sm:mx-10 lg:mx-20 h-[300px] sm:h-[400px] lg:h-[800px]">
+                    <img src="characters/anxiety.png" alt="Anxiety" class="max-h-full w-auto object-contain">
+                </div>
+            </div>
+        </div>
+
+        <!-- Posts anónimos -->
+        <div id="anonymous-post">
+            <div class="flex justify-end p-4 sm:p-8 md:p-12 lg:p-20 min-h-screen bg-snake" id="water-dots">
+                <div class="flex flex-col-reverse lg:flex-row w-full gap-6 lg:gap-0">
+                    <div class="flex-1 flex justify-center lg:justify-end items-center relative h-[300px] sm:h-[400px] lg:h-[500px]">
+                        <img src="characters/familiar-control.png" alt="Familiar Control" class="max-h-full w-auto object-contain">
+                    </div>
+
+                    <div class="flex flex-row gap-6 lg:gap-10 lg:mt-20 w-full lg:w-auto justify-center">
+                        <app-community-post-entry (modeSelected)="'anonymous'"></app-community-post-entry>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
