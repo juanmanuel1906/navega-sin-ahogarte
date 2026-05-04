@@ -100,7 +100,7 @@ export class WellnessTest implements OnInit {
       color: 'text-blue-600', 
       videoId: 'p_mzd4Ceow4',
       allies: [
-        { name: 'Hospital Mental de Filandia', description: 'Acceso a profesionales en centros de salud mental.', icon: '/logos/hsm-logo.png' },
+        { name: 'Hospital Mental de Filandia', description: 'Acceso a profesionales en centros de salud mental.', icon: '/logos/hsm-logo.webp' },
       ],
       offerings: ['Talleres de manejo de ansiedad', 'Guías de primeros auxilios psicológicos', 'Terapia individual y grupal'],
       link: '#enlace-clinico', // Enlace directo a la página de recursos
@@ -113,8 +113,8 @@ export class WellnessTest implements OnInit {
       color: 'text-green-600',
       videoId: 'wTTxj8JohhQ',
       allies: [
-        { name: 'Comfenalco', description: 'Programas de bienestar y acceso a centros deportivos de alta calidad.', icon: '/logos/comfenalco.png' },
-        { name: 'Real Sport', description: 'Club deportivo que fomenta el bienestar integral a través del deporte.', icon: '/logos/real-sport.jpeg' }
+        { name: 'Comfenalco', description: 'Programas de bienestar y acceso a centros deportivos de alta calidad.', icon: '/logos/comfenalco-logo.webp' },
+        { name: 'Real Sport', description: 'Club deportivo que fomenta el bienestar integral a través del deporte.', icon: '/logos/real-sport.webp' }
       ],
       // COMPLETADO
       offerings: ['Rutinas de ejercicio en casa', 'Clases de estiramiento guiado', 'Grupos de ciclismo y senderismo'],

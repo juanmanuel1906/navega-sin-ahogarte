@@ -8,12 +8,12 @@ import { gsap } from 'gsap';
 })
 export class PartnerBrands implements AfterViewInit, OnDestroy {
   allies = [
-    { name: "Cofincafé", image: 'logos/cofincafe-logo.png' },
-    { name: "Comfenalco", image: 'logos/comfenalco-logo.png' },
-    { name: "Hospital de Salud Mental Quindío", image: 'logos/hsm-logo-no-bg.png' },
-    { name: "Gobernación del Quindío", image: 'logos/gobernacion-logo.png' },
-    { name: "Universidad del Quindío", image: 'logos/uq-logo.png' },
-    { name: "TRINEO", image: 'logos/trineo-logo.png' }
+    { name: "Cofincafé", image: 'logos/cofincafe-logo.webp' },
+    { name: "Comfenalco", image: 'logos/comfenalco-logo.webp' },
+    { name: "Hospital de Salud Mental Quindío", image: 'logos/hsm-logo-no-bg.webp' },
+    { name: "Gobernación del Quindío", image: 'logos/gobernacion-logo.webp' },
+    { name: "Universidad del Quindío", image: 'logos/uq-logo.webp' },
+    { name: "TRINEO", image: 'logos/trineo-logo.webp' }
   ];
 
   @ViewChildren('allyLogo') allyLogos!: QueryList<ElementRef>;

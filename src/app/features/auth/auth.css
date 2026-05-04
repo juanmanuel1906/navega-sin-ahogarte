@@ -10,7 +10,7 @@ section {
     width: 100%;
     
     background-color: var(--secondary-blue);
-    background-image: url('/textures/snake-bg.png'); /* Tu textura de pinceladas */
+    background-image: url('/textures/snake-bg.webp'); /* Tu textura de pinceladas */
     
     /* 'overlay' o 'soft-light' suelen dar un efecto más integrado que color-dodge */
     background-blend-mode: overlay; 

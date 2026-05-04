@@ -10,7 +10,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-1 md:gap-4 p-4 max-w-6xl mx-auto">
         @for (post of posts; track post.id) {
         <div (click)="openModal(post)" class="relative aspect-[4/5] cursor-pointer group overflow-hidden bg-gray-200 mb-5 md:mb-0">
-            <img [src]="post.images[0]" class="w-full h-full object-cover">
+            <img [src]="post.images[0]" class="w-full h-full object-cover" loading="lazy">
 
             @if (post.images.length > 1) {
             <div class="absolute top-3 right-3 drop-shadow-md"

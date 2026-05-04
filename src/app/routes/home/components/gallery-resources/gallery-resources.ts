@@ -17,12 +17,12 @@ interface PostI {
 })
 export class GalleryResources {
   posts: PostI[] = [
-    { id: 1, images: ['/posts/2.png', '/posts/3.png', '/posts/4.png', '/posts/5.png'], currentSlide: 0, theme: 'light' },
-    { id: 2, images: ['/posts/6.png'], currentSlide: 0, theme: 'light' },
-    { id: 3, images: ['/posts/7.png'], currentSlide: 0, theme: 'light' },
-    { id: 4, images: ['/posts/8.png'], currentSlide: 0, theme: 'dark' },
-    { id: 5, images: ['/posts/9.png', '/posts/10.png', '/posts/11.png'], currentSlide: 0, theme: 'dark' },
-    { id: 6, images: ['/posts/12.png'], currentSlide: 0, theme: 'dark' },
+    { id: 1, images: ['/posts/2.webp', '/posts/3.webp', '/posts/4.webp', '/posts/5.webp'], currentSlide: 0, theme: 'light' },
+    { id: 2, images: ['/posts/6.webp'], currentSlide: 0, theme: 'light' },
+    { id: 3, images: ['/posts/7.webp'], currentSlide: 0, theme: 'light' },
+    { id: 4, images: ['/posts/8.webp'], currentSlide: 0, theme: 'dark' },
+    { id: 5, images: ['/posts/9.webp', '/posts/10.webp', '/posts/11.webp'], currentSlide: 0, theme: 'dark' },
+    { id: 6, images: ['/posts/12.webp'], currentSlide: 0, theme: 'dark' },
   ];
 
   selectedPost: PostI | null = null;

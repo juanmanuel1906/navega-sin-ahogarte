@@ -12,8 +12,8 @@ export class MainHero implements AfterViewInit {
   ngAfterViewInit() {
     gsap.ticker.lagSmoothing(1000, 16);
     // Iniciamos los dos flujos de partículas
-    this.startParticleFlow('mouth-emitter', 'animations/bubble.png', 800, 'bubble');
-    this.startParticleFlow('phone-emitter', 'animations/like.png', 1200, 'like');
+    this.startParticleFlow('mouth-emitter', 'animations/bubble.webp', 800, 'bubble');
+    this.startParticleFlow('phone-emitter', 'animations/like.webp', 1200, 'like');
   }
 
   private intervals: any[] = [];
@@ -26,8 +26,8 @@ export class MainHero implements AfterViewInit {
       this.intervals = [];
     } else {
       // Reiniciamos el flujo cuando el usuario vuelve
-      this.startParticleFlow('mouth-emitter', 'animations/bubble.png', 800, 'bubble');
-      this.startParticleFlow('phone-emitter', 'animations/like.png', 1200, 'like');
+      this.startParticleFlow('mouth-emitter', 'animations/bubble.webp', 800, 'bubble');
+      this.startParticleFlow('phone-emitter', 'animations/like.webp', 1200, 'like');
     }
   }
 

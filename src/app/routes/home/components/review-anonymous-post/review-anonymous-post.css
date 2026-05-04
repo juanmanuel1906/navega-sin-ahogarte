@@ -29,7 +29,7 @@
 
 .bg-snake {
     background-color: var(--secondary-blue);
-    background-image: url('/textures/snake-bg.png');
+    background-image: url('/textures/snake-bg.webp');
     background-blend-mode: color-dodge;
     background-size: cover;
     position: relative;
