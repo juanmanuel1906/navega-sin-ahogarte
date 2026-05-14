@@ -5,6 +5,8 @@
 }
 
 .call-to-action-button {
+    min-width: 48px;
+    min-height: 48px;
     background-color: var(--light-pink);
     color: var(--white);
     border-radius: 20px;

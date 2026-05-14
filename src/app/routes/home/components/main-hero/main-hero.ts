@@ -38,6 +38,7 @@ export class MainHero implements AfterViewInit {
     const id = setInterval(() => {
       const p = document.createElement('img');
       p.src = assetPath;
+      p.alt = type;
       p.style.position = 'absolute';
       p.style.width = type === 'like' ? '40px' : '15px';
       p.style.opacity = '0';
