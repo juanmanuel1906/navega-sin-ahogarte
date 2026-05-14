@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { NotFound } from './routes/not-found/not-found';
 import { Home } from './routes/home/home';
-import { Landing } from './routes/landing/landing';
 import { Auth } from './features/auth/auth';
 import { publicGuard } from './features/auth/guards/public-guard';
 
@@ -16,11 +15,6 @@ export const routes: Routes = [
     component: Auth,
     title: 'NSA - Autenticación',
     canActivate: [publicGuard]
-  },
-  {
-    path: 'landing',
-    component: Landing,
-    title: 'NSA - Tu Bienestar Digital',
   },
   {
     path: 'wellness-test',
